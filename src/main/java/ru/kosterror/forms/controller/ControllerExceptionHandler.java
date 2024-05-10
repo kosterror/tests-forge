@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.kosterror.forms.dto.api.ErrorResponse;
+import ru.kosterror.forms.exception.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +61,18 @@ public class ControllerExceptionHandler {
                 errors
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationError);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNotFoundException(HttpServletRequest request, NotFoundException exception) {
+        logException(request, exception);
+
+        ErrorResponse response = buildErrorResponse(exception.getMessage(),
+                request.getRequestURI(),
+                HttpStatus.NOT_FOUND
+        );
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
     @ExceptionHandler(Exception.class)
