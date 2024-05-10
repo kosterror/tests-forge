@@ -1,1 +1,11 @@
-spring.application.name=forms
+spring:
+  application:
+    name: forms
+  datasource:
+    url: jdbc:postgresql://localhost:5432/forms
+    password: forms
+    username: forms
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
