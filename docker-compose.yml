@@ -1,11 +1,11 @@
 services:
-  db:
-    container_name: forms-db
+  core-service-db:
+    container_name: core-service-db
     image: postgres:15
     environment:
-      POSTGRES_DB: forms
-      POSTGRES_USER: forms
-      POSTGRES_PASSWORD: forms
+      POSTGRES_DB: core-service
+      POSTGRES_USER: core-service
+      POSTGRES_PASSWORD: core-service
     ports:
       - "5432:5432"
     volumes:

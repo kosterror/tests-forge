@@ -2,9 +2,9 @@ spring:
   application:
     name: core-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/forms
-    password: forms
-    username: forms
+    url: jdbc:postgresql://localhost:5432/core-service
+    password: core-service
+    username: core-service
   jpa:
     hibernate:
       ddl-auto: validate
