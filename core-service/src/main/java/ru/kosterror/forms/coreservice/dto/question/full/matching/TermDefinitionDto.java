@@ -10,10 +10,10 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @AllArgsConstructor
 public class TermDefinitionDto {
 
-    @Schema(description = "Term", requiredMode = REQUIRED)
+    @Schema(description = "Термин", requiredMode = REQUIRED)
     private MatchingOptionDto term;
 
-    @Schema(description = "Definition for the term", requiredMode = REQUIRED)
+    @Schema(description = "Определение для термина", requiredMode = REQUIRED)
     private MatchingOptionDto definition;
 
 }

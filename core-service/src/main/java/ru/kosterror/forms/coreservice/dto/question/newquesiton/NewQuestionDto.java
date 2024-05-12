@@ -26,19 +26,19 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Data
 public abstract class NewQuestionDto {
 
-    @Schema(description = "Question text", requiredMode = REQUIRED)
+    @Schema(description = "Текст вопроса", requiredMode = REQUIRED)
     @NotNull(message = "Question is required")
     private String question;
 
-    @Schema(description = "Comment for the question", requiredMode = REQUIRED)
+    @Schema(description = "Комментарий к вопросу", requiredMode = REQUIRED)
     @NotNull(message = "Comment is required")
     private String comment;
 
-    @Schema(description = "Points for the question", requiredMode = REQUIRED)
+    @Schema(description = "Баллы за вопрос", requiredMode = REQUIRED)
     @Min(value = 1, message = "Points must be greater than 0")
     private int points;
 
-    @Schema(description = "Type of the question", requiredMode = REQUIRED)
+    @Schema(description = "Тип вопроса", requiredMode = REQUIRED)
     @NotNull(message = "Type is required")
     private QuestionType type;
 

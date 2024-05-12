@@ -18,7 +18,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @ToString(callSuper = true)
 public class MultipleChoiceQuestionDto extends QuestionDto {
 
-    @Schema(description = "Options for the question", requiredMode = REQUIRED)
+    @Schema(description = "Варианты ответа для вопроса", requiredMode = REQUIRED)
     private List<MultipleOptionDto> options;
 
     public MultipleChoiceQuestionDto() {

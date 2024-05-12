@@ -17,7 +17,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @ToString(callSuper = true)
 public class NewMatchingQuestionDto extends NewQuestionDto {
 
-    @Schema(description = "Map of terms and definitions for the question", requiredMode = REQUIRED)
+    @Schema(description = "Словарь, где ключ - термин, а значение - определение", requiredMode = REQUIRED)
     private Map<String, String> termsAndDefinitions;
 
     public NewMatchingQuestionDto() {

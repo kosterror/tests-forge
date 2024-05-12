@@ -11,19 +11,19 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Data
 public abstract class QuestionDto {
 
-    @Schema(description = "Question id", requiredMode = REQUIRED)
+    @Schema(description = "Идентификатор", requiredMode = REQUIRED)
     private UUID id;
 
-    @Schema(description = "Question text", requiredMode = REQUIRED)
+    @Schema(description = "Текст вопроса", requiredMode = REQUIRED)
     private String question;
 
-    @Schema(description = "Comment for the question", requiredMode = REQUIRED)
+    @Schema(description = "Комментарий для вопроса", requiredMode = REQUIRED)
     private String comment;
 
-    @Schema(description = "Points for the question", requiredMode = REQUIRED)
+    @Schema(description = "Баллы за вопрос", requiredMode = REQUIRED)
     private int points;
 
-    @Schema(description = "Type of the question", requiredMode = REQUIRED)
+    @Schema(description = "Тип вопроса", requiredMode = REQUIRED)
     private QuestionType type;
 
     protected QuestionDto(QuestionType type) {

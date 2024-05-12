@@ -19,11 +19,11 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @ToString(callSuper = true)
 public class NewTextInputQuestionDto extends NewQuestionDto {
 
-    @Schema(description = "Whether the answer is case sensitive", requiredMode = REQUIRED)
+    @Schema(description = "Является ли ответ чувствительным к регистру", requiredMode = REQUIRED)
     @NotNull(message = "Field isCaseSensitive is required")
     private boolean isCaseSensitive;
 
-    @Schema(description = "List of answers for the question", requiredMode = REQUIRED)
+    @Schema(description = "Список правильных ответов", requiredMode = REQUIRED)
     @NotNull(message = "List of answers is required")
     @Size(min = 1, message = "List of answers must contain at least 1 element")
     private List<String> answers;

@@ -1,5 +1,6 @@
 package ru.kosterror.forms.coreservice.dto.question.full.matching;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import java.util.List;
 @ToString(callSuper = true)
 public class MatchingQuestionDto extends QuestionDto {
 
+    @Schema(description = "Список терминов и их определений")
     private List<TermDefinitionDto> termAndDefinitions;
 
     public MatchingQuestionDto() {

@@ -19,13 +19,13 @@ public class QuestionController {
 
     private final QuestionService service;
 
-    @Operation(summary = "Create question")
+    @Operation(summary = "Создать вопрос")
     @PostMapping
     public QuestionDto createQuestion(@RequestBody @Valid NewQuestionDto question) {
         return service.createQuestion(question);
     }
 
-    @Operation(summary = "Get question")
+    @Operation(summary = "Получить вопрос")
     @GetMapping("/{id}")
     public QuestionDto getQuestion(@PathVariable UUID id) {
         return service.getQuestion(id);

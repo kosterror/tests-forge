@@ -12,10 +12,10 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @AllArgsConstructor
 public class MatchingOptionDto {
 
-    @Schema(description = "Id", requiredMode = REQUIRED)
+    @Schema(description = "Идентификатор", requiredMode = REQUIRED)
     private UUID id;
 
-    @Schema(description = "Text", requiredMode = REQUIRED)
+    @Schema(description = "Текст", requiredMode = REQUIRED)
     private String text;
 
 }

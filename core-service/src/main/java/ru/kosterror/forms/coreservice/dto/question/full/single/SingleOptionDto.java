@@ -10,13 +10,13 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Data
 public class SingleOptionDto {
 
-    @Schema(description = "Option id", requiredMode = REQUIRED)
+    @Schema(description = "Идентификатор", requiredMode = REQUIRED)
     private UUID id;
 
-    @Schema(description = "Option value", requiredMode = REQUIRED)
+    @Schema(description = "Значение варианта ответа", requiredMode = REQUIRED)
     private String value;
 
-    @Schema(description = "Is the option right", requiredMode = REQUIRED)
+    @Schema(description = "Является ли вариант ответа правильным", requiredMode = REQUIRED)
     private boolean isRight;
 
 }

@@ -19,12 +19,12 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @ToString(callSuper = true)
 public class NewSingleChoiceQuestionDto extends NewQuestionDto {
 
-    @Schema(description = "List of options for the question", requiredMode = REQUIRED)
+    @Schema(description = "Список вариантов ответа", requiredMode = REQUIRED)
     @NotNull(message = "Options list is required")
     @Size(min = 2, message = "Options list must contain at least 2 elements")
     private List<String> options;
 
-    @Schema(description = "Index of correct option", requiredMode = REQUIRED)
+    @Schema(description = "Индекс правильного варианта ответа", requiredMode = REQUIRED)
     @NotNull(message = "Correct option index is required")
     private int correctOptionIndex;
 
