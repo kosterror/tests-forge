@@ -1,7 +1,14 @@
 spring:
   application:
     name: file-storage-service
-
+  datasource:
+    url: jdbc:postgresql://localhost:5434/file-storage-service
+    password: file-storage-service
+    username: file-storage-service
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
 server:
   port: 8082
 

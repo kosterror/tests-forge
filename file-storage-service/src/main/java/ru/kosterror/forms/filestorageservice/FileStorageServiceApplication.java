@@ -6,10 +6,10 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
-public class FileStorageService {
+public class FileStorageServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FileStorageService.class, args);
+        SpringApplication.run(FileStorageServiceApplication.class, args);
     }
 
 }
