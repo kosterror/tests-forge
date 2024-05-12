@@ -8,6 +8,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import ru.kosterror.forms.coreservice.entity.question.QuestionType;
 
+import java.util.List;
+import java.util.UUID;
+
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIRED;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 @JsonTypeInfo(
@@ -37,6 +41,12 @@ public abstract class NewQuestionDto {
     @Schema(description = "Type of the question", requiredMode = REQUIRED)
     @NotNull(message = "Type is required")
     private QuestionType type;
+
+    @Schema(description = "Видимость вопроса в банке вопросов", requiredMode = NOT_REQUIRED, defaultValue = "false")
+    private Boolean isVisible;
+
+    @Schema(description = "Вложения к вопросу", requiredMode = NOT_REQUIRED, defaultValue = "[]")
+    private List<UUID> attachments;
 
     protected NewQuestionDto(QuestionType type) {
         this.type = type;

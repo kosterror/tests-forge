@@ -207,6 +207,8 @@ public class QuestionMapper {
         entity.setComment(dto.getComment());
         entity.setPoints(dto.getPoints());
         entity.setType(dto.getType());
+        entity.setIsVisible(dto.getIsVisible());
+        entity.setAttachments(dto.getAttachments());
     }
 
 }
