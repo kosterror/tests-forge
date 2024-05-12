@@ -1,38 +1,24 @@
 plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.2.5'
-    id 'io.spring.dependency-management' version '1.1.4'
+    id "java"
+    id "org.springframework.boot" version "3.2.5"
+    id "io.spring.dependency-management" version "1.1.4"
 }
 
-group = 'ru.kosterror'
-version = '1'
+allprojects {
+    apply plugin: "java"
 
-java {
-    sourceCompatibility = '21'
-}
+    group "ru.kosterror.forms"
+    version "1.0"
 
-repositories {
-    mavenCentral()
-}
+    java.sourceCompatibility(JavaVersion.VERSION_21)
+    java.targetCompatibility(JavaVersion.VERSION_21)
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-    implementation "org.springframework.boot:spring-boot-starter-validation"
+    repositories {
+        mavenCentral()
+    }
 
-    implementation "org.postgresql:postgresql:${postgreSqlDriverVersion}"
-    implementation "org.flywaydb:flyway-core:${flywayCoreVersion}"
-
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
-    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-
-    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}"
-
-    implementation "org.hibernate.orm:hibernate-jpamodelgen:${jpaModelGenVersion}"
-    annotationProcessor "org.hibernate.orm:hibernate-jpamodelgen:${jpaModelGenVersion}"
-    compileOnly "org.hibernate.orm:hibernate-jpamodelgen:${jpaModelGenVersion}"
+    dependencies {
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    }
 }

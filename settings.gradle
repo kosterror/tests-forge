@@ -1,1 +1,3 @@
-rootProject.name = 'forms'
+rootProject.name = "forms"
+
+include "core-service"
