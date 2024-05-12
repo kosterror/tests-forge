@@ -1,3 +1,4 @@
 rootProject.name = "forms"
 
 include "core-service"
+include "mail-service"
