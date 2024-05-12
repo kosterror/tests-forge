@@ -2,3 +2,5 @@ rootProject.name = "forms"
 
 include "core-service"
 include "mail-service"
+include "file-storage-service"
+
