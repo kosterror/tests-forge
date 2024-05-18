@@ -5,4 +5,5 @@ include "mail-service"
 include "file-storage-service"
 include "common-model"
 include "user-service"
+include "security-starter-jwt"
 
