@@ -10,6 +10,28 @@ services:
       - "5432:5432"
     volumes:
       - core-service-db:/var/lib/postgresql/data
+  user-service-db:
+    container_name: user-service-db
+    image: postgres:15
+    environment:
+      POSTGRES_DB: user-service
+      POSTGRES_USER: user-service
+      POSTGRES_PASSWORD: user-service
+    ports:
+      - "5433:5432"
+    volumes:
+      - file-storage-service-db:/var/lib/postgresql/data
+  file-storage-db:
+    container_name: file-storage-db
+    image: postgres:15
+    environment:
+      POSTGRES_DB: file-storage-service
+      POSTGRES_USER: file-storage-service
+      POSTGRES_PASSWORD: file-storage-service
+    ports:
+      - "5434:5432"
+    volumes:
+      - file-storage-service-db:/var/lib/postgresql/data
   minio:
     container_name: minio
     image: bitnami/minio:latest
@@ -24,5 +46,6 @@ services:
 
 volumes:
   core-service-db: { }
+  user-service-db: { }
   file-storage-service-db: { }
   minio-data: { }
