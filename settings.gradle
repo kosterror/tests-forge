@@ -3,6 +3,6 @@ rootProject.name = "forms"
 include "core-service"
 include "mail-service"
 include "file-storage-service"
-include "common-dto"
+include "common-model"
 include "user-service"
 

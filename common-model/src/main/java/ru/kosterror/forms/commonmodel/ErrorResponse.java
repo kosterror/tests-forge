@@ -1,4 +1,4 @@
-package ru.kosterror.forms.commondto;
+package ru.kosterror.forms.commonmodel;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

@@ -8,7 +8,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import ru.kosterror.forms.commondto.ErrorResponse;
+import ru.kosterror.forms.commonmodel.ErrorResponse;
 import ru.kosterror.forms.coreservice.exception.NotFoundException;
 
 import java.util.ArrayList;
