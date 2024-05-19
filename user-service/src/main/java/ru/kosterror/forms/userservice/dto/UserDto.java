@@ -1,6 +1,7 @@
 package ru.kosterror.forms.userservice.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import ru.kosterror.forms.userservice.entity.UserRole;
 
 import java.util.UUID;
 
@@ -21,6 +22,9 @@ public record UserDto(
         String surname,
 
         @Schema(description = "Отчество", requiredMode = NOT_REQUIRED)
-        String patronymic
+        String patronymic,
+
+        @Schema(description = "Роль", requiredMode = REQUIRED)
+        UserRole role
 ) {
 }
