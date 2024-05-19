@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 import ru.kosterror.forms.securitystarterjwt.security.JwtAuthenticationConverter;
 import ru.kosterror.forms.securitystarterjwt.security.JwtAuthenticationFilter;
 
@@ -40,6 +41,9 @@ public class SecurityConfiguration {
                                 antMatcher(HttpMethod.POST, "/api/v1/auth/teachers/register"),
                                 antMatcher(HttpMethod.POST, "/api/v1/users/*/role")
                         ).hasRole("TEACHER")
+                        .requestMatchers(
+                                new NegatedRequestMatcher(antMatcher("/api/**"))
+                        ).permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtAuthenticationFilter(
                                 authenticationConverter,
