@@ -14,9 +14,6 @@ public record UserDto(
         @Schema(description = "Почта", requiredMode = REQUIRED)
         String email,
 
-        @Schema(description = "Пароль", requiredMode = REQUIRED)
-        String password,
-
         @Schema(description = "Имя", requiredMode = REQUIRED)
         String name,
 
