@@ -47,7 +47,7 @@ public class JwtServiceImpl implements JwtService {
                 .expiration(expiration)
                 .claim(CustomClaims.ROLE, user.getRole().name())
                 .claim(CustomClaims.EMAIL, user.getEmail())
-                .signWith(publicKeyProvider.getPublicKey())
+                .signWith(privateKeyProvider.getPrivateKey())
                 .compact();
     }
 
