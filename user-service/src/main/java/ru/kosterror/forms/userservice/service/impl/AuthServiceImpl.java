@@ -12,6 +12,7 @@ import ru.kosterror.forms.userservice.dto.UserDto;
 import ru.kosterror.forms.userservice.entity.RefreshTokenEntity;
 import ru.kosterror.forms.userservice.entity.UserEntity;
 import ru.kosterror.forms.userservice.entity.UserRole;
+import ru.kosterror.forms.userservice.exception.ConflictException;
 import ru.kosterror.forms.userservice.exception.UnauthorizedException;
 import ru.kosterror.forms.userservice.mapper.UserMapper;
 import ru.kosterror.forms.userservice.repository.RefreshTokenRepository;
@@ -69,10 +70,14 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    @Transactional
     public UserDto registerTeacher(NewUserDto newUserDto) {
+        checkExistingUserWithEmail(newUserDto.email());
+
         var entity = userMapper.toEntity(newUserDto);
         entity.setPassword(passwordEncoder.encode(newUserDto.password()));
         entity.setRole(UserRole.ROLE_TEACHER);
+
         entity = userRepository.save(entity);
         return userMapper.toDto(entity);
     }
@@ -80,6 +85,8 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public TokensDto registerStudent(NewUserDto newUserDto) {
+        checkExistingUserWithEmail(newUserDto.email());
+
         var entity = userMapper.toEntity(newUserDto);
         entity.setPassword(passwordEncoder.encode(newUserDto.password()));
         entity.setRole(UserRole.ROLE_STUDENT);
@@ -106,6 +113,13 @@ public class AuthServiceImpl implements AuthService {
                 user.getId()
         );
         refreshTokenRepository.delete(foundRefreshToken);
+    }
+
+    private void checkExistingUserWithEmail(String email) {
+        userRepository.findByEmail(email)
+                .ifPresent(user -> {
+                    throw new ConflictException("User with email '%s' already exists".formatted(email));
+                });
     }
 
 }
