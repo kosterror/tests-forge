@@ -2,6 +2,7 @@ package ru.kosterror.forms.securitystarterjwt.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -15,6 +16,7 @@ import ru.kosterror.forms.securitystarterjwt.jwtmanager.impl.JwtMangerImpl;
 import ru.kosterror.forms.securitystarterjwt.keyprovider.PublicKeyProvider;
 import ru.kosterror.forms.securitystarterjwt.keyprovider.impl.RSAPublicKeyProviderImpl;
 import ru.kosterror.forms.securitystarterjwt.security.JwtAuthenticationConverter;
+import ru.kosterror.forms.securitystarterjwt.util.Beans;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -24,11 +26,11 @@ import java.security.spec.InvalidKeySpecException;
 @AutoConfiguration
 public class SecurityStarterJwtConfiguration {
 
-    @Value("${jwt.public-key-name}")
+    @Value("${jwt.access-token.public-key-name}")
     private String keyName;
 
-    @Bean
-    @ConditionalOnMissingBean
+    @Bean(Beans.ACCESS_TOKEN_PUBLIC_KEY_PROVIDER)
+    @ConditionalOnMissingBean(name = Beans.ACCESS_TOKEN_PUBLIC_KEY_PROVIDER)
     public PublicKeyProvider publicKeyProvider()
             throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
         return new RSAPublicKeyProviderImpl(keyName);
@@ -36,7 +38,9 @@ public class SecurityStarterJwtConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public JwtManager jwtManager(PublicKeyProvider publicKeyProvider) {
+    public JwtManager jwtManager(
+            @Qualifier(Beans.ACCESS_TOKEN_PUBLIC_KEY_PROVIDER) PublicKeyProvider publicKeyProvider
+    ) {
         return new JwtMangerImpl(publicKeyProvider);
     }
 

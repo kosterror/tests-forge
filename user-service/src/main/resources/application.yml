@@ -15,7 +15,10 @@ server:
   port: 8081
 
 jwt:
-  public-key-name: public-key.pem
-  private-key-name: private-key.pem
-  refresh-token-expiration-time-days: 7
-  access-token-expiration-time-minutes: 5
+  access-token:
+    expiration-time-minutes: 5
+    public-key-name: authorization/access-token-public-key.pem
+    private-key-name: authorization/access-token-private-key.pem
+  refresh-token:
+    expiration-time-days: 7
+    private-key-name: authorization/refresh-token-private-key.pem

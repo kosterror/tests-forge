@@ -1,34 +1,42 @@
 package ru.kosterror.forms.userservice.service.impl;
 
 import io.jsonwebtoken.Jwts;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import ru.kosterror.forms.securitystarterjwt.keyprovider.PublicKeyProvider;
+import ru.kosterror.forms.securitystarterjwt.keyprovider.PrivateKeyProvider;
 import ru.kosterror.forms.securitystarterjwt.util.CustomClaims;
-import ru.kosterror.forms.userservice.configuration.PrivateKeyProvider;
 import ru.kosterror.forms.userservice.dto.TokensDto;
 import ru.kosterror.forms.userservice.entity.RefreshTokenEntity;
 import ru.kosterror.forms.userservice.entity.UserEntity;
 import ru.kosterror.forms.userservice.repository.RefreshTokenRepository;
 import ru.kosterror.forms.userservice.service.JwtService;
+import ru.kosterror.forms.userservice.util.Beans;
 
 import java.time.ZoneId;
 import java.util.Date;
 
 @Service
-@RequiredArgsConstructor
 public class JwtServiceImpl implements JwtService {
 
     private final RefreshTokenRepository refreshTokenRepository;
-    private final PrivateKeyProvider privateKeyProvider;
-    private final PublicKeyProvider publicKeyProvider;
+    private final PrivateKeyProvider accessTokenPrivateKeyProvider;
+    private final PrivateKeyProvider refreshTokenPrivateKeyProvider;
 
-    @Value("${jwt.access-token-expiration-time-minutes}")
+    @Value("${jwt.access-token.expiration-time-minutes}")
     private int accessTokenExpirationTimeMin;
 
-    @Value("${jwt.refresh-token-expiration-time-days}")
+    @Value("${jwt.refresh-token.expiration-time-days}")
     private int refreshTokenExpirationTimeDays;
+
+    public JwtServiceImpl(RefreshTokenRepository refreshTokenRepository,
+                          @Qualifier(Beans.ACCESS_TOKEN_PRIVATE_KEY) PrivateKeyProvider accessTokenPrivateKeyProvider,
+                          @Qualifier(Beans.REFRESH_TOKEN_PRIVATE_KEY) PrivateKeyProvider refreshTokenPrivateKeyProvider
+    ) {
+        this.refreshTokenRepository = refreshTokenRepository;
+        this.accessTokenPrivateKeyProvider = accessTokenPrivateKeyProvider;
+        this.refreshTokenPrivateKeyProvider = refreshTokenPrivateKeyProvider;
+    }
 
     @Override
     public TokensDto generateTokens(UserEntity user) {
@@ -47,7 +55,7 @@ public class JwtServiceImpl implements JwtService {
                 .expiration(expiration)
                 .claim(CustomClaims.ROLE, user.getRole().name())
                 .claim(CustomClaims.EMAIL, user.getEmail())
-                .signWith(privateKeyProvider.getPrivateKey())
+                .signWith(accessTokenPrivateKeyProvider.getPrivateKey())
                 .compact();
     }
 
@@ -61,7 +69,7 @@ public class JwtServiceImpl implements JwtService {
                 .expiration(expiration)
                 .claim(CustomClaims.ROLE, user.getRole().name())
                 .claim(CustomClaims.EMAIL, user.getEmail())
-                .signWith(privateKeyProvider.getPrivateKey())
+                .signWith(refreshTokenPrivateKeyProvider.getPrivateKey())
                 .compact();
 
         var tokenEntity = RefreshTokenEntity.builder()
