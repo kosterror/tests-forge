@@ -1,10 +1,15 @@
 package ru.kosterror.forms.securitystarterjwt.configuration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import ru.kosterror.forms.securitystarterjwt.handler.CustomAccessDeniedHandler;
+import ru.kosterror.forms.securitystarterjwt.handler.CustomAuthenticationEntryPoint;
 import ru.kosterror.forms.securitystarterjwt.jwtmanager.JwtManager;
 import ru.kosterror.forms.securitystarterjwt.jwtmanager.impl.JwtMangerImpl;
 import ru.kosterror.forms.securitystarterjwt.keyprovider.PublicKeyProvider;
@@ -39,6 +44,18 @@ public class SecurityStarterJwtConfiguration {
     @ConditionalOnMissingBean
     public JwtAuthenticationConverter jwtAuthenticationConverter(JwtManager manager) {
         return new JwtAuthenticationConverter(manager);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public AuthenticationEntryPoint authenticationEntryPoint(ObjectMapper objectMapper) {
+        return new CustomAuthenticationEntryPoint(objectMapper);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public AccessDeniedHandler accessDeniedHandler(ObjectMapper objectMapper) {
+        return new CustomAccessDeniedHandler(objectMapper);
     }
 
 }
