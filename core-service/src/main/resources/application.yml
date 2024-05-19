@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: core-service
@@ -10,5 +13,6 @@ spring:
       ddl-auto: validate
     show-sql: false
 
-server:
-  port: 8080
+jwt:
+  access-token:
+    public-key-name: authorization/access-token-public-key.pem

@@ -1,6 +1,7 @@
 package ru.kosterror.forms.coreservice.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,8 @@ import ru.kosterror.forms.coreservice.service.question.QuestionService;
 
 import java.util.UUID;
 
+import static ru.kosterror.forms.coreservice.config.SpringDocConfiguration.JWT;
+
 @RestController
 @RequestMapping("/api/v1/questions")
 @RequiredArgsConstructor
@@ -19,7 +22,7 @@ public class QuestionController {
 
     private final QuestionService service;
 
-    @Operation(summary = "Создать вопрос")
+    @Operation(summary = "Создать вопрос", security = @SecurityRequirement(name = JWT))
     @PostMapping
     public QuestionDto createQuestion(@RequestBody @Valid NewQuestionDto question) {
         return service.createQuestion(question);
