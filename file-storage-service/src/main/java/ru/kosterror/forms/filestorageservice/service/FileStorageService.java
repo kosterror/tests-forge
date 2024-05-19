@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface FileStorageService {
 
-    FileMetaInfoDto uploadFile(MultipartFile file);
+    FileMetaInfoDto uploadFile(UUID userId, MultipartFile file);
 
     Pair<String, byte[]> downloadFile(UUID fileId);
 

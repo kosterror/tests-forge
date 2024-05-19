@@ -22,3 +22,7 @@ minio:
   secret-key: ${MINIO_SECRET_KEY}
   bucket: ${MINIO_BUCKET:file-storage-service}
   url: ${MINIO_URL:http://localhost:9000}
+
+jwt:
+  access-token:
+    public-key-name: authorization/access-token-public-key.pem

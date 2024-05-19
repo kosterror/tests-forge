@@ -33,13 +33,13 @@ public class FileStorageServiceImpl implements FileStorageService {
     private final FileMetaInfoMapper fileMetaInfoMapper;
 
     @Override
-    public FileMetaInfoDto uploadFile(MultipartFile file) {
+    public FileMetaInfoDto uploadFile(UUID userId, MultipartFile file) {
         var fileMetaInfo = FileMetaInfoEntity.builder()
                 .id(UUID.randomUUID())
                 .bucket(minioProperties.bucket())
                 .name(file.getOriginalFilename())
                 .size((double) file.getSize() / 1024)
-                .ownerId(UUID.randomUUID())                 //TODO: get owner id from security context
+                .ownerId(userId)
                 .uploadDateTime(LocalDateTime.now())
                 .build();
 
