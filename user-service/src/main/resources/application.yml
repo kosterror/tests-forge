@@ -6,6 +6,7 @@ spring:
     password: user-service
     username: user-service
   jpa:
+    open-in-view: true
     hibernate:
       ddl-auto: validate
     show-sql: false
@@ -16,5 +17,5 @@ server:
 jwt:
   public-key-name: public-key.pem
   private-key-name: private-key.pem
-  refresh-token-expiration-time-days: 30
-  access-token-expiration-time-minutes: 15
+  refresh-token-expiration-time-days: 7
+  access-token-expiration-time-minutes: 5
