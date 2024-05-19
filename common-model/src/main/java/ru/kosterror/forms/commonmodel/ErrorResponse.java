@@ -14,25 +14,28 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Data
 public class ErrorResponse {
 
-    @Schema(description = "Timestamp of the error", requiredMode = REQUIRED)
+    @Schema(description = "Дата и время, когда случилась ошибка", requiredMode = REQUIRED)
     private LocalDateTime timestamp;
 
-    @Schema(description = "HTTP status code of the error", requiredMode = REQUIRED)
+    @Schema(description = "HTTP статус код", requiredMode = REQUIRED)
     private HttpStatusCode code;
 
-    @Schema(description = "Error message", requiredMode = REQUIRED)
+    @Schema(description = "Сообщение об ошибке", requiredMode = REQUIRED)
     private String error;
 
-    @Schema(description = "Path of the request that caused the error", requiredMode = REQUIRED)
+    @Schema(description = "Путь запроса", requiredMode = REQUIRED)
     private String path;
 
-    @Schema(description = "Validation messages", requiredMode = NOT_REQUIRED)
+    @Schema(description = "Ошибки валидации. Ключ - поле из тела запроса, значение - список ошибок валидации",
+            requiredMode = NOT_REQUIRED
+    )
     private Map<String, List<String>> validationMessages;
 
     public ErrorResponse(HttpStatusCode code,
                          String error,
                          String path,
                          Map<String, List<String>> validationMessages) {
+        this.timestamp = LocalDateTime.now();
         this.code = code;
         this.error = error;
         this.path = path;
@@ -42,6 +45,7 @@ public class ErrorResponse {
     public ErrorResponse(HttpStatusCode code,
                          String error,
                          String path) {
+        this.timestamp = LocalDateTime.now();
         this.code = code;
         this.error = error;
         this.path = path;

@@ -10,13 +10,13 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Data
 public class PaginationResponse<T> {
 
-    @Schema(description = "Number of page", requiredMode = REQUIRED)
+    @Schema(description = "Номер страницы", requiredMode = REQUIRED)
     private int pageNumber;
 
-    @Schema(description = "Size of page", requiredMode = REQUIRED)
+    @Schema(description = "Размер страницы", requiredMode = REQUIRED)
     private int pageSize;
 
-    @Schema(description = "Elements", requiredMode = REQUIRED)
+    @Schema(description = "Элементы", requiredMode = REQUIRED)
     private List<T> elements;
 
 }
