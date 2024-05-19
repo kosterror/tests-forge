@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                         ).permitAll()
                         .requestMatchers(
                                 antMatcher(HttpMethod.POST, "/api/v1/auth/teachers/register"),
-                                antMatcher(HttpMethod.POST, "/api/v1/users/*/role")
+                                antMatcher(HttpMethod.PUT, "/api/v1/users/*/role")
                         ).hasRole("TEACHER")
                         .requestMatchers(
                                 new NegatedRequestMatcher(antMatcher("/api/**"))
