@@ -1,6 +1,8 @@
 package ru.kosterror.forms.userservice.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,9 +14,12 @@ import ru.kosterror.forms.userservice.dto.TokensDto;
 import ru.kosterror.forms.userservice.dto.UserDto;
 import ru.kosterror.forms.userservice.service.AuthService;
 
+import static ru.kosterror.forms.userservice.configuration.SpringDocConfiguration.JWT;
+
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+@Tag(name = "Auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -31,7 +36,7 @@ public class AuthController {
         return authService.refresh(refreshToken);
     }
 
-    @Operation(summary = "Выход")
+    @Operation(summary = "Выход", security = @SecurityRequirement(name = JWT))
     @PostMapping("/logout")
     public void logout(@AuthenticationPrincipal JwtPrincipal principal,
                        @RequestParam String refreshToken) {
@@ -44,7 +49,7 @@ public class AuthController {
         return authService.registerStudent(newUserDto);
     }
 
-    @Operation(summary = "Зарегистрировать преподавателя")
+    @Operation(summary = "Зарегистрировать преподавателя", security = @SecurityRequirement(name = JWT))
     @PostMapping("/teachers/register")
     public UserDto registerTeacher(@RequestBody @Valid NewUserDto newUserDto) {
         return authService.registerTeacher(newUserDto);
