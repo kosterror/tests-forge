@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.kosterror.forms.commonmodel.ErrorResponse;
+import ru.kosterror.forms.userservice.exception.ConflictException;
 import ru.kosterror.forms.userservice.exception.NotFoundException;
 
 import java.util.ArrayList;
@@ -54,13 +55,13 @@ public class ControllerExceptionHandler {
                     }
                 });
 
-        ErrorResponse validationError = new ErrorResponse(
+        ErrorResponse response = new ErrorResponse(
                 HttpStatus.BAD_REQUEST,
                 "Validation error",
                 request.getRequestURI(),
                 errors
         );
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationError);
+        return ResponseEntity.status(response.getCode()).body(response);
     }
 
     @ExceptionHandler(NotFoundException.class)
@@ -72,7 +73,19 @@ public class ControllerExceptionHandler {
                 HttpStatus.NOT_FOUND
         );
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        return ResponseEntity.status(response.getCode()).body(response);
+    }
+
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<ErrorResponse> handleConflictException(HttpServletRequest request, ConflictException exception) {
+        logException(request, exception);
+
+        ErrorResponse response = buildErrorResponse(exception.getMessage(),
+                request.getRequestURI(),
+                HttpStatus.CONFLICT
+        );
+
+        return ResponseEntity.status(response.getCode()).body(response);
     }
 
     @ExceptionHandler(Exception.class)
