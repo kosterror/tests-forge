@@ -1,11 +1,11 @@
 package ru.kosterror.forms.securitystarterjwt.jwtmanager;
 
-import ru.kosterror.forms.securitystarterjwt.model.JwtPrincipal;
+import ru.kosterror.forms.securitystarterjwt.model.JwtUser;
 
 public interface JwtManager {
 
     boolean isValid(String token);
 
-    JwtPrincipal parse(String token);
+    JwtUser parse(String token);
 
 }

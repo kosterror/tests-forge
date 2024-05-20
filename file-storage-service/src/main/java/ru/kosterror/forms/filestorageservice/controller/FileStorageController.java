@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kosterror.forms.filestorageservice.dto.FileMetaInfoDto;
 import ru.kosterror.forms.filestorageservice.service.FileStorageService;
-import ru.kosterror.forms.securitystarterjwt.model.JwtPrincipal;
+import ru.kosterror.forms.securitystarterjwt.model.JwtUser;
 
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
@@ -35,7 +35,7 @@ public class FileStorageController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public FileMetaInfoDto uploadFile(@AuthenticationPrincipal JwtPrincipal principal,
+    public FileMetaInfoDto uploadFile(@AuthenticationPrincipal JwtUser principal,
                                       @RequestParam("file") MultipartFile file
     ) {
         return fileStorageService.uploadFile(principal.userId(), file);

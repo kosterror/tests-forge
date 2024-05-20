@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import ru.kosterror.forms.securitystarterjwt.model.JwtPrincipal;
+import ru.kosterror.forms.securitystarterjwt.model.JwtUser;
 import ru.kosterror.forms.userservice.dto.UserDto;
 import ru.kosterror.forms.userservice.entity.UserRole;
 import ru.kosterror.forms.userservice.service.UserService;
@@ -25,7 +25,7 @@ public class UserController {
 
     @Operation(summary = "Получить информацию о себе", security = @SecurityRequirement(name = JWT))
     @GetMapping
-    public UserDto getUser(@AuthenticationPrincipal JwtPrincipal principal) {
+    public UserDto getUser(@AuthenticationPrincipal JwtUser principal) {
         return userService.getUser(principal.userId());
     }
 

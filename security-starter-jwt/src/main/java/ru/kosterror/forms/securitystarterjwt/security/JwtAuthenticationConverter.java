@@ -4,15 +4,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.util.StringUtils;
 import ru.kosterror.forms.securitystarterjwt.jwtmanager.JwtManager;
-import ru.kosterror.forms.securitystarterjwt.model.JwtPrincipal;
-
-import java.util.List;
+import ru.kosterror.forms.securitystarterjwt.model.JwtAuthentication;
+import ru.kosterror.forms.securitystarterjwt.model.JwtUser;
 
 @RequiredArgsConstructor
 public class JwtAuthenticationConverter implements AuthenticationConverter {
@@ -42,13 +39,9 @@ public class JwtAuthenticationConverter implements AuthenticationConverter {
             throw new BadCredentialsException("Token is not valid");
         }
 
-        JwtPrincipal user = jwtManager.parse(token);
+        JwtUser user = jwtManager.parse(token);
 
-        return UsernamePasswordAuthenticationToken.authenticated(
-                user,
-                null,
-                List.of(new SimpleGrantedAuthority(user.role()))
-        );
+        return new JwtAuthentication(user, token);
     }
 
 }

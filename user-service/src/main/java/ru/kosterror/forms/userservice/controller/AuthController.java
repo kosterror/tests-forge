@@ -7,7 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import ru.kosterror.forms.securitystarterjwt.model.JwtPrincipal;
+import ru.kosterror.forms.securitystarterjwt.model.JwtUser;
 import ru.kosterror.forms.userservice.dto.CredentialsDto;
 import ru.kosterror.forms.userservice.dto.NewUserDto;
 import ru.kosterror.forms.userservice.dto.TokensDto;
@@ -38,7 +38,7 @@ public class AuthController {
 
     @Operation(summary = "Выход", security = @SecurityRequirement(name = JWT))
     @PostMapping("/logout")
-    public void logout(@AuthenticationPrincipal JwtPrincipal principal,
+    public void logout(@AuthenticationPrincipal JwtUser principal,
                        @RequestParam String refreshToken) {
         authService.logout(principal.userId(), refreshToken);
     }
