@@ -1,4 +1,4 @@
-create table person
+create table "user"
 (
     id         uuid primary key,
     email      varchar(255) not null unique,
@@ -9,11 +9,24 @@ create table person
     surname    varchar(255) not null
 );
 
+create table "group"
+(
+    id   uuid primary key,
+    name varchar(255) not null
+);
+
+create table user_group
+(
+    user_id  uuid references "user" (id) on delete cascade,
+    group_id uuid references "group" (id) on delete cascade,
+    primary key (user_id, group_id)
+);
+
 create table refresh_tokens
 (
     id           uuid primary key,
     expired_date timestamp     not null,
     issued_date  timestamp     not null,
-    owner_id     uuid references person on delete cascade,
+    owner_id uuid references "user" on delete cascade,
     token        varchar(1024) not null
 );
