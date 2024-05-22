@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -26,18 +26,15 @@ import java.security.spec.InvalidKeySpecException;
 @AutoConfiguration
 public class SecurityStarterJwtConfiguration {
 
-    @Value("${jwt.access-token.public-key-name}")
-    private String keyName;
-
     @Bean(Beans.ACCESS_TOKEN_PUBLIC_KEY_PROVIDER)
-    @ConditionalOnMissingBean(name = Beans.ACCESS_TOKEN_PUBLIC_KEY_PROVIDER)
-    public PublicKeyProvider publicKeyProvider()
+    @ConditionalOnProperty(name = "jwt.autoconfigure", havingValue = "true")
+    public PublicKeyProvider publicKeyProvider(@Value("${jwt.access-token.public-key-name}") String keyName)
             throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
         return new RSAPublicKeyProviderImpl(keyName);
     }
 
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnProperty(name = "jwt.autoconfigure", havingValue = "true")
     public JwtManager jwtManager(
             @Qualifier(Beans.ACCESS_TOKEN_PUBLIC_KEY_PROVIDER) PublicKeyProvider publicKeyProvider
     ) {
@@ -45,19 +42,19 @@ public class SecurityStarterJwtConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnProperty(name = "jwt.autoconfigure", havingValue = "true")
     public JwtAuthenticationConverter jwtAuthenticationConverter(JwtManager manager) {
         return new JwtAuthenticationConverter(manager);
     }
 
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnProperty(name = "jwt.autoconfigure", havingValue = "true")
     public AuthenticationEntryPoint authenticationEntryPoint(ObjectMapper objectMapper) {
         return new CustomAuthenticationEntryPoint(objectMapper);
     }
 
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnProperty(name = "jwt.autoconfigure", havingValue = "true")
     public AccessDeniedHandler accessDeniedHandler(ObjectMapper objectMapper) {
         return new CustomAccessDeniedHandler(objectMapper);
     }

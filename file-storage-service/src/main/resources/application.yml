@@ -24,5 +24,6 @@ minio:
   url: ${MINIO_URL:http://localhost:9000}
 
 jwt:
+  autoconfigure: true
   access-token:
     public-key-name: authorization/access-token-public-key.pem

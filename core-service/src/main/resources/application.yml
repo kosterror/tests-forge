@@ -14,5 +14,6 @@ spring:
     show-sql: false
 
 jwt:
+  autoconfigure: true
   access-token:
     public-key-name: authorization/access-token-public-key.pem
