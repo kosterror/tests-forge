@@ -20,3 +20,6 @@ security:
     autoconfigure: true
     access-token:
       public-key-name: authorization/access-token-public-key.pem
+  api-key:
+    autoconfigure: true
+    key: ${API_KEY:api-key}
