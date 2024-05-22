@@ -26,3 +26,6 @@ security:
     refresh-token:
       expiration-time-days: 7
       private-key-name: authorization/refresh-token-private-key.pem
+  api-key:
+    autoconfigure: true
+    key: ${API_KEY:api-key}

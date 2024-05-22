@@ -1,2 +1,3 @@
 ru.kosterror.forms.securitystarter.configuration.JwtAutoConfiguration
+ru.kosterror.forms.securitystarter.configuration.ApiKeyAutoConfiguration
 ru.kosterror.forms.securitystarter.configuration.CommonAutoConfiguration
