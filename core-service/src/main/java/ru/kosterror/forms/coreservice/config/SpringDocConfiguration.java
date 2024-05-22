@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringDocConfiguration {
 
+    public static final String API_KEY = "Api-Key";
     public static final String JWT = "Bearer Token";
     private static final String JWT_BEARER_FORMAT = "JWT";
     private static final String JWT_SCHEME = "bearer";
@@ -28,6 +29,11 @@ public class SpringDocConfiguration {
                                 .type(SecurityScheme.Type.HTTP)
                                 .scheme(JWT_SCHEME)
                                 .bearerFormat(JWT_BEARER_FORMAT)
+                ).addSecuritySchemes(API_KEY,
+                        new SecurityScheme()
+                                .type(SecurityScheme.Type.APIKEY)
+                                .in(SecurityScheme.In.HEADER)
+                                .name(API_KEY)
                 )
         );
     }
