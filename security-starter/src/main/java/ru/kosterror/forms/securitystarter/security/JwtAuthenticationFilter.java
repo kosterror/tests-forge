@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -28,25 +27,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
-        try {
-            Authentication authentication = converter.convert(request);
-            if (authentication == null) {
-                SecurityContextHolder.clearContext();
-                filterChain.doFilter(request, response);
-                return;
-            }
+        Authentication authentication = converter.convert(request);
 
-            SecurityContext context = SecurityContextHolder.createEmptyContext();
-            context.setAuthentication(authentication);
-            SecurityContextHolder.setContext(context);
-        } catch (AuthenticationException exception) {
-            log.error("Invalid JWT token, request: {} {}",
-                    request.getMethod(),
-                    request.getRequestURI(),
-                    exception
-            );
-            SecurityContextHolder.clearContext();
+        if (authentication == null) {
+            filterChain.doFilter(request, response);
+            return;
         }
+
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        context.setAuthentication(authentication);
+        SecurityContextHolder.setContext(context);
 
         filterChain.doFilter(request, response);
     }
