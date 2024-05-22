@@ -24,10 +24,10 @@ public class KeyConfiguration {
     private static final String REGEX = "\\s";
     private static final String EMPTY_STRING = "";
 
-    @Value("${jwt.access-token.private-key-name}")
+    @Value("${security.jwt.access-token.private-key-name}")
     private String accessTokenPrivateKeyName;
 
-    @Value("${jwt.refresh-token.private-key-name}")
+    @Value("${security.jwt.refresh-token.private-key-name}")
     private String refreshTokenPrivateKeyName;
 
     @SneakyThrows

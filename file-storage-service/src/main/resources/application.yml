@@ -23,7 +23,10 @@ minio:
   bucket: ${MINIO_BUCKET:file-storage-service}
   url: ${MINIO_URL:http://localhost:9000}
 
-jwt:
-  autoconfigure: true
-  access-token:
-    public-key-name: authorization/access-token-public-key.pem
+security:
+  common:
+    autoconfigure: true
+  jwt:
+    autoconfigure: true
+    access-token:
+      public-key-name: authorization/access-token-public-key.pem

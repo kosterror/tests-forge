@@ -23,10 +23,10 @@ public class JwtServiceImpl implements JwtService {
     private final PrivateKeyProvider accessTokenPrivateKeyProvider;
     private final PrivateKeyProvider refreshTokenPrivateKeyProvider;
 
-    @Value("${jwt.access-token.expiration-time-minutes}")
+    @Value("${security.jwt.access-token.expiration-time-minutes}")
     private int accessTokenExpirationTimeMin;
 
-    @Value("${jwt.refresh-token.expiration-time-days}")
+    @Value("${security.jwt.refresh-token.expiration-time-days}")
     private int refreshTokenExpirationTimeDays;
 
     public JwtServiceImpl(RefreshTokenRepository refreshTokenRepository,

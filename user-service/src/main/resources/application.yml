@@ -14,12 +14,15 @@ spring:
       ddl-auto: validate
     show-sql: false
 
-jwt:
-  autoconfigure: true
-  access-token:
-    expiration-time-minutes: 5
-    public-key-name: authorization/access-token-public-key.pem
-    private-key-name: authorization/access-token-private-key.pem
-  refresh-token:
-    expiration-time-days: 7
-    private-key-name: authorization/refresh-token-private-key.pem
+security:
+  common:
+    autoconfigure: true
+  jwt:
+    autoconfigure: true
+    access-token:
+      expiration-time-minutes: 5
+      public-key-name: authorization/access-token-public-key.pem
+      private-key-name: authorization/access-token-private-key.pem
+    refresh-token:
+      expiration-time-days: 7
+      private-key-name: authorization/refresh-token-private-key.pem

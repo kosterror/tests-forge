@@ -1,1 +1,2 @@
-ru.kosterror.forms.securitystarter.configuration.SecurityStarterJwtConfiguration
+ru.kosterror.forms.securitystarter.configuration.JwtAutoConfiguration
+ru.kosterror.forms.securitystarter.configuration.CommonAutoConfiguration
