@@ -39,14 +39,13 @@ public class JwtAuthenticationConverter implements AuthenticationConverter {
 
         String token = header.substring(AUTHORIZATION_SCHEME_BEARER.length() + 1);
 
-        if (!jwtManager.isValid(token)) {
-            log.error("Token is not valid");
+        try {
+            JwtUser user = jwtManager.parse(token);
+            return new JwtAuthentication(user, token);
+        } catch (Exception exception) {
+            log.error("Error parsing token", exception);
             return null;
         }
-
-        JwtUser user = jwtManager.parse(token);
-
-        return new JwtAuthentication(user, token);
     }
 
 }
