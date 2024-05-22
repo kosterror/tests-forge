@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import ru.kosterror.forms.securitystarterjwt.keyprovider.PrivateKeyProvider;
+import ru.kosterror.forms.securitystarter.keyprovider.PrivateKeyProvider;
 import ru.kosterror.forms.userservice.util.Beans;
 
 import java.nio.file.Files;

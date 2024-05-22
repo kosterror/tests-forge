@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kosterror.forms.filestorageservice.dto.FileMetaInfoDto;
 import ru.kosterror.forms.filestorageservice.service.FileStorageService;
-import ru.kosterror.forms.securitystarterjwt.model.JwtUser;
+import ru.kosterror.forms.securitystarter.model.JwtUser;
 
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;

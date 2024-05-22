@@ -12,8 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
-import ru.kosterror.forms.securitystarterjwt.security.JwtAuthenticationConverter;
-import ru.kosterror.forms.securitystarterjwt.security.JwtAuthenticationFilter;
+import ru.kosterror.forms.securitystarter.security.JwtAuthenticationConverter;
+import ru.kosterror.forms.securitystarter.security.JwtAuthenticationFilter;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
