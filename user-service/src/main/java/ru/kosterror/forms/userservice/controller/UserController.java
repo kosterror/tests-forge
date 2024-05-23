@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import ru.kosterror.forms.commonmodel.PaginationResponse;
 import ru.kosterror.forms.securitystarter.model.JwtUser;
 import ru.kosterror.forms.userservice.dto.UserDto;
 import ru.kosterror.forms.userservice.entity.UserRole;
@@ -39,6 +40,16 @@ public class UserController {
     @PutMapping("/{userId}/role")
     public UserDto changeRole(@PathVariable UUID userId, @RequestParam UserRole role) {
         return userService.changeRole(userId, role);
+    }
+
+    @Operation(summary = "Поиск по пользователям", security = @SecurityRequirement(name = JWT))
+    @GetMapping("/search")
+    public PaginationResponse<UserDto> searchUsers(@RequestParam(required = false) String name,
+                                                   @RequestParam(required = false) String surname,
+                                                   @RequestParam(required = false) String patronymic,
+                                                   @RequestParam(defaultValue = "0") int page,
+                                                   @RequestParam(defaultValue = "10") int size) {
+        return userService.searchUsers(name, surname, patronymic, page, size);
     }
 
 }
