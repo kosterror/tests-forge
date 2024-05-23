@@ -46,7 +46,7 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     public TokensDto login(CredentialsDto credentialsDto) {
         var user = userRepository.findByEmail(credentialsDto.email())
-                .orElseThrow(UnauthorizedException::new);
+                .orElseThrow(() -> new UnauthorizedException("Incorrect email or password"));
 
         if (!passwordEncoder.matches(credentialsDto.password(), user.getPassword())) {
             log.info("Invalid password for user with email: {}", credentialsDto.email());
