@@ -13,13 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.kosterror.forms.filestorageservice.dto.FileMetaInfoDto;
+import ru.kosterror.forms.commonmodel.filestorageservice.FileMetaInfoDto;
 import ru.kosterror.forms.filestorageservice.service.FileStorageService;
 import ru.kosterror.forms.securitystarter.model.JwtUser;
 
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
+import static ru.kosterror.forms.filestorageservice.configuration.SpringDocConfiguration.API_KEY;
 import static ru.kosterror.forms.filestorageservice.configuration.SpringDocConfiguration.JWT;
 
 @RestController
@@ -58,7 +59,13 @@ public class FileStorageController {
                 .body(new ByteArrayResource(nameAndFile.getRight()));
     }
 
-    @Operation(summary = "Получить метаинформацию о файле")
+    @Operation(
+            summary = "Получить метаинформацию о файле",
+            security = {
+                    @SecurityRequirement(name = JWT),
+                    @SecurityRequirement(name = API_KEY)
+            }
+    )
     @GetMapping("/{id}")
     public FileMetaInfoDto getFileMetaInfo(@PathVariable UUID id) {
         return fileStorageService.getFileMetaInfo(id);

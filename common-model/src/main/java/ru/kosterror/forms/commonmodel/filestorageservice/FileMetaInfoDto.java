@@ -1,4 +1,4 @@
-package ru.kosterror.forms.filestorageservice.dto;
+package ru.kosterror.forms.commonmodel.filestorageservice;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
