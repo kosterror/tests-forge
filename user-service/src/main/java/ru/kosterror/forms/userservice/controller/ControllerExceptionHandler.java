@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.kosterror.forms.commonmodel.ErrorResponse;
 import ru.kosterror.forms.userservice.exception.ConflictException;
 import ru.kosterror.forms.userservice.exception.NotFoundException;
+import ru.kosterror.forms.userservice.exception.UnauthorizedException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,7 +66,8 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleNotFoundException(HttpServletRequest request, NotFoundException exception) {
+    public ResponseEntity<ErrorResponse> handleNotFoundException(HttpServletRequest request,
+                                                                 NotFoundException exception) {
         logException(request, exception);
 
         ErrorResponse response = buildErrorResponse(exception.getMessage(),
@@ -76,8 +78,22 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(response.getCode()).body(response);
     }
 
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ErrorResponse> handleUnauthorizedException(HttpServletRequest request,
+                                                                     UnauthorizedException exception) {
+        logException(request, exception);
+
+        ErrorResponse response = buildErrorResponse(exception.getMessage(),
+                request.getRequestURI(),
+                HttpStatus.UNAUTHORIZED
+        );
+
+        return ResponseEntity.status(response.getCode()).body(response);
+    }
+
     @ExceptionHandler(ConflictException.class)
-    public ResponseEntity<ErrorResponse> handleConflictException(HttpServletRequest request, ConflictException exception) {
+    public ResponseEntity<ErrorResponse> handleConflictException(HttpServletRequest request,
+                                                                 ConflictException exception) {
         logException(request, exception);
 
         ErrorResponse response = buildErrorResponse(exception.getMessage(),
@@ -89,7 +105,8 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(HttpServletRequest request, Exception exception) {
+    public ResponseEntity<ErrorResponse> handleException(HttpServletRequest request,
+                                                         Exception exception) {
         logException(request, exception);
 
         ErrorResponse response = buildErrorResponse("Internal service error",
