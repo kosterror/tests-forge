@@ -116,8 +116,8 @@ public class QuestionMapper {
 
     private void mapBaseQuestionDtoFields(QuestionDto dto, QuestionEntity entity) {
         dto.setId(entity.getId());
-        dto.setQuestion(entity.getQuestion());
-        dto.setComment(entity.getComment());
+        dto.setTitle(entity.getTitle());
+        dto.setOwnerId(entity.getOwnerId());
         dto.setPoints(entity.getPoints());
         dto.setType(entity.getType());
     }
@@ -203,8 +203,7 @@ public class QuestionMapper {
     }
 
     private <T extends QuestionEntity> void mapBaseQuestionEntityFields(T entity, NewQuestionDto dto) {
-        entity.setQuestion(dto.getQuestion());
-        entity.setComment(dto.getComment());
+        entity.setTitle(dto.getTitle());
         entity.setPoints(dto.getPoints());
         entity.setType(dto.getType());
         entity.setIsVisible(dto.getIsVisible());

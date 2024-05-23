@@ -45,12 +45,15 @@ public class SecurityConfiguration {
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers(
-                                new NegatedRequestMatcher(antMatcher(API_PATTERN))
-                        ).permitAll()
-                        .requestMatchers(
                                 antMatcher(HttpMethod.GET, "/api/v1/file-storage/download/*"),
                                 antMatcher(HttpMethod.POST, "/api/v1/file-storage/upload")
                         ).hasAnyRole("STUDENT", "TEACHER")
+                        .requestMatchers(
+                                antMatcher(HttpMethod.GET, "/api/v1/file-storage/*")
+                        ).hasAnyRole("STUDENT", "TEACHER", "SERVICE")
+                        .requestMatchers(
+                                new NegatedRequestMatcher(antMatcher(API_PATTERN))
+                        ).permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtAuthenticationFilter(
                         authenticationConverter,

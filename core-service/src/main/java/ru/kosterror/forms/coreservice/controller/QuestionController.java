@@ -5,10 +5,12 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.forms.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.newquesiton.NewQuestionDto;
 import ru.kosterror.forms.coreservice.service.question.QuestionService;
+import ru.kosterror.forms.securitystarter.model.JwtUser;
 
 import java.util.UUID;
 
@@ -24,8 +26,9 @@ public class QuestionController {
 
     @Operation(summary = "Создать вопрос", security = @SecurityRequirement(name = JWT))
     @PostMapping
-    public QuestionDto createQuestion(@RequestBody @Valid NewQuestionDto question) {
-        return service.createQuestion(question);
+    public QuestionDto createQuestion(@AuthenticationPrincipal JwtUser principal,
+                                      @RequestBody @Valid NewQuestionDto question) {
+        return service.createQuestion(principal.userId(), question);
     }
 
     @Operation(summary = "Получить вопрос")

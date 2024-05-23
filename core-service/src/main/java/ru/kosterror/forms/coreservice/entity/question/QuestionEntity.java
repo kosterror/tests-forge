@@ -14,9 +14,9 @@ import java.util.UUID;
 @Setter
 public abstract class QuestionEntity extends BaseEntity {
 
-    private String question;
+    private String title;
 
-    private String comment;
+    private UUID ownerId;
 
     @Enumerated(value = EnumType.STRING)
     private QuestionType type;

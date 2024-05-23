@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface QuestionService {
 
-    QuestionDto createQuestion(NewQuestionDto question);
+    QuestionDto createQuestion(UUID userId, NewQuestionDto question);
 
     QuestionDto getQuestion(UUID id);
 }

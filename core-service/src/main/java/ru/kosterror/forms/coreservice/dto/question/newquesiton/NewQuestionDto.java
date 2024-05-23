@@ -28,11 +28,7 @@ public abstract class NewQuestionDto {
 
     @Schema(description = "Текст вопроса", requiredMode = REQUIRED)
     @NotNull(message = "Question is required")
-    private String question;
-
-    @Schema(description = "Комментарий к вопросу", requiredMode = REQUIRED)
-    @NotNull(message = "Comment is required")
-    private String comment;
+    private String title;
 
     @Schema(description = "Баллы за вопрос", requiredMode = REQUIRED)
     @Min(value = 1, message = "Points must be greater than 0")
@@ -45,7 +41,7 @@ public abstract class NewQuestionDto {
     @Schema(description = "Видимость вопроса в банке вопросов", requiredMode = NOT_REQUIRED, defaultValue = "false")
     private Boolean isVisible;
 
-    @Schema(description = "Вложения к вопросу", requiredMode = NOT_REQUIRED, defaultValue = "[]")
+    @Schema(description = "Вложения к вопросу", requiredMode = NOT_REQUIRED)
     private List<UUID> attachments;
 
     protected NewQuestionDto(QuestionType type) {

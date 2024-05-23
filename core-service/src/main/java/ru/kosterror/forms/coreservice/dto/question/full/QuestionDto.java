@@ -15,10 +15,10 @@ public abstract class QuestionDto {
     private UUID id;
 
     @Schema(description = "Текст вопроса", requiredMode = REQUIRED)
-    private String question;
+    private String title;
 
-    @Schema(description = "Комментарий для вопроса", requiredMode = REQUIRED)
-    private String comment;
+    @Schema(description = "Идентификатор владельца", requiredMode = REQUIRED)
+    private UUID ownerId;
 
     @Schema(description = "Баллы за вопрос", requiredMode = REQUIRED)
     private int points;
