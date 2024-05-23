@@ -12,7 +12,7 @@ import ru.kosterror.forms.coreservice.service.question.QuestionService;
 
 import java.util.UUID;
 
-import static ru.kosterror.forms.coreservice.config.SpringDocConfiguration.JWT;
+import static ru.kosterror.forms.coreservice.configuration.SpringDocConfiguration.JWT;
 
 @RestController
 @RequestMapping("/api/v1/questions")

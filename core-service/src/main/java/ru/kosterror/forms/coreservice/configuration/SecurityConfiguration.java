@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.config;
+package ru.kosterror.forms.coreservice.configuration;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
