@@ -21,7 +21,12 @@ public class GroupEntity {
 
     private String name;
 
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany
+    @JoinTable(
+            name = "user_group",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private Set<UserEntity> users;
 
 }

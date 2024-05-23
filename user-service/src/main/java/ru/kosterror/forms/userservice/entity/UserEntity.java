@@ -36,12 +36,7 @@ public class UserEntity {
     @OneToMany(mappedBy = "owner")
     private List<RefreshTokenEntity> refreshTokens;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_group",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id")
-    )
+    @ManyToMany(mappedBy = "users")
     private Set<GroupEntity> groups;
 
 }
