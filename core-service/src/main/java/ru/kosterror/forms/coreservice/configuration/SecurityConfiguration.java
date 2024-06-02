@@ -33,6 +33,7 @@ public class SecurityConfiguration {
     private final AccessDeniedHandler accessDeniedHandler;
 
     @Bean
+    @SuppressWarnings("java:S1192")
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
@@ -45,7 +46,12 @@ public class SecurityConfiguration {
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(registry -> registry
-                        .requestMatchers(antMatcher(HttpMethod.POST, "/api/questions")).hasRole("TEACHER")
+                        .requestMatchers(
+                                antMatcher(HttpMethod.POST, "/api/questions"),
+                                antMatcher(HttpMethod.POST, "/api/subjects/**"),
+                                antMatcher(HttpMethod.PUT, "/api/subjects/**"),
+                                antMatcher(HttpMethod.DELETE, "/api/subjects/**")
+                        ).hasRole("TEACHER")
                         .requestMatchers(
                                 new NegatedRequestMatcher(antMatcher(API_PATTERN))
                         ).permitAll()
