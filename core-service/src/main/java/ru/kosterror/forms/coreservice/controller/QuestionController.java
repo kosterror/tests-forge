@@ -9,7 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.forms.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.newquesiton.NewQuestionDto;
-import ru.kosterror.forms.coreservice.service.question.QuestionService;
+import ru.kosterror.forms.coreservice.service.QuestionService;
 import ru.kosterror.forms.securitystarter.model.JwtUser;
 
 import java.util.UUID;

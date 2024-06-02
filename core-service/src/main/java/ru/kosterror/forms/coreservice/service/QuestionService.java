@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.service.question;
+package ru.kosterror.forms.coreservice.service;
 
 import ru.kosterror.forms.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.newquesiton.NewQuestionDto;

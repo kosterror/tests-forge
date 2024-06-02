@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.service.question;
+package ru.kosterror.forms.coreservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +11,7 @@ import ru.kosterror.forms.coreservice.exception.BadRequestException;
 import ru.kosterror.forms.coreservice.exception.NotFoundException;
 import ru.kosterror.forms.coreservice.mapper.QuestionMapper;
 import ru.kosterror.forms.coreservice.repository.QuestionRepository;
+import ru.kosterror.forms.coreservice.service.QuestionService;
 
 import java.util.List;
 import java.util.UUID;
