@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.configuration;
+package ru.kosterror.forms.userservice.configuration;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -8,13 +8,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class SpringDocConfiguration {
+public class OpenApiConfiguration {
 
     public static final String API_KEY = "Api-Key";
     public static final String JWT = "Bearer Token";
     private static final String JWT_BEARER_FORMAT = "JWT";
     private static final String JWT_SCHEME = "bearer";
-    private static final String TITLE = "core-service API";
+    private static final String TITLE = "user-service API";
     private static final String VERSION = "1.0.0";
 
     @Bean
@@ -37,6 +37,5 @@ public class SpringDocConfiguration {
                 )
         );
     }
-
 
 }

@@ -20,8 +20,8 @@ import ru.kosterror.forms.securitystarter.model.JwtUser;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
-import static ru.kosterror.forms.filestorageservice.configuration.SpringDocConfiguration.API_KEY;
-import static ru.kosterror.forms.filestorageservice.configuration.SpringDocConfiguration.JWT;
+import static ru.kosterror.forms.filestorageservice.configuration.OpenApiConfiguration.API_KEY;
+import static ru.kosterror.forms.filestorageservice.configuration.OpenApiConfiguration.JWT;
 
 @RestController
 @RequestMapping("/api/file-storage")

@@ -14,7 +14,7 @@ import ru.kosterror.forms.securitystarter.model.JwtUser;
 
 import java.util.UUID;
 
-import static ru.kosterror.forms.coreservice.configuration.SpringDocConfiguration.JWT;
+import static ru.kosterror.forms.coreservice.configuration.OpenApiConfiguration.JWT;
 
 @RestController
 @RequestMapping("/api/questions")

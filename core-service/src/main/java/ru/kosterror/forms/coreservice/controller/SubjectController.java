@@ -13,7 +13,7 @@ import ru.kosterror.forms.coreservice.service.SubjectService;
 import java.util.List;
 import java.util.UUID;
 
-import static ru.kosterror.forms.coreservice.configuration.SpringDocConfiguration.JWT;
+import static ru.kosterror.forms.coreservice.configuration.OpenApiConfiguration.JWT;
 
 @Tag(name = "Subjects")
 @RestController

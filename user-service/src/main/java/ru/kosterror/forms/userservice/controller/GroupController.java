@@ -19,7 +19,7 @@ import ru.kosterror.forms.userservice.service.GroupService;
 import java.util.List;
 import java.util.UUID;
 
-import static ru.kosterror.forms.userservice.configuration.SpringDocConfiguration.JWT;
+import static ru.kosterror.forms.userservice.configuration.OpenApiConfiguration.JWT;
 
 @Tag(name = "Groups")
 @RestController

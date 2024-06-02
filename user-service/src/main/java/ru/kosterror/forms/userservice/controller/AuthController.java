@@ -14,7 +14,7 @@ import ru.kosterror.forms.userservice.dto.TokensDto;
 import ru.kosterror.forms.userservice.dto.UserDto;
 import ru.kosterror.forms.userservice.service.AuthService;
 
-import static ru.kosterror.forms.userservice.configuration.SpringDocConfiguration.JWT;
+import static ru.kosterror.forms.userservice.configuration.OpenApiConfiguration.JWT;
 
 @RestController
 @RequestMapping("/api/auth")

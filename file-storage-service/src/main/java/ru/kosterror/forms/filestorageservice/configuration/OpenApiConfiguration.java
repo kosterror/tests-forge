@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class SpringDocConfiguration {
+public class OpenApiConfiguration {
 
     public static final String API_KEY = "Api-Key";
     public static final String JWT = "Bearer Token";

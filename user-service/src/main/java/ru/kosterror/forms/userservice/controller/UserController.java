@@ -14,7 +14,7 @@ import ru.kosterror.forms.userservice.service.UserService;
 
 import java.util.UUID;
 
-import static ru.kosterror.forms.userservice.configuration.SpringDocConfiguration.JWT;
+import static ru.kosterror.forms.userservice.configuration.OpenApiConfiguration.JWT;
 
 @RestController
 @RequestMapping("/api/users")
