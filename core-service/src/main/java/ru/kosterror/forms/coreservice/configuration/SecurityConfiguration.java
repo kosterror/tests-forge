@@ -45,7 +45,7 @@ public class SecurityConfiguration {
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(registry -> registry
-                        .requestMatchers(antMatcher(HttpMethod.POST, "/api/v1/questions")).hasRole("TEACHER")
+                        .requestMatchers(antMatcher(HttpMethod.POST, "/api/questions")).hasRole("TEACHER")
                         .requestMatchers(
                                 new NegatedRequestMatcher(antMatcher(API_PATTERN))
                         ).permitAll()

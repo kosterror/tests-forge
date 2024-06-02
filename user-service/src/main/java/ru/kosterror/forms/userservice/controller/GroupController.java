@@ -23,7 +23,7 @@ import static ru.kosterror.forms.userservice.configuration.SpringDocConfiguratio
 
 @Tag(name = "Groups")
 @RestController
-@RequestMapping("/api/v1/groups")
+@RequestMapping("/api/groups")
 @RequiredArgsConstructor
 public class GroupController {
 

@@ -17,7 +17,7 @@ import java.util.UUID;
 import static ru.kosterror.forms.userservice.configuration.SpringDocConfiguration.JWT;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
 @Tag(name = "Users")
 public class UserController {

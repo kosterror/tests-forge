@@ -46,16 +46,16 @@ public class SecurityConfiguration {
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers(
-                                antMatcher(HttpMethod.POST, "/api/v1/auth/teachers/register"),
-                                antMatcher(HttpMethod.PUT, "/api/v1/users/*/role"),
-                                antMatcher(HttpMethod.POST, "/api/v1/groups"),
-                                antMatcher(HttpMethod.PUT, "/api/v1/groups/*"),
-                                antMatcher(HttpMethod.DELETE, "/api/v1/groups/*")
+                                antMatcher(HttpMethod.POST, "/api/auth/teachers/register"),
+                                antMatcher(HttpMethod.PUT, "/api/users/*/role"),
+                                antMatcher(HttpMethod.POST, "/api/groups"),
+                                antMatcher(HttpMethod.PUT, "/api/groups/*"),
+                                antMatcher(HttpMethod.DELETE, "/api/groups/*")
                         ).hasRole("TEACHER")
                         .requestMatchers(
-                                antMatcher(HttpMethod.POST, "/api/v1/auth/login"),
-                                antMatcher(HttpMethod.POST, "/api/v1/auth/students/register"),
-                                antMatcher(HttpMethod.POST, "/api/v1/auth/refresh"),
+                                antMatcher(HttpMethod.POST, "/api/auth/login"),
+                                antMatcher(HttpMethod.POST, "/api/auth/students/register"),
+                                antMatcher(HttpMethod.POST, "/api/auth/refresh"),
                                 new NegatedRequestMatcher(antMatcher(API_PATTERN))
                         ).permitAll()
                         .anyRequest().authenticated())

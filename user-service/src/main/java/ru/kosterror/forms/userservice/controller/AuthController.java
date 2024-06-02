@@ -17,7 +17,7 @@ import ru.kosterror.forms.userservice.service.AuthService;
 import static ru.kosterror.forms.userservice.configuration.SpringDocConfiguration.JWT;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @Tag(name = "Auth")
 public class AuthController {

@@ -24,7 +24,7 @@ import static ru.kosterror.forms.filestorageservice.configuration.SpringDocConfi
 import static ru.kosterror.forms.filestorageservice.configuration.SpringDocConfiguration.JWT;
 
 @RestController
-@RequestMapping("/api/v1/file-storage")
+@RequestMapping("/api/file-storage")
 @RequiredArgsConstructor
 @Tag(name = "Файловое хранилище")
 public class FileStorageController {

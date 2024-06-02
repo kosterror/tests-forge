@@ -45,11 +45,11 @@ public class SecurityConfiguration {
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers(
-                                antMatcher(HttpMethod.GET, "/api/v1/file-storage/download/*"),
-                                antMatcher(HttpMethod.POST, "/api/v1/file-storage/upload")
+                                antMatcher(HttpMethod.GET, "/api/file-storage/download/*"),
+                                antMatcher(HttpMethod.POST, "/api/file-storage/upload")
                         ).hasAnyRole("STUDENT", "TEACHER")
                         .requestMatchers(
-                                antMatcher(HttpMethod.GET, "/api/v1/file-storage/*")
+                                antMatcher(HttpMethod.GET, "/api/file-storage/*")
                         ).hasAnyRole("STUDENT", "TEACHER", "SERVICE")
                         .requestMatchers(
                                 new NegatedRequestMatcher(antMatcher(API_PATTERN))

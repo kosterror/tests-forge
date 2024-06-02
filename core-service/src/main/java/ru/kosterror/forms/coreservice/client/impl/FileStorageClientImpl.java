@@ -25,7 +25,7 @@ public class FileStorageClientImpl implements FileStorageClient {
     @Override
     public FileMetaInfoDto getFileMetaInfo(UUID id) {
         return restClient.get()
-                .uri("/api/v1/file-storage/{id}", id)
+                .uri("/api/file-storage/{id}", id)
                 .retrieve()
                 .onStatus(
                         status -> status.equals(HttpStatus.NOT_FOUND),
