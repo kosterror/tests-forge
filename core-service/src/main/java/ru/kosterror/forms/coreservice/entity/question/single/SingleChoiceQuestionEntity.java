@@ -16,7 +16,7 @@ public class SingleChoiceQuestionEntity extends QuestionEntity {
     private Integer points;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    @OrderBy("sequenceNumber")
+    @OrderBy("order")
     private List<SingleOptionEntity> options;
 
 }
