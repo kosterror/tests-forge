@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.question.createupdate;
+package ru.kosterror.forms.coreservice.dto.question.update;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
@@ -18,7 +18,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CreateUpdateMultipleChoiceQuestionDto extends CreateUpdateQuestionDto {
+public class UpdateMultipleChoiceQuestionDto extends UpdateQuestionDto {
 
     @Schema(description = "Список вариантов ответа", requiredMode = REQUIRED)
     @NotNull(message = "Список вариантов не может быть null")
@@ -35,7 +35,7 @@ public class CreateUpdateMultipleChoiceQuestionDto extends CreateUpdateQuestionD
             "значение - соответствующий балл. Количество пар не может быть больше, чем количество вариантов ответа + 1")
     private Map<Integer, Integer> points;
 
-    public CreateUpdateMultipleChoiceQuestionDto() {
+    public UpdateMultipleChoiceQuestionDto() {
         super(QuestionType.MULTIPLE_CHOICE);
     }
 }

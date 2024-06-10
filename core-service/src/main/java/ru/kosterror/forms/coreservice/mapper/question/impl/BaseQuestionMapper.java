@@ -1,16 +1,16 @@
 package ru.kosterror.forms.coreservice.mapper.question.impl;
 
-import ru.kosterror.forms.coreservice.dto.question.createupdate.CreateUpdateQuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.full.QuestionDto;
+import ru.kosterror.forms.coreservice.dto.question.update.UpdateQuestionDto;
 import ru.kosterror.forms.coreservice.entity.question.QuestionEntity;
 
 public abstract class BaseQuestionMapper {
 
-    public abstract QuestionEntity toEntity(CreateUpdateQuestionDto dto);
+    public abstract QuestionEntity toEntity(UpdateQuestionDto dto);
 
     public abstract QuestionDto toDto(QuestionEntity entity);
 
-    protected void mapBaseQuestionEntityFields(QuestionEntity entity, CreateUpdateQuestionDto dto) {
+    protected void mapBaseQuestionEntityFields(QuestionEntity entity, UpdateQuestionDto dto) {
         entity.setName(dto.getName());
         entity.setType(dto.getType());
         entity.setAttachments(dto.getAttachments());

@@ -1,12 +1,12 @@
 package ru.kosterror.forms.coreservice.mapper.question.impl;
 
 import org.springframework.stereotype.Component;
-import ru.kosterror.forms.coreservice.dto.question.createupdate.CreateUpdateMatchingQuestionDto;
-import ru.kosterror.forms.coreservice.dto.question.createupdate.CreateUpdateQuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.full.matching.MatchingOptionDto;
 import ru.kosterror.forms.coreservice.dto.question.full.matching.MatchingQuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.full.matching.TermDefinitionDto;
+import ru.kosterror.forms.coreservice.dto.question.update.UpdateMatchingQuestionDto;
+import ru.kosterror.forms.coreservice.dto.question.update.UpdateQuestionDto;
 import ru.kosterror.forms.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.forms.coreservice.entity.question.matching.DefinitionEntity;
 import ru.kosterror.forms.coreservice.entity.question.matching.MatchingQuestionEntity;
@@ -32,11 +32,11 @@ public class MatchingQuestionMapper extends BaseQuestionMapper {
     }
 
     @Override
-    public QuestionEntity toEntity(CreateUpdateQuestionDto baseDto) {
+    public QuestionEntity toEntity(UpdateQuestionDto baseDto) {
         var entity = new MatchingQuestionEntity();
         mapBaseQuestionEntityFields(entity, baseDto);
 
-        var dto = (CreateUpdateMatchingQuestionDto) baseDto;
+        var dto = (UpdateMatchingQuestionDto) baseDto;
 
         int listsSize = dto.getTermsAndDefinitions().size();
         var terms = new ArrayList<TermEntity>(listsSize);

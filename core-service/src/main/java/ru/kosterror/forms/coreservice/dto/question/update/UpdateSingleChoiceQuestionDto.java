@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.question.createupdate;
+package ru.kosterror.forms.coreservice.dto.question.update;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +17,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CreateUpdateSingleChoiceQuestionDto extends CreateUpdateQuestionDto {
+public class UpdateSingleChoiceQuestionDto extends UpdateQuestionDto {
 
     @Schema(description = "Список вариантов ответа", requiredMode = REQUIRED)
     @NotNull(message = "Список вариантов обязателен")
@@ -32,7 +32,7 @@ public class CreateUpdateSingleChoiceQuestionDto extends CreateUpdateQuestionDto
     @NotNull(message = "Количество баллов обязательно")
     private Integer points;
 
-    public CreateUpdateSingleChoiceQuestionDto() {
+    public UpdateSingleChoiceQuestionDto() {
         super(QuestionType.SINGLE_CHOICE);
     }
 }

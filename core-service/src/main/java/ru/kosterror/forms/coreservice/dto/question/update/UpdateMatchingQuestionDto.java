@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.question.createupdate;
+package ru.kosterror.forms.coreservice.dto.question.update;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
@@ -16,7 +16,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CreateUpdateMatchingQuestionDto extends CreateUpdateQuestionDto {
+public class UpdateMatchingQuestionDto extends UpdateQuestionDto {
 
     @Size(min = 2, max = 32, message = "Количество терминов и определений должно быть от 2 до 32")
     @Schema(description = "Словарь, где ключ - термин, а значение - определение", requiredMode = REQUIRED)
@@ -28,7 +28,7 @@ public class CreateUpdateMatchingQuestionDto extends CreateUpdateQuestionDto {
             "определений + 1")
     private Map<Integer, Integer> points;
 
-    public CreateUpdateMatchingQuestionDto() {
+    public UpdateMatchingQuestionDto() {
         super(QuestionType.MATCHING);
     }
 }

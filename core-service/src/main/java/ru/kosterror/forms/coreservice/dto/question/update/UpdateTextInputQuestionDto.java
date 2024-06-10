@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.question.createupdate;
+package ru.kosterror.forms.coreservice.dto.question.update;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +17,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CreateUpdateTextInputQuestionDto extends CreateUpdateQuestionDto {
+public class UpdateTextInputQuestionDto extends UpdateQuestionDto {
 
     @Schema(description = "Является ли ответ чувствительным к регистру", requiredMode = REQUIRED)
     @NotNull(message = "Чувствительность к регистру обязательна")
@@ -32,7 +32,7 @@ public class CreateUpdateTextInputQuestionDto extends CreateUpdateQuestionDto {
     @NotNull(message = "Количество баллов обязательно")
     private Integer points;
 
-    public CreateUpdateTextInputQuestionDto() {
+    public UpdateTextInputQuestionDto() {
         super(QuestionType.TEXT_INPUT);
     }
 }

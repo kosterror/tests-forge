@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.question.createupdate;
+package ru.kosterror.forms.coreservice.dto.question.update;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -17,13 +17,13 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
         use = JsonTypeInfo.Id.NAME,
         property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = CreateUpdateMultipleChoiceQuestionDto.class, name = "MULTIPLE_CHOICE"),
-        @JsonSubTypes.Type(value = CreateUpdateSingleChoiceQuestionDto.class, name = "SINGLE_CHOICE"),
-        @JsonSubTypes.Type(value = CreateUpdateMatchingQuestionDto.class, name = "MATCHING"),
-        @JsonSubTypes.Type(value = CreateUpdateTextInputQuestionDto.class, name = "TEXT_INPUT"),
+        @JsonSubTypes.Type(value = UpdateMultipleChoiceQuestionDto.class, name = "MULTIPLE_CHOICE"),
+        @JsonSubTypes.Type(value = UpdateSingleChoiceQuestionDto.class, name = "SINGLE_CHOICE"),
+        @JsonSubTypes.Type(value = UpdateMatchingQuestionDto.class, name = "MATCHING"),
+        @JsonSubTypes.Type(value = UpdateTextInputQuestionDto.class, name = "TEXT_INPUT"),
 })
 @Data
-public abstract class CreateUpdateQuestionDto {
+public abstract class UpdateQuestionDto {
     @Schema(description = "Текст вопроса", requiredMode = REQUIRED)
     @NotNull(message = "Текст вопроса обязателен")
     private String name;
@@ -35,7 +35,7 @@ public abstract class CreateUpdateQuestionDto {
     @Schema(description = "Вложения к вопросу", requiredMode = NOT_REQUIRED)
     private List<UUID> attachments;
 
-    protected CreateUpdateQuestionDto(QuestionType type) {
+    protected UpdateQuestionDto(QuestionType type) {
         this.type = type;
     }
 }

@@ -1,10 +1,10 @@
 package ru.kosterror.forms.coreservice.mapper.question.impl;
 
 import org.springframework.stereotype.Component;
-import ru.kosterror.forms.coreservice.dto.question.createupdate.CreateUpdateQuestionDto;
-import ru.kosterror.forms.coreservice.dto.question.createupdate.CreateUpdateTextInputQuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.full.textinput.TextInputQuestionDto;
+import ru.kosterror.forms.coreservice.dto.question.update.UpdateQuestionDto;
+import ru.kosterror.forms.coreservice.dto.question.update.UpdateTextInputQuestionDto;
 import ru.kosterror.forms.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.forms.coreservice.entity.question.textinput.TextInputQuestionEntity;
 
@@ -12,11 +12,11 @@ import ru.kosterror.forms.coreservice.entity.question.textinput.TextInputQuestio
 public class TextInputQuestionMapper extends BaseQuestionMapper {
 
     @Override
-    public QuestionEntity toEntity(CreateUpdateQuestionDto baseDto) {
+    public QuestionEntity toEntity(UpdateQuestionDto baseDto) {
         var entity = new TextInputQuestionEntity();
         mapBaseQuestionEntityFields(entity, baseDto);
 
-        var dto = (CreateUpdateTextInputQuestionDto) baseDto;
+        var dto = (UpdateTextInputQuestionDto) baseDto;
 
         entity.setPoints(dto.getPoints());
         entity.setIsCaseSensitive(dto.isCaseSensitive());

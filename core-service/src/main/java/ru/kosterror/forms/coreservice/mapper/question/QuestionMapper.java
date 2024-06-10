@@ -2,8 +2,8 @@ package ru.kosterror.forms.coreservice.mapper.question;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.kosterror.forms.coreservice.dto.question.createupdate.CreateUpdateQuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.full.QuestionDto;
+import ru.kosterror.forms.coreservice.dto.question.update.UpdateQuestionDto;
 import ru.kosterror.forms.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.forms.coreservice.mapper.question.impl.MatchingQuestionMapper;
 import ru.kosterror.forms.coreservice.mapper.question.impl.MultipleChoiceQuestionMapper;
@@ -21,7 +21,7 @@ public class QuestionMapper {
     private final TextInputQuestionMapper textInputQuestionMapper;
     private final MatchingQuestionMapper matchingQuestionMapper;
 
-    public QuestionEntity toEntity(CreateUpdateQuestionDto dto) {
+    public QuestionEntity toEntity(UpdateQuestionDto dto) {
         return switch (dto.getType()) {
             case SINGLE_CHOICE -> singleChoiceQuestionMapper.toEntity(dto);
             case MULTIPLE_CHOICE -> multipleChoiceQuestionMapper.toEntity(dto);
@@ -30,7 +30,7 @@ public class QuestionMapper {
         };
     }
 
-    public List<QuestionEntity> toEntities(List<CreateUpdateQuestionDto> dtos) {
+    public List<QuestionEntity> toEntities(List<UpdateQuestionDto> dtos) {
         return dtos.stream()
                 .map(this::toEntity)
                 .toList();

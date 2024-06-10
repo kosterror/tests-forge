@@ -1,11 +1,11 @@
 package ru.kosterror.forms.coreservice.mapper.question.impl;
 
 import org.springframework.stereotype.Component;
-import ru.kosterror.forms.coreservice.dto.question.createupdate.CreateUpdateMultipleChoiceQuestionDto;
-import ru.kosterror.forms.coreservice.dto.question.createupdate.CreateUpdateQuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.full.multiple.MultipleChoiceQuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.full.multiple.MultipleOptionDto;
+import ru.kosterror.forms.coreservice.dto.question.update.UpdateMultipleChoiceQuestionDto;
+import ru.kosterror.forms.coreservice.dto.question.update.UpdateQuestionDto;
 import ru.kosterror.forms.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.forms.coreservice.entity.question.multiple.MultipleChoiceQuestionEntity;
 import ru.kosterror.forms.coreservice.entity.question.multiple.MultipleOptionEntity;
@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class MultipleChoiceQuestionMapper extends BaseQuestionMapper {
 
-    private static MultipleOptionEntity mapToMultipleOptionEntity(CreateUpdateMultipleChoiceQuestionDto dto,
+    private static MultipleOptionEntity mapToMultipleOptionEntity(UpdateMultipleChoiceQuestionDto dto,
                                                                   int order) {
         var optionEntity = new MultipleOptionEntity();
         optionEntity.setName(dto.getOptions().get(order));
@@ -26,11 +26,11 @@ public class MultipleChoiceQuestionMapper extends BaseQuestionMapper {
     }
 
     @Override
-    public QuestionEntity toEntity(CreateUpdateQuestionDto baseDto) {
+    public QuestionEntity toEntity(UpdateQuestionDto baseDto) {
         var entity = new MultipleChoiceQuestionEntity();
         mapBaseQuestionEntityFields(entity, baseDto);
 
-        var dto = (CreateUpdateMultipleChoiceQuestionDto) baseDto;
+        var dto = (UpdateMultipleChoiceQuestionDto) baseDto;
 
         var optionNames = dto.getOptions();
         var options = new ArrayList<MultipleOptionEntity>(optionNames.size());
