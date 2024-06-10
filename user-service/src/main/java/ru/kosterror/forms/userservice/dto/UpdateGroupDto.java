@@ -9,7 +9,7 @@ import java.util.UUID;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
-public record NewGroupDto(
+public record UpdateGroupDto(
 
         @Schema(description = "Имя группы", requiredMode = REQUIRED)
         @NotBlank(message = "Имя группы не может быть пустым")

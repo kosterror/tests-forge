@@ -9,8 +9,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.forms.securitystarter.model.JwtUser;
 import ru.kosterror.forms.userservice.dto.CredentialsDto;
-import ru.kosterror.forms.userservice.dto.NewUserDto;
 import ru.kosterror.forms.userservice.dto.TokensDto;
+import ru.kosterror.forms.userservice.dto.UpdateUserDto;
 import ru.kosterror.forms.userservice.dto.UserDto;
 import ru.kosterror.forms.userservice.service.AuthService;
 
@@ -45,14 +45,14 @@ public class AuthController {
 
     @Operation(summary = "Зарегистрироваться студентом")
     @PostMapping("/students/register")
-    public TokensDto registerStudent(@RequestBody @Valid NewUserDto newUserDto) {
-        return authService.registerStudent(newUserDto);
+    public TokensDto registerStudent(@RequestBody @Valid UpdateUserDto updateUserDto) {
+        return authService.registerStudent(updateUserDto);
     }
 
     @Operation(summary = "Зарегистрировать преподавателя", security = @SecurityRequirement(name = JWT))
     @PostMapping("/teachers/register")
-    public UserDto registerTeacher(@RequestBody @Valid NewUserDto newUserDto) {
-        return authService.registerTeacher(newUserDto);
+    public UserDto registerTeacher(@RequestBody @Valid UpdateUserDto updateUserDto) {
+        return authService.registerTeacher(updateUserDto);
     }
 
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.kosterror.forms.commonmodel.PaginationResponse;
 import ru.kosterror.forms.securitystarter.model.JwtUser;
 import ru.kosterror.forms.userservice.dto.GroupDto;
-import ru.kosterror.forms.userservice.dto.NewGroupDto;
+import ru.kosterror.forms.userservice.dto.UpdateGroupDto;
 import ru.kosterror.forms.userservice.service.GroupService;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class GroupController {
 
     @Operation(summary = "Создать новую группу", security = @SecurityRequirement(name = JWT))
     @PostMapping
-    public GroupDto createGroup(@RequestBody @Valid NewGroupDto request) {
+    public GroupDto createGroup(@RequestBody @Valid UpdateGroupDto request) {
         return service.createGroup(request);
     }
 
@@ -49,7 +49,7 @@ public class GroupController {
 
     @Operation(summary = "Изменить группу", security = @SecurityRequirement(name = JWT))
     @PutMapping("/{id}")
-    public GroupDto updateGroup(@PathVariable UUID id, @RequestBody NewGroupDto groupDto) {
+    public GroupDto updateGroup(@PathVariable UUID id, @RequestBody UpdateGroupDto groupDto) {
         return service.updateGroup(id, groupDto);
     }
 

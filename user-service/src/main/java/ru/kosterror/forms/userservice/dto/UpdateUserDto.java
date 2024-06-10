@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Size;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIRED;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
-public record NewUserDto(
+public record UpdateUserDto(
         @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", message = "Некорректный формат почты")
         @NotNull(message = "Почта не может быть пустой")
         @Schema(description = "Почта", requiredMode = REQUIRED, example = "example@domain.org")

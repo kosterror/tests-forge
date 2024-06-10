@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 import ru.kosterror.forms.userservice.dto.GroupDto;
-import ru.kosterror.forms.userservice.dto.NewGroupDto;
+import ru.kosterror.forms.userservice.dto.UpdateGroupDto;
 import ru.kosterror.forms.userservice.entity.GroupEntity;
 
 @Mapper(
@@ -13,7 +13,7 @@ import ru.kosterror.forms.userservice.entity.GroupEntity;
 )
 public interface GroupMapper {
 
-    GroupEntity toEntity(NewGroupDto dto);
+    GroupEntity toEntity(UpdateGroupDto dto);
 
     GroupDto toDto(GroupEntity entity);
 

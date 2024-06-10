@@ -3,7 +3,7 @@ package ru.kosterror.forms.userservice.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
-import ru.kosterror.forms.userservice.dto.NewUserDto;
+import ru.kosterror.forms.userservice.dto.UpdateUserDto;
 import ru.kosterror.forms.userservice.dto.UserDto;
 import ru.kosterror.forms.userservice.entity.UserEntity;
 
@@ -15,6 +15,6 @@ public interface UserMapper {
 
     UserDto toDto(UserEntity entity);
 
-    UserEntity toEntity(NewUserDto dto);
+    UserEntity toEntity(UpdateUserDto dto);
 
 }

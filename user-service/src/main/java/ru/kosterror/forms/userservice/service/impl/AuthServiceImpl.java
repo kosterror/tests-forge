@@ -6,8 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kosterror.forms.userservice.dto.CredentialsDto;
-import ru.kosterror.forms.userservice.dto.NewUserDto;
 import ru.kosterror.forms.userservice.dto.TokensDto;
+import ru.kosterror.forms.userservice.dto.UpdateUserDto;
 import ru.kosterror.forms.userservice.dto.UserDto;
 import ru.kosterror.forms.userservice.entity.RefreshTokenEntity;
 import ru.kosterror.forms.userservice.entity.UserEntity;
@@ -71,11 +71,11 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @Transactional
-    public UserDto registerTeacher(NewUserDto newUserDto) {
-        checkExistingUserWithEmail(newUserDto.email());
+    public UserDto registerTeacher(UpdateUserDto updateUserDto) {
+        checkExistingUserWithEmail(updateUserDto.email());
 
-        var entity = userMapper.toEntity(newUserDto);
-        entity.setPassword(passwordEncoder.encode(newUserDto.password()));
+        var entity = userMapper.toEntity(updateUserDto);
+        entity.setPassword(passwordEncoder.encode(updateUserDto.password()));
         entity.setRole(UserRole.ROLE_TEACHER);
 
         entity = userRepository.save(entity);
@@ -84,11 +84,11 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @Transactional
-    public TokensDto registerStudent(NewUserDto newUserDto) {
-        checkExistingUserWithEmail(newUserDto.email());
+    public TokensDto registerStudent(UpdateUserDto updateUserDto) {
+        checkExistingUserWithEmail(updateUserDto.email());
 
-        var entity = userMapper.toEntity(newUserDto);
-        entity.setPassword(passwordEncoder.encode(newUserDto.password()));
+        var entity = userMapper.toEntity(updateUserDto);
+        entity.setPassword(passwordEncoder.encode(updateUserDto.password()));
         entity.setRole(UserRole.ROLE_STUDENT);
 
         entity = userRepository.save(entity);

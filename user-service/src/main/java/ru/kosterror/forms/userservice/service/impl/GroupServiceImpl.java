@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kosterror.forms.commonmodel.PaginationResponse;
 import ru.kosterror.forms.userservice.dto.GroupDto;
-import ru.kosterror.forms.userservice.dto.NewGroupDto;
+import ru.kosterror.forms.userservice.dto.UpdateGroupDto;
 import ru.kosterror.forms.userservice.entity.GroupEntity;
 import ru.kosterror.forms.userservice.exception.NotFoundException;
 import ru.kosterror.forms.userservice.mapper.GroupMapper;
@@ -30,9 +30,9 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     @Transactional
-    public GroupDto createGroup(NewGroupDto newGroupDto) {
-        var group = groupMapper.toEntity(newGroupDto);
-        var users = userService.findAllByIds(newGroupDto.userIds());
+    public GroupDto createGroup(UpdateGroupDto updateGroupDto) {
+        var group = groupMapper.toEntity(updateGroupDto);
+        var users = userService.findAllByIds(updateGroupDto.userIds());
         group.setUsers(new HashSet<>(users));
 
         group = groupRepository.save(group);
@@ -54,7 +54,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     @Transactional
-    public GroupDto updateGroup(UUID id, NewGroupDto groupDto) {
+    public GroupDto updateGroup(UUID id, UpdateGroupDto groupDto) {
         var group = getGroupEntity(id);
         group.setName(groupDto.name());
 
