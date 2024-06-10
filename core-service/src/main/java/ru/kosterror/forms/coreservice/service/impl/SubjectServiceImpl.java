@@ -2,8 +2,8 @@ package ru.kosterror.forms.coreservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.kosterror.forms.coreservice.dto.subject.CreateUpdateSubjectDto;
 import ru.kosterror.forms.coreservice.dto.subject.SubjectDto;
+import ru.kosterror.forms.coreservice.dto.subject.UpdateSubjectDto;
 import ru.kosterror.forms.coreservice.entity.subject.SubjectEntity;
 import ru.kosterror.forms.coreservice.exception.NotFoundException;
 import ru.kosterror.forms.coreservice.mapper.SubjectMapper;
@@ -21,7 +21,7 @@ public class SubjectServiceImpl implements SubjectService {
     private final SubjectMapper mapper;
 
     @Override
-    public SubjectDto createSubject(CreateUpdateSubjectDto subjectDto) {
+    public SubjectDto createSubject(UpdateSubjectDto subjectDto) {
         var subjectEntity = mapper.toEntity(subjectDto);
         subjectEntity = repository.save(subjectEntity);
 
@@ -46,7 +46,7 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public SubjectDto updateSubject(UUID id, CreateUpdateSubjectDto subjectDto) {
+    public SubjectDto updateSubject(UUID id, UpdateSubjectDto subjectDto) {
         var subjectEntity = getSubjectById(id);
         subjectEntity.setName(subjectDto.name());
         subjectEntity = repository.save(subjectEntity);

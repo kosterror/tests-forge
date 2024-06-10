@@ -6,8 +6,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.kosterror.forms.coreservice.dto.subject.CreateUpdateSubjectDto;
 import ru.kosterror.forms.coreservice.dto.subject.SubjectDto;
+import ru.kosterror.forms.coreservice.dto.subject.UpdateSubjectDto;
 import ru.kosterror.forms.coreservice.service.SubjectService;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class SubjectController {
 
     @Operation(summary = "Создать предмет", security = @SecurityRequirement(name = JWT))
     @PostMapping
-    public SubjectDto createSubject(@RequestBody @Valid CreateUpdateSubjectDto subjectDto) {
+    public SubjectDto createSubject(@RequestBody @Valid UpdateSubjectDto subjectDto) {
         return service.createSubject(subjectDto);
     }
 
@@ -44,7 +44,7 @@ public class SubjectController {
     @Operation(summary = "Изменить предмет", security = @SecurityRequirement(name = JWT))
     @PostMapping("/{id}")
     public SubjectDto updateSubject(@PathVariable UUID id,
-                                    @RequestBody @Valid CreateUpdateSubjectDto subjectDto) {
+                                    @RequestBody @Valid UpdateSubjectDto subjectDto) {
         return service.updateSubject(id, subjectDto);
     }
 
