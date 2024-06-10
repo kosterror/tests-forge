@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.formpattern.createupdate;
+package ru.kosterror.forms.coreservice.dto.formpattern.update;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
@@ -18,14 +18,14 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CreateStaticBlockDto extends CreateBlockDto {
+public class UpdateStaticBlockDto extends UpdateBlockDto {
 
     @NotNull(message = "Список вариантов блока не может быть null")
     @Size(min = 1, message = "Количество вариантов должно быть не меньше 1")
     @Schema(description = "Список вариантов блока", requiredMode = REQUIRED)
-    private List<@Valid CreateBlockVariantDto> variants;
+    private List<@Valid UpdateBlockVariantDto> variants;
 
-    protected CreateStaticBlockDto() {
+    protected UpdateStaticBlockDto() {
         super(BlockType.STATIC);
     }
 

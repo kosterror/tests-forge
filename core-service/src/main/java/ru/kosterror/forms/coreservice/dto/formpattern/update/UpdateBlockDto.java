@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.formpattern.createupdate;
+package ru.kosterror.forms.coreservice.dto.formpattern.update;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -11,11 +11,11 @@ import ru.kosterror.forms.coreservice.entity.BlockType;
         use = JsonTypeInfo.Id.NAME,
         property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = CreateStaticBlockDto.class, name = "STATIC"),
-        @JsonSubTypes.Type(value = CreateDynamicBlockDto.class, name = "DYNAMIC"),
+        @JsonSubTypes.Type(value = UpdateStaticBlockDto.class, name = "STATIC"),
+        @JsonSubTypes.Type(value = UpdateDynamicBlockDto.class, name = "DYNAMIC"),
 })
 @Data
-public abstract class CreateBlockDto {
+public abstract class UpdateBlockDto {
 
     @NotNull(message = "Название блока не может быть null")
     @Schema(description = "Название блока", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -28,7 +28,7 @@ public abstract class CreateBlockDto {
     @Schema(description = "Тип блока", requiredMode = Schema.RequiredMode.REQUIRED)
     private BlockType type;
 
-    protected CreateBlockDto(BlockType type) {
+    protected UpdateBlockDto(BlockType type) {
         this.type = type;
     }
 

@@ -1,14 +1,14 @@
 package ru.kosterror.forms.coreservice.mapper.block;
 
-import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateBlockDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.BlockDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdateBlockDto;
 import ru.kosterror.forms.coreservice.entity.form.BlockEntity;
 
 public abstract class BaseBlockMapper {
 
-    public abstract BlockEntity toEntity(CreateBlockDto dto);
+    public abstract BlockEntity toEntity(UpdateBlockDto dto);
 
-    protected void mapBaseBlockEntityFields(BlockEntity entity, CreateBlockDto dto) {
+    protected void mapBaseBlockEntityFields(BlockEntity entity, UpdateBlockDto dto) {
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
         entity.setType(dto.getType());

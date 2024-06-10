@@ -1,8 +1,8 @@
 package ru.kosterror.forms.coreservice.mapper;
 
 import org.mapstruct.*;
-import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateFormPatternDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.FormPatternDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdateFormPatternDto;
 import ru.kosterror.forms.coreservice.entity.form.FormPatternEntity;
 
 @Mapper(
@@ -12,7 +12,7 @@ import ru.kosterror.forms.coreservice.entity.form.FormPatternEntity;
 )
 public abstract class FormPatternMapper {
 
-    public abstract FormPatternEntity toEntity(CreateFormPatternDto formDto);
+    public abstract FormPatternEntity toEntity(UpdateFormPatternDto formDto);
 
     public abstract FormPatternDto toDto(FormPatternEntity formPatternEntity);
 

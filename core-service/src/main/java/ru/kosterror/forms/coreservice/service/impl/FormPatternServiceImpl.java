@@ -3,8 +3,8 @@ package ru.kosterror.forms.coreservice.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateFormPatternDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.FormPatternDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdateFormPatternDto;
 import ru.kosterror.forms.coreservice.exception.NotFoundException;
 import ru.kosterror.forms.coreservice.mapper.FormPatternMapper;
 import ru.kosterror.forms.coreservice.repository.FormPatternRepository;
@@ -21,8 +21,8 @@ public class FormPatternServiceImpl implements FormPatternService {
 
     @Override
     @Transactional
-    public FormPatternDto createFormPattern(UUID userId, CreateFormPatternDto createFormPatternDto) {
-        var form = formPatternMapper.toEntity(createFormPatternDto);
+    public FormPatternDto createFormPattern(UUID userId, UpdateFormPatternDto updateFormPatternDto) {
+        var form = formPatternMapper.toEntity(updateFormPatternDto);
         form = formPatternRepository.save(form);
 
         return formPatternMapper.toDto(form);

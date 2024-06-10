@@ -2,10 +2,10 @@ package ru.kosterror.forms.coreservice.mapper.block;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateBlockDto;
-import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateStaticBlockDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.BlockDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.StaticBlockDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdateBlockDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdateStaticBlockDto;
 import ru.kosterror.forms.coreservice.entity.form.BlockEntity;
 import ru.kosterror.forms.coreservice.entity.form.StaticBlockEntity;
 import ru.kosterror.forms.coreservice.mapper.VariantMapper;
@@ -17,11 +17,11 @@ public class StaticBlockMapper extends BaseBlockMapper {
     private final VariantMapper variantMapper;
 
     @Override
-    public BlockEntity toEntity(CreateBlockDto baseDto) {
+    public BlockEntity toEntity(UpdateBlockDto baseDto) {
         var entity = new StaticBlockEntity();
         mapBaseBlockEntityFields(entity, baseDto);
 
-        var dto = (CreateStaticBlockDto) baseDto;
+        var dto = (UpdateStaticBlockDto) baseDto;
 
         var variants = variantMapper.toEntities(dto.getVariants());
         entity.setVariants(variants);

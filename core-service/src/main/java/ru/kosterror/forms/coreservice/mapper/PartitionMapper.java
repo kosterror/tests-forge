@@ -1,8 +1,8 @@
 package ru.kosterror.forms.coreservice.mapper;
 
 import org.mapstruct.*;
-import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreatePartitionDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.PartitionDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdatePartitionDto;
 import ru.kosterror.forms.coreservice.entity.form.PartitionEntity;
 import ru.kosterror.forms.coreservice.mapper.block.BlockMapper;
 
@@ -13,7 +13,7 @@ import ru.kosterror.forms.coreservice.mapper.block.BlockMapper;
 )
 public abstract class PartitionMapper {
 
-    public abstract PartitionEntity toEntity(CreatePartitionDto partitionDto);
+    public abstract PartitionEntity toEntity(UpdatePartitionDto partitionDto);
 
     public abstract PartitionDto toDto(PartitionEntity partitionEntity);
 

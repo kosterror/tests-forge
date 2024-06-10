@@ -1,8 +1,8 @@
 package ru.kosterror.forms.coreservice.mapper;
 
 import org.mapstruct.*;
-import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateBlockVariantDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.VariantDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdateBlockVariantDto;
 import ru.kosterror.forms.coreservice.entity.form.VariantEntity;
 import ru.kosterror.forms.coreservice.mapper.question.QuestionMapper;
 
@@ -15,7 +15,7 @@ import java.util.List;
 )
 public abstract class VariantMapper {
 
-    public abstract List<VariantEntity> toEntities(List<CreateBlockVariantDto> dtos);
+    public abstract List<VariantEntity> toEntities(List<UpdateBlockVariantDto> dtos);
 
     public abstract List<VariantDto> toDtos(List<VariantEntity> entities);
 

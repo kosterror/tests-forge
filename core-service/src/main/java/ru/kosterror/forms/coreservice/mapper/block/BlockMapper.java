@@ -2,8 +2,8 @@ package ru.kosterror.forms.coreservice.mapper.block;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateBlockDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.BlockDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdateBlockDto;
 import ru.kosterror.forms.coreservice.entity.form.BlockEntity;
 
 @Component
@@ -13,7 +13,7 @@ public class BlockMapper {
     private final DynamicBlockMapper dynamicBlockMapper;
     private final StaticBlockMapper staticBlockMapper;
 
-    public BlockEntity toEntity(CreateBlockDto dto) {
+    public BlockEntity toEntity(UpdateBlockDto dto) {
         return switch (dto.getType()) {
             case DYNAMIC -> dynamicBlockMapper.toEntity(dto);
             case STATIC -> staticBlockMapper.toEntity(dto);

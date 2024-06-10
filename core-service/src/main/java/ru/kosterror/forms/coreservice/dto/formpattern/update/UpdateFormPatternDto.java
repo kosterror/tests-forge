@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.formpattern.createupdate;
+package ru.kosterror.forms.coreservice.dto.formpattern.update;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 import java.util.UUID;
 
-public record CreateFormPatternDto(
+public record UpdateFormPatternDto(
         @NotNull(message = "Название формы не может быть null")
         @Schema(description = "Название формы", requiredMode = Schema.RequiredMode.REQUIRED)
         String name,
@@ -23,6 +23,6 @@ public record CreateFormPatternDto(
         @NotNull(message = "Список разделов не может быть null")
         @Size(min = 1, message = "Количество разделов должно содержать хотя бы одно значение")
         @Schema(description = "Список разделов", requiredMode = Schema.RequiredMode.REQUIRED)
-        List<@Valid CreatePartitionDto> partitions
+        List<@Valid UpdatePartitionDto> partitions
 ) {
 }

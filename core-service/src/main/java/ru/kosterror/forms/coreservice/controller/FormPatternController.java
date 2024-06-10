@@ -7,8 +7,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateFormPatternDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.FormPatternDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdateFormPatternDto;
 import ru.kosterror.forms.coreservice.service.FormPatternService;
 import ru.kosterror.forms.securitystarter.model.JwtUser;
 
@@ -27,8 +27,8 @@ public class FormPatternController {
     @Operation(summary = "Создать шаблон формы", security = @SecurityRequirement(name = JWT))
     @PostMapping
     public FormPatternDto createFormPattern(@AuthenticationPrincipal JwtUser principal,
-                                            @RequestBody @Valid CreateFormPatternDto createFormPatternDto) {
-        return formPatternService.createFormPattern(principal.userId(), createFormPatternDto);
+                                            @RequestBody @Valid UpdateFormPatternDto updateFormPatternDto) {
+        return formPatternService.createFormPattern(principal.userId(), updateFormPatternDto);
     }
 
     @Operation(summary = "Получить шаблон формы", security = @SecurityRequirement(name = JWT))

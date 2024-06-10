@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.formpattern.createupdate;
+package ru.kosterror.forms.coreservice.dto.formpattern.update;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
@@ -11,7 +11,7 @@ import java.util.List;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIRED;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
-public record CreateBlockVariantDto(
+public record UpdateBlockVariantDto(
         @NotNull(message = "Название варианта не может быть null")
         @Schema(description = "Название варианта", requiredMode = REQUIRED)
         String name,
