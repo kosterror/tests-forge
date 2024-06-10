@@ -18,6 +18,9 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @ToString(callSuper = true)
 public class TextInputQuestionDto extends QuestionDto {
 
+    @Schema(description = "Количество баллов за правильный ответ", requiredMode = REQUIRED)
+    private Integer points;
+
     @Schema(description = "Является ли ответы чувствительными к регистру", requiredMode = REQUIRED)
     private boolean isCaseSensitive;
 

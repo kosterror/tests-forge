@@ -21,6 +21,9 @@ public class SingleChoiceQuestionDto extends QuestionDto {
     @Schema(description = "Варианты ответа на вопрос", requiredMode = REQUIRED)
     private List<SingleOptionDto> options;
 
+    @Schema(description = "Количество баллов за правильный ответ", requiredMode = REQUIRED)
+    private Integer points;
+
     public SingleChoiceQuestionDto() {
         super(QuestionType.SINGLE_CHOICE);
     }

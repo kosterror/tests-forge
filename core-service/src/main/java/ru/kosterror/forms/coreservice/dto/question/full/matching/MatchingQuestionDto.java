@@ -9,6 +9,9 @@ import ru.kosterror.forms.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.forms.coreservice.entity.question.QuestionType;
 
 import java.util.List;
+import java.util.Map;
+
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 @Getter
 @Setter
@@ -16,7 +19,10 @@ import java.util.List;
 @ToString(callSuper = true)
 public class MatchingQuestionDto extends QuestionDto {
 
-    @Schema(description = "Список терминов и их определений")
+    @Schema(description = "Баллы", requiredMode = REQUIRED)
+    private Map<Integer, Integer> points;
+
+    @Schema(description = "Список терминов и их определений", requiredMode = REQUIRED)
     private List<TermDefinitionDto> termAndDefinitions;
 
     public MatchingQuestionDto() {

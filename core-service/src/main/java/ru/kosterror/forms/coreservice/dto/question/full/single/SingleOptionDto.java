@@ -14,7 +14,7 @@ public class SingleOptionDto {
     private UUID id;
 
     @Schema(description = "Значение варианта ответа", requiredMode = REQUIRED)
-    private String value;
+    private String name;
 
     @Schema(description = "Является ли вариант ответа правильным", requiredMode = REQUIRED)
     private boolean isRight;

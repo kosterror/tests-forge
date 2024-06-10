@@ -13,6 +13,8 @@ import java.util.List;
 @Setter
 public class SingleChoiceQuestionEntity extends QuestionEntity {
 
+    private Integer points;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     @OrderBy("sequenceNumber")
     private List<SingleOptionEntity> options;

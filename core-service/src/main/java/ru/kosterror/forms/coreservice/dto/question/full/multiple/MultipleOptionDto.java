@@ -13,8 +13,8 @@ public class MultipleOptionDto {
     @Schema(description = "Идентификатор варианта ответа", requiredMode = REQUIRED)
     private UUID id;
 
-    @Schema(description = "Значение варианта ответа", requiredMode = REQUIRED)
-    private String value;
+    @Schema(description = "Текст варианта ответа", requiredMode = REQUIRED)
+    private String name;
 
     @Schema(description = "Является ли вариант ответа правильным", requiredMode = REQUIRED)
     private boolean isRight;

@@ -4,12 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kosterror.forms.coreservice.client.FileStorageClient;
+import ru.kosterror.forms.coreservice.dto.question.createupdate.CreateUpdateQuestionDto;
 import ru.kosterror.forms.coreservice.dto.question.full.QuestionDto;
-import ru.kosterror.forms.coreservice.dto.question.newquesiton.NewQuestionDto;
 import ru.kosterror.forms.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.forms.coreservice.exception.BadRequestException;
 import ru.kosterror.forms.coreservice.exception.NotFoundException;
-import ru.kosterror.forms.coreservice.mapper.QuestionMapper;
+import ru.kosterror.forms.coreservice.mapper.question.QuestionMapper;
 import ru.kosterror.forms.coreservice.repository.QuestionRepository;
 import ru.kosterror.forms.coreservice.service.QuestionService;
 
@@ -26,8 +26,8 @@ public class QuestionServiceImpl implements QuestionService {
     private final FileStorageClient fileStorageClient;
 
     @Override
-    public QuestionDto createQuestion(UUID userId, NewQuestionDto question) {
-        if (question.getAttachments() != null) {
+    public QuestionDto createQuestion(UUID userId, CreateUpdateQuestionDto question) {
+        if (question.getAttachments() != null && !question.getAttachments().isEmpty()) {
             validateAttachments(userId, question.getAttachments());
         }
 
@@ -49,8 +49,8 @@ public class QuestionServiceImpl implements QuestionService {
                 .orElseThrow(() -> new NotFoundException(String.format("Question with id %s not found", id)));
     }
 
-    private void validateAttachments(UUID userId, List<UUID> attachment) {
-        for (var attachmentId : attachment) {
+    private void validateAttachments(UUID userId, List<UUID> attachmentIds) {
+        for (var attachmentId : attachmentIds) {
             var fileMetaInfo = fileStorageClient.getFileMetaInfo(attachmentId);
 
             if (fileMetaInfo.ownerId() != userId) {

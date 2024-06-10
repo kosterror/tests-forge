@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.question.newquesiton;
+package ru.kosterror.forms.coreservice.dto.question.createupdate;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
@@ -17,18 +17,22 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class NewTextInputQuestionDto extends NewQuestionDto {
+public class CreateUpdateTextInputQuestionDto extends CreateUpdateQuestionDto {
 
     @Schema(description = "Является ли ответ чувствительным к регистру", requiredMode = REQUIRED)
-    @NotNull(message = "Field isCaseSensitive is required")
+    @NotNull(message = "Чувствительность к регистру обязательна")
     private boolean isCaseSensitive;
 
     @Schema(description = "Список правильных ответов", requiredMode = REQUIRED)
-    @NotNull(message = "List of answers is required")
-    @Size(min = 1, message = "List of answers must contain at least 1 element")
+    @NotNull(message = "Список ответов не может быть null")
+    @Size(min = 1, message = "Должен быть хотя бы один правильный ответ")
     private List<String> answers;
 
-    public NewTextInputQuestionDto() {
+    @Schema(description = "Количество баллов", requiredMode = REQUIRED)
+    @NotNull(message = "Количество баллов обязательно")
+    private Integer points;
+
+    public CreateUpdateTextInputQuestionDto() {
         super(QuestionType.TEXT_INPUT);
     }
 }

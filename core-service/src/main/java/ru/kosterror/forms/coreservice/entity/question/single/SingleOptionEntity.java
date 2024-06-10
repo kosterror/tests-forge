@@ -1,9 +1,6 @@
 package ru.kosterror.forms.coreservice.entity.question.single;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import ru.kosterror.forms.coreservice.entity.BaseEntity;
@@ -14,9 +11,10 @@ import ru.kosterror.forms.coreservice.entity.BaseEntity;
 @Setter
 public class SingleOptionEntity extends BaseEntity {
 
-    private String value;
+    private String name;
 
-    private int sequenceNumber;
+    @Column(name = "\"order\"")
+    private Integer order;
 
     private Boolean isRight;
 

@@ -16,6 +16,8 @@ import java.util.List;
 @Setter
 public class TextInputQuestionEntity extends QuestionEntity {
 
+    private Integer points;
+
     private Boolean isCaseSensitive;
 
     @CollectionTable(name = "text_input_answer_question")

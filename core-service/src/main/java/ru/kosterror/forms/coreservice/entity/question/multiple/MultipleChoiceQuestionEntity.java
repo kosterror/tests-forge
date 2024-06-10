@@ -6,6 +6,7 @@ import lombok.Setter;
 import ru.kosterror.forms.coreservice.entity.question.QuestionEntity;
 
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "multiple_choice_question")
@@ -13,8 +14,12 @@ import java.util.List;
 @Setter
 public class MultipleChoiceQuestionEntity extends QuestionEntity {
 
+    @ElementCollection
+    @CollectionTable(name = "multiple_question_points", joinColumns = @JoinColumn(name = "question_id"))
+    private Map<Integer, Integer> points;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    @OrderBy("sequenceNumber")
+    @OrderBy("order")
     private List<MultipleOptionEntity> options;
 
 }
