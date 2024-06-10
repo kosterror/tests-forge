@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.form.createupdate;
+package ru.kosterror.forms.coreservice.dto.formpattern.createupdate;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

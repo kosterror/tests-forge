@@ -14,7 +14,7 @@ import java.util.UUID;
 @Table(name = "form")
 @Getter
 @Setter
-public class FormEntity extends BaseEntity {
+public class FormPatternEntity extends BaseEntity {
 
     private String name;
 

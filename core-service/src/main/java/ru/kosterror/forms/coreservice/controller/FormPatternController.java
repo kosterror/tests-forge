@@ -7,9 +7,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import ru.kosterror.forms.coreservice.dto.form.createupdate.CreateFormDto;
-import ru.kosterror.forms.coreservice.dto.form.full.FormDto;
-import ru.kosterror.forms.coreservice.service.FormService;
+import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateFormPatternDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.full.FormPatternDto;
+import ru.kosterror.forms.coreservice.service.FormPatternService;
 import ru.kosterror.forms.securitystarter.model.JwtUser;
 
 import java.util.UUID;
@@ -18,23 +18,23 @@ import static ru.kosterror.forms.coreservice.configuration.OpenApiConfiguration.
 
 @Tag(name = "Forms")
 @RestController
-@RequestMapping("/api/forms")
+@RequestMapping("/api/forms/patterns")
 @RequiredArgsConstructor
-public class FormController {
+public class FormPatternController {
 
-    private final FormService formService;
+    private final FormPatternService formPatternService;
 
     @Operation(summary = "Создать шаблон формы", security = @SecurityRequirement(name = JWT))
-    @PostMapping("/patterns")
-    public FormDto createFormPattern(@AuthenticationPrincipal JwtUser principal,
-                                     @RequestBody @Valid CreateFormDto createFormDto) {
-        return formService.createFormPattern(principal.userId(), createFormDto);
+    @PostMapping
+    public FormPatternDto createFormPattern(@AuthenticationPrincipal JwtUser principal,
+                                            @RequestBody @Valid CreateFormPatternDto createFormPatternDto) {
+        return formPatternService.createFormPattern(principal.userId(), createFormPatternDto);
     }
 
     @Operation(summary = "Получить шаблон формы", security = @SecurityRequirement(name = JWT))
-    @GetMapping("/patterns/{id}")
-    public FormDto getFormPattern(@PathVariable UUID id) {
-        return formService.getFormPattern(id);
+    @GetMapping("/{id}")
+    public FormPatternDto getFormPattern(@PathVariable UUID id) {
+        return formPatternService.getFormPattern(id);
     }
 
 }

@@ -1,8 +1,7 @@
-package ru.kosterror.forms.coreservice.dto.form.full;
+package ru.kosterror.forms.coreservice.dto.formpattern.full;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import ru.kosterror.forms.coreservice.dto.question.full.QuestionDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,18 +10,18 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIR
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 @Data
-public class VariantDto {
+public class PartitionDto {
 
     @Schema(description = "Идентификатор", requiredMode = REQUIRED)
     private UUID id;
 
-    @Schema(description = "Название варианта", requiredMode = REQUIRED)
+    @Schema(description = "Название раздела", requiredMode = REQUIRED)
     private String name;
 
-    @Schema(description = "Описание варианта", requiredMode = NOT_REQUIRED)
+    @Schema(description = "Описание раздела", requiredMode = NOT_REQUIRED)
     private String description;
 
-    @Schema(description = "Вопросы", requiredMode = REQUIRED)
-    private List<QuestionDto> questions;
+    @Schema(description = "Список блоков", requiredMode = REQUIRED)
+    private List<BlockDto> blocks;
 
 }

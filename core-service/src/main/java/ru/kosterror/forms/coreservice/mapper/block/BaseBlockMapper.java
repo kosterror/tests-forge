@@ -1,7 +1,7 @@
 package ru.kosterror.forms.coreservice.mapper.block;
 
-import ru.kosterror.forms.coreservice.dto.form.createupdate.CreateBlockDto;
-import ru.kosterror.forms.coreservice.dto.form.full.BlockDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateBlockDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.full.BlockDto;
 import ru.kosterror.forms.coreservice.entity.form.BlockEntity;
 
 public abstract class BaseBlockMapper {

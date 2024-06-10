@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.form.createupdate;
+package ru.kosterror.forms.coreservice.dto.formpattern.createupdate;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 import java.util.UUID;
 
-public record CreateFormDto(
+public record CreateFormPatternDto(
         @NotNull(message = "Название формы не может быть null")
         @Schema(description = "Название формы", requiredMode = Schema.RequiredMode.REQUIRED)
         String name,

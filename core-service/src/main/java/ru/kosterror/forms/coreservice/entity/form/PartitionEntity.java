@@ -22,7 +22,7 @@ public class PartitionEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "form_id")
-    private FormEntity form;
+    private FormPatternEntity form;
 
     @OneToMany(mappedBy = "partition", cascade = CascadeType.ALL)
     @OrderBy("order")

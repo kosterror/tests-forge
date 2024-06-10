@@ -2,10 +2,10 @@ package ru.kosterror.forms.coreservice.mapper.block;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.kosterror.forms.coreservice.dto.form.createupdate.CreateBlockDto;
-import ru.kosterror.forms.coreservice.dto.form.createupdate.CreateStaticBlockDto;
-import ru.kosterror.forms.coreservice.dto.form.full.BlockDto;
-import ru.kosterror.forms.coreservice.dto.form.full.StaticBlockDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateBlockDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateStaticBlockDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.full.BlockDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.full.StaticBlockDto;
 import ru.kosterror.forms.coreservice.entity.form.BlockEntity;
 import ru.kosterror.forms.coreservice.entity.form.StaticBlockEntity;
 import ru.kosterror.forms.coreservice.mapper.VariantMapper;

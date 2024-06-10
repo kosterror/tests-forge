@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.form.full;
+package ru.kosterror.forms.coreservice.dto.formpattern.full;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -11,7 +11,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIR
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 @Data
-public class FormDto {
+public class FormPatternDto {
 
     @Schema(description = "Идентификатор", requiredMode = REQUIRED)
     private UUID id;

@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.form.createupdate;
+package ru.kosterror.forms.coreservice.dto.formpattern.createupdate;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;

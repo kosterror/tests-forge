@@ -2,8 +2,8 @@ package ru.kosterror.forms.coreservice.mapper.block;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.kosterror.forms.coreservice.dto.form.createupdate.CreateBlockDto;
-import ru.kosterror.forms.coreservice.dto.form.full.BlockDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateBlockDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.full.BlockDto;
 import ru.kosterror.forms.coreservice.entity.form.BlockEntity;
 
 @Component

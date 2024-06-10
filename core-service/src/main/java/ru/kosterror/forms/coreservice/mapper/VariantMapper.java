@@ -1,8 +1,8 @@
 package ru.kosterror.forms.coreservice.mapper;
 
 import org.mapstruct.*;
-import ru.kosterror.forms.coreservice.dto.form.createupdate.CreateBlockVariantDto;
-import ru.kosterror.forms.coreservice.dto.form.full.VariantDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreateBlockVariantDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.full.VariantDto;
 import ru.kosterror.forms.coreservice.entity.form.VariantEntity;
 import ru.kosterror.forms.coreservice.mapper.question.QuestionMapper;
 

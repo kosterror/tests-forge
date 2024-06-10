@@ -1,8 +1,8 @@
 package ru.kosterror.forms.coreservice.mapper;
 
 import org.mapstruct.*;
-import ru.kosterror.forms.coreservice.dto.form.createupdate.CreatePartitionDto;
-import ru.kosterror.forms.coreservice.dto.form.full.PartitionDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.createupdate.CreatePartitionDto;
+import ru.kosterror.forms.coreservice.dto.formpattern.full.PartitionDto;
 import ru.kosterror.forms.coreservice.entity.form.PartitionEntity;
 import ru.kosterror.forms.coreservice.mapper.block.BlockMapper;
 

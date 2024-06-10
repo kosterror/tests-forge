@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.form.full;
+package ru.kosterror.forms.coreservice.dto.formpattern.full;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

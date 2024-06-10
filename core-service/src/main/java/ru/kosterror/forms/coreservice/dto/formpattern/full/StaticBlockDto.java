@@ -1,4 +1,4 @@
-package ru.kosterror.forms.coreservice.dto.form.full;
+package ru.kosterror.forms.coreservice.dto.formpattern.full;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
