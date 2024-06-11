@@ -1,6 +1,7 @@
 package ru.kosterror.forms.coreservice.mapper;
 
 import org.mapstruct.*;
+import ru.kosterror.forms.coreservice.dto.formpattern.full.BaseFormPatternDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.FormPatternDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdateFormPatternDto;
 import ru.kosterror.forms.coreservice.entity.form.FormPatternEntity;
@@ -15,6 +16,8 @@ public abstract class FormPatternMapper {
     public abstract FormPatternEntity toEntity(UpdateFormPatternDto formDto);
 
     public abstract FormPatternDto toDto(FormPatternEntity formPatternEntity);
+
+    public abstract BaseFormPatternDto toBaseDto(FormPatternEntity formPatternEntity);
 
     @AfterMapping
     void orderPartitions(@MappingTarget FormPatternEntity formPatternEntity) {

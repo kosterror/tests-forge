@@ -4,9 +4,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import ru.kosterror.forms.commonmodel.PaginationResponse;
+import ru.kosterror.forms.coreservice.dto.formpattern.full.BaseFormPatternDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.FormPatternDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdateFormPatternDto;
 import ru.kosterror.forms.coreservice.service.FormPatternService;
@@ -35,6 +39,16 @@ public class FormPatternController {
     @GetMapping("/{id}")
     public FormPatternDto getFormPattern(@PathVariable UUID id) {
         return formPatternService.getFormPattern(id);
+    }
+
+    @Operation(summary = "Получить шаблоны форм с фильтрацией", security = @SecurityRequirement(name = JWT))
+    @GetMapping
+    public PaginationResponse<BaseFormPatternDto> getFormPatterns(@Min(0) @RequestParam(defaultValue = "0") int page,
+                                                                  @Min(1) @Max(200) @RequestParam(defaultValue = "10") int size,
+                                                                  @RequestParam(required = false) String name,
+                                                                  @RequestParam(required = false) UUID ownerId,
+                                                                  @RequestParam(required = false) UUID subjectId) {
+        return formPatternService.getFormPatterns(page, size, name, ownerId, subjectId);
     }
 
 }

@@ -1,16 +1,23 @@
 package ru.kosterror.forms.coreservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kosterror.forms.commonmodel.PaginationResponse;
+import ru.kosterror.forms.coreservice.dto.formpattern.full.BaseFormPatternDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.FormPatternDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdateFormPatternDto;
+import ru.kosterror.forms.coreservice.entity.form.FormPatternEntity;
 import ru.kosterror.forms.coreservice.exception.NotFoundException;
 import ru.kosterror.forms.coreservice.mapper.FormPatternMapper;
 import ru.kosterror.forms.coreservice.repository.FormPatternRepository;
 import ru.kosterror.forms.coreservice.service.FormPatternService;
 
 import java.util.UUID;
+
+import static ru.kosterror.forms.coreservice.specificaiton.FormPatternSpecification.*;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +41,28 @@ public class FormPatternServiceImpl implements FormPatternService {
                 .orElseThrow(() -> new NotFoundException("Form with id %s not found".formatted(id)));
 
         return formPatternMapper.toDto(form);
+    }
+
+    @Override
+    public PaginationResponse<BaseFormPatternDto> getFormPatterns(int page,
+                                                                  int size,
+                                                                  String name,
+                                                                  UUID ownerId,
+                                                                  UUID subjectId
+    ) {
+        var specification = Specification.<FormPatternEntity>where(null)
+                .and(hasNameLike(name))
+                .and(hasOwner(ownerId))
+                .and(hasSubjectId(subjectId))
+                .and(orderByName());
+
+        var formPage = formPatternRepository.findAll(specification, PageRequest.of(page, size));
+
+        var formDtos = formPage.getContent().stream()
+                .map(formPatternMapper::toBaseDto)
+                .toList();
+
+        return new PaginationResponse<>(page, size, formDtos);
     }
 
 }

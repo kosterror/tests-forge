@@ -1,5 +1,7 @@
 package ru.kosterror.forms.coreservice.service;
 
+import ru.kosterror.forms.commonmodel.PaginationResponse;
+import ru.kosterror.forms.coreservice.dto.formpattern.full.BaseFormPatternDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.full.FormPatternDto;
 import ru.kosterror.forms.coreservice.dto.formpattern.update.UpdateFormPatternDto;
 
@@ -11,4 +13,10 @@ public interface FormPatternService {
 
     FormPatternDto getFormPattern(UUID id);
 
+    PaginationResponse<BaseFormPatternDto> getFormPatterns(int page,
+                                                           int size,
+                                                           String name,
+                                                           UUID ownerId,
+                                                           UUID subjectId
+    );
 }
