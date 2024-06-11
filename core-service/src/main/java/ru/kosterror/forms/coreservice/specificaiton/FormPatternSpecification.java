@@ -20,8 +20,8 @@ public class FormPatternSpecification {
         }
 
         return (root, query, cb) -> cb.like(
-                root.get(FormPatternEntity_.NAME),
-                like(name)
+                cb.lower(root.get(FormPatternEntity_.NAME)),
+                like(name.toLowerCase())
         );
 
     }
