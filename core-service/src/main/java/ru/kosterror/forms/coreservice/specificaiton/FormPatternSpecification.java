@@ -37,7 +37,7 @@ public class FormPatternSpecification {
         );
     }
 
-    public static Specification<FormPatternEntity> hasSubjectId(UUID subjectId) {
+    public static Specification<FormPatternEntity> hasSubject(UUID subjectId) {
         if (subjectId == null) {
             return null;
         }

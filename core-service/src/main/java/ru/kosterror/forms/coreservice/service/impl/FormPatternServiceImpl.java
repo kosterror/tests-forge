@@ -53,7 +53,7 @@ public class FormPatternServiceImpl implements FormPatternService {
         var specification = Specification.<FormPatternEntity>where(null)
                 .and(hasNameLike(name))
                 .and(hasOwner(ownerId))
-                .and(hasSubjectId(subjectId))
+                .and(hasSubject(subjectId))
                 .and(orderByName());
 
         var formPage = formPatternRepository.findAll(specification, PageRequest.of(page, size));
