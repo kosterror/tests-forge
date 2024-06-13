@@ -3,5 +3,6 @@ apply plugin: "io.spring.dependency-management"
 
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter"
-    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-mail"
+    implementation "org.thymeleaf:thymeleaf-spring6:${thymeleafVersion}"
 }
