@@ -4,7 +4,6 @@ server:
 spring:
   application:
     name: mail-service
-
   mail:
     host: ${MAIL_HOST:smtp.gmail.com}
     port: ${MAIL_PORT:587}
@@ -13,3 +12,10 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
+  data:
+    mongodb:
+      username: mail-service
+      password: mail-service
+      database: mail-service
+      host: localhost
+      port: 27017
