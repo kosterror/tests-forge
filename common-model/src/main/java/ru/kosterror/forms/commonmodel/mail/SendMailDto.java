@@ -12,14 +12,4 @@ public record SendMailDto(
         String subject,
         String body
 ) {
-    @Override
-    public String toString() {
-        return "SendMailDto{" +
-                "receivers=" + receivers +
-                ", copies=" + copies +
-                ", hiddenCopies=" + hiddenCopies +
-                ", subject='" + subject + '\'' +
-                ", body='" + body + '\'' +
-                '}';
-    }
 }
