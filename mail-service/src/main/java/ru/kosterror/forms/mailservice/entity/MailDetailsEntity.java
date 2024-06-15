@@ -28,9 +28,7 @@ public class MailDetailsEntity {
 
     private String body;
 
-    private LocalDateTime sendDate;
-
-    private LocalDateTime createdDate;
+    private LocalDateTime date;
 
     private MailStatus status;
 
