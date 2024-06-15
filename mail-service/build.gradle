@@ -10,5 +10,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-mail"
     implementation "org.springframework.kafka:spring-kafka"
     implementation "org.thymeleaf:thymeleaf-spring6:${thymeleafVersion}"
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 }
