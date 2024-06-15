@@ -19,3 +19,20 @@ spring:
       database: mail-service
       host: localhost
       port: 27017
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: ${spring.application.name}
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "ru.kosterror.forms.commonmodel.mail"
+
+application:
+  kafka:
+    topic:
+      send-mail:
+        name: "send-mail"
+        partitions: 1
+        replication-factor: 1
