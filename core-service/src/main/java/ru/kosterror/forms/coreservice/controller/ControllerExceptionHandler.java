@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,17 +42,17 @@ public class ControllerExceptionHandler {
 
         exception.getBindingResult()
                 .getAllErrors()
-                .forEach(error -> {
-                    String fieldName = ((FieldError) error).getField();
-                    String errorMessage = error.getDefaultMessage();
+                .forEach(rawError -> {
+                    if (rawError instanceof FieldError error) {
+                        String fieldName = error.getObjectName() + "." + error.getField();
+                        String errorMessage = error.getDefaultMessage();
 
-                    if (errors.containsKey(fieldName)) {
-                        var messages = errors.get(fieldName);
-                        messages.add(errorMessage);
-                    } else {
-                        var messages = new ArrayList<String>();
-                        messages.add(errorMessage);
-                        errors.put(fieldName, messages);
+                        addErrorMessage(errors, fieldName, errorMessage);
+                    } else if (rawError instanceof ObjectError error) {
+                        String fieldName = error.getObjectName();
+                        String errorMessage = error.getDefaultMessage();
+
+                        addErrorMessage(errors, fieldName, errorMessage);
                     }
                 });
 
@@ -62,6 +63,20 @@ public class ControllerExceptionHandler {
                 errors
         );
         return ResponseEntity.status(response.getCode()).body(response);
+    }
+
+    private static void addErrorMessage(HashMap<String, List<String>> errors,
+                                        String fieldName,
+                                        String errorMessage
+    ) {
+        if (errors.containsKey(fieldName)) {
+            var messages = errors.get(fieldName);
+            messages.add(errorMessage);
+        } else {
+            var messages = new ArrayList<String>();
+            messages.add(errorMessage);
+            errors.put(fieldName, messages);
+        }
     }
 
     @ExceptionHandler(BadRequestException.class)
