@@ -2,6 +2,7 @@ package ru.kosterror.forms.coreservice.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import ru.kosterror.forms.coreservice.util.validation.AtLeastOneId;
 import ru.kosterror.forms.coreservice.util.validation.NotBeforeNow;
@@ -33,6 +34,7 @@ public class PublishFormDto {
     @NotBeforeNow(message = "Дедлайн не может быть в прошлом")
     private LocalDateTime deadline;
 
+    @Positive(message = "Значение таймера должно быть позитивным или null")
     @Schema(description = "Время таймера в минутах", requiredMode = NOT_REQUIRED)
     private Integer timer;
 
