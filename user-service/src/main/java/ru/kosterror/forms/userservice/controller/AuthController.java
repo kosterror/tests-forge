@@ -7,11 +7,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import ru.kosterror.forms.commonmodel.user.UserDto;
 import ru.kosterror.forms.securitystarter.model.JwtUser;
 import ru.kosterror.forms.userservice.dto.CredentialsDto;
 import ru.kosterror.forms.userservice.dto.TokensDto;
 import ru.kosterror.forms.userservice.dto.UpdateUserDto;
-import ru.kosterror.forms.userservice.dto.UserDto;
 import ru.kosterror.forms.userservice.service.AuthService;
 
 import static ru.kosterror.forms.userservice.configuration.OpenApiConfiguration.JWT;

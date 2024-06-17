@@ -7,18 +7,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.kosterror.forms.commonmodel.PaginationResponse;
-import ru.kosterror.forms.userservice.dto.UserDto;
+import ru.kosterror.forms.commonmodel.user.FoundUsersDto;
+import ru.kosterror.forms.commonmodel.user.UserDto;
+import ru.kosterror.forms.commonmodel.user.UserRole;
 import ru.kosterror.forms.userservice.entity.UserEntity;
 import ru.kosterror.forms.userservice.entity.UserEntity_;
-import ru.kosterror.forms.userservice.entity.UserRole;
 import ru.kosterror.forms.userservice.exception.NotFoundException;
 import ru.kosterror.forms.userservice.mapper.UserMapper;
 import ru.kosterror.forms.userservice.repository.UserRepository;
 import ru.kosterror.forms.userservice.service.UserService;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -87,6 +87,21 @@ public class UserServiceImpl implements UserService {
                         .stream()
                         .map(userMapper::toDto)
                         .toList()
+        );
+    }
+
+    @Override
+    public FoundUsersDto getUserByIds(Set<UUID> userIds) {
+        var users = userRepository.findAllById(userIds);
+        var foundUserIds = users.stream().map(UserEntity::getId).collect(Collectors.toSet());
+        var notFoundUserIds = new HashSet<>(userIds);
+        foundUserIds.forEach(notFoundUserIds::remove);
+
+        return new FoundUsersDto(
+                users.stream()
+                        .map(userMapper::toDto)
+                        .collect(Collectors.toSet()),
+                notFoundUserIds
         );
     }
 }

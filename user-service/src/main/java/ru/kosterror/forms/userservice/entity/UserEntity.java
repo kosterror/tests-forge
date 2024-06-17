@@ -2,6 +2,7 @@ package ru.kosterror.forms.userservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import ru.kosterror.forms.commonmodel.user.UserRole;
 
 import java.util.List;
 import java.util.Set;

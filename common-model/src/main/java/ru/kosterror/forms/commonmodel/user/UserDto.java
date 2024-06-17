@@ -1,7 +1,6 @@
-package ru.kosterror.forms.userservice.dto;
+package ru.kosterror.forms.commonmodel.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import ru.kosterror.forms.userservice.entity.UserRole;
 
 import java.util.UUID;
 

@@ -21,4 +21,12 @@ public class RestClientConfiguration {
                 .build();
     }
 
+    @Bean
+    public RestClient userClient() {
+        return RestClient.builder()
+                .baseUrl("http://localhost:8081")
+                .defaultHeader(API_KEY, apiKey)
+                .build();
+    }
+
 }

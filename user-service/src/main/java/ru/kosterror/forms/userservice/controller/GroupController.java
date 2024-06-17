@@ -11,14 +11,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.forms.commonmodel.PaginationResponse;
+import ru.kosterror.forms.commonmodel.user.FoundGroupsDto;
+import ru.kosterror.forms.commonmodel.user.GroupDto;
 import ru.kosterror.forms.securitystarter.model.JwtUser;
-import ru.kosterror.forms.userservice.dto.GroupDto;
 import ru.kosterror.forms.userservice.dto.UpdateGroupDto;
 import ru.kosterror.forms.userservice.service.GroupService;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
+import static ru.kosterror.forms.userservice.configuration.OpenApiConfiguration.API_KEY;
 import static ru.kosterror.forms.userservice.configuration.OpenApiConfiguration.JWT;
 
 @Tag(name = "Groups")
@@ -69,6 +72,12 @@ public class GroupController {
                                                   @Parameter(description = "Размер страницы")
                                                   @RequestParam(defaultValue = "10") int size) {
         return service.getGroups(name, page, size);
+    }
+
+    @Operation(summary = "Найти группы по идентификаторам", security = @SecurityRequirement(name = API_KEY))
+    @GetMapping("/search-by-ids")
+    public FoundGroupsDto getGroupsByIds(@RequestParam Set<UUID> groupIds) {
+        return service.getGroupsByIds(groupIds);
     }
 
 }

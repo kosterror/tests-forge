@@ -7,13 +7,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.forms.commonmodel.PaginationResponse;
+import ru.kosterror.forms.commonmodel.user.FoundUsersDto;
+import ru.kosterror.forms.commonmodel.user.UserDto;
+import ru.kosterror.forms.commonmodel.user.UserRole;
 import ru.kosterror.forms.securitystarter.model.JwtUser;
-import ru.kosterror.forms.userservice.dto.UserDto;
-import ru.kosterror.forms.userservice.entity.UserRole;
 import ru.kosterror.forms.userservice.service.UserService;
 
+import java.util.Set;
 import java.util.UUID;
 
+import static ru.kosterror.forms.userservice.configuration.OpenApiConfiguration.API_KEY;
 import static ru.kosterror.forms.userservice.configuration.OpenApiConfiguration.JWT;
 
 @RestController
@@ -52,4 +55,9 @@ public class UserController {
         return userService.searchUsers(name, surname, patronymic, page, size);
     }
 
+    @Operation(summary = "Найти пользователей по идентификаторам", security = @SecurityRequirement(name = API_KEY))
+    @GetMapping("/search-by-ids")
+    public FoundUsersDto getGroupsByIds(@RequestParam Set<UUID> userIds) {
+        return userService.getUserByIds(userIds);
+    }
 }

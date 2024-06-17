@@ -37,10 +37,15 @@ public class FormPatternServiceImpl implements FormPatternService {
 
     @Override
     public FormPatternDto getFormPattern(UUID id) {
-        var form = formPatternRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Form with id %s not found".formatted(id)));
+        var form = getFormPatternEntity(id);
 
         return formPatternMapper.toDto(form);
+    }
+
+    @Override
+    public FormPatternEntity getFormPatternEntity(UUID id) {
+        return formPatternRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Form pattern with id %s not found".formatted(id)));
     }
 
     @Override

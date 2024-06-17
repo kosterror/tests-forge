@@ -1,9 +1,9 @@
 package ru.kosterror.forms.userservice.service;
 
+import ru.kosterror.forms.commonmodel.user.UserDto;
 import ru.kosterror.forms.userservice.dto.CredentialsDto;
 import ru.kosterror.forms.userservice.dto.TokensDto;
 import ru.kosterror.forms.userservice.dto.UpdateUserDto;
-import ru.kosterror.forms.userservice.dto.UserDto;
 
 import java.util.UUID;
 

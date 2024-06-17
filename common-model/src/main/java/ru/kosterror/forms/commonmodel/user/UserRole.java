@@ -1,4 +1,4 @@
-package ru.kosterror.forms.userservice.entity;
+package ru.kosterror.forms.commonmodel.user;
 
 public enum UserRole {
     ROLE_STUDENT,

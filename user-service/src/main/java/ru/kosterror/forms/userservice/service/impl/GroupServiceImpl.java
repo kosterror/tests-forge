@@ -7,7 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kosterror.forms.commonmodel.PaginationResponse;
-import ru.kosterror.forms.userservice.dto.GroupDto;
+import ru.kosterror.forms.commonmodel.user.FoundGroupsDto;
+import ru.kosterror.forms.commonmodel.user.GroupDto;
 import ru.kosterror.forms.userservice.dto.UpdateGroupDto;
 import ru.kosterror.forms.userservice.entity.GroupEntity;
 import ru.kosterror.forms.userservice.exception.NotFoundException;
@@ -18,7 +19,9 @@ import ru.kosterror.forms.userservice.service.UserService;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -108,5 +111,20 @@ public class GroupServiceImpl implements GroupService {
                 .stream()
                 .map(groupMapper::toDto)
                 .toList();
+    }
+
+    @Override
+    public FoundGroupsDto getGroupsByIds(Set<UUID> groupIds) {
+        var groups = groupRepository.findAllById(groupIds);
+        var foundGroupIds = groups.stream().map(GroupEntity::getId).toList();
+        var notFoundGroupIds = new HashSet<>(groupIds);
+        foundGroupIds.forEach(notFoundGroupIds::remove);
+
+        return new FoundGroupsDto(
+                groups.stream()
+                        .map(groupMapper::toDto)
+                        .collect(Collectors.toSet()),
+                notFoundGroupIds
+        );
     }
 }
