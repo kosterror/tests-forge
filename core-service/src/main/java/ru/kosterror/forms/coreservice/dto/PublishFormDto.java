@@ -3,6 +3,7 @@ package ru.kosterror.forms.coreservice.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import ru.kosterror.forms.coreservice.util.validation.AtLeastOneId;
 import ru.kosterror.forms.coreservice.util.validation.NotBeforeNow;
@@ -22,15 +23,17 @@ public class PublishFormDto {
     @Schema(description = "Идентификатор шаблона формы", requiredMode = REQUIRED)
     private UUID formPatternId;
 
+    @Size(max = 10, message = "Количество групп не может быть больше 10")
     @NotNull(message = "Множество идентификаторов групп не может быть null")
     @Schema(description = "Идентификаторы групп", requiredMode = REQUIRED)
     private Set<UUID> groupIds;
 
+    @Size(max = 50, message = "Количество пользователей не может быть больше 50")
     @NotNull(message = "Множество идентификаторов пользователей не может быть null")
     @Schema(description = "Идентификаторы пользователей", requiredMode = REQUIRED)
     private Set<UUID> userIds;
 
-    @Schema(description = "Дедлайн формы", requiredMode = NOT_REQUIRED)
+    @Schema(description = "Дедлайн", requiredMode = NOT_REQUIRED)
     @NotBeforeNow(message = "Дедлайн не может быть в прошлом")
     private LocalDateTime deadline;
 
