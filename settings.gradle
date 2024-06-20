@@ -1,4 +1,4 @@
-rootProject.name = "forms"
+rootProject.name = "tests-forge"
 
 include "core-service"
 include "mail-service"

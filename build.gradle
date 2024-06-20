@@ -7,7 +7,7 @@ plugins {
 allprojects {
     apply plugin: "java"
 
-    group "ru.kosterror.forms"
+    group "ru.kosterror.testsforge"
     version "1.0"
 
     java.sourceCompatibility(JavaVersion.VERSION_21)

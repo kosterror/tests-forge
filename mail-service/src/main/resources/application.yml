@@ -27,7 +27,7 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
-        spring.json.trusted.packages: "ru.kosterror.forms.commonmodel.mail"
+        spring.json.trusted.packages: "ru.kosterror.testsforge.commonmodel.mail"
 
 application:
   kafka:
