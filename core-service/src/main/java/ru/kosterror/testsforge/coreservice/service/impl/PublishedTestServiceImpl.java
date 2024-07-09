@@ -2,8 +2,11 @@ package ru.kosterror.testsforge.coreservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.commonmodel.user.UserDto;
 import ru.kosterror.testsforge.coreservice.client.UserClient;
 import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
@@ -19,6 +22,7 @@ import ru.kosterror.testsforge.coreservice.service.TestPatternService;
 import java.util.*;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
+import static ru.kosterror.testsforge.coreservice.specificaiton.PublishedTestSpecification.*;
 
 @Slf4j
 @Service
@@ -52,6 +56,29 @@ public class PublishedTestServiceImpl implements PublishedTestService {
         log.info("Mails about publishing test {} sent", publishedTest.getId());
 
         return publishedTestMapper.toBaseDto(publishedTest);
+    }
+
+    @Override
+    public PaginationResponse<BasePublishedTestDto> getPublishedTests(String name,
+                                                                      UUID subjectId,
+                                                                      UUID groupId,
+                                                                      int page,
+                                                                      int size
+    ) {
+        var specification = Specification.<PublishedTestEntity>where(null)
+                .and(hasNameLike(name))
+                .and(hasSubject(subjectId))
+                .and(hasGroupId(groupId));
+
+        var pageable = PageRequest.of(page, size);
+
+        var publishedTests = publishedTestRepository.findAll(specification, pageable)
+                .getContent()
+                .stream()
+                .map(publishedTestMapper::toBaseDto)
+                .toList();
+
+        return new PaginationResponse<>(page, size, publishedTests);
     }
 
     private List<String> getUserEmails(Set<UUID> groupIds, Set<UUID> userIds) {
