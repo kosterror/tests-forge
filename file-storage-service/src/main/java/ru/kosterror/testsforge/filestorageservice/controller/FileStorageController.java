@@ -22,7 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/file-storage")
+@RequestMapping("/api/files")
 @RequiredArgsConstructor
 @Tag(name = "Файловое хранилище")
 public class FileStorageController {
@@ -30,10 +30,7 @@ public class FileStorageController {
     private final FileStorageService fileStorageService;
 
     @Operation(summary = "Загрузить файл в хранилище", security = @SecurityRequirement(name = OpenApiConfiguration.JWT))
-    @PostMapping(value = "/upload",
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public FileMetaInfoDto uploadFile(@AuthenticationPrincipal JwtUser principal,
                                       @RequestParam("file") MultipartFile file
     ) {
@@ -41,7 +38,7 @@ public class FileStorageController {
     }
 
     @Operation(summary = "Скачать файл")
-    @GetMapping(value = "/download/{id}",
+    @GetMapping(value = "/{id}",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
     )
     public ResponseEntity<Resource> downloadFile(@PathVariable UUID id) {
@@ -64,7 +61,7 @@ public class FileStorageController {
                     @SecurityRequirement(name = OpenApiConfiguration.API_KEY)
             }
     )
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/meta-info")
     public FileMetaInfoDto getFileMetaInfo(@PathVariable UUID id) {
         return fileStorageService.getFileMetaInfo(id);
     }
