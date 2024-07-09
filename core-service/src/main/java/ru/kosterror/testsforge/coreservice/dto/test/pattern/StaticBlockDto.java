@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.dto.testpattern.full;
+package ru.kosterror.testsforge.coreservice.dto.test.pattern;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

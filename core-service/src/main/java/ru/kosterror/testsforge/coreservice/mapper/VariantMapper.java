@@ -1,8 +1,8 @@
 package ru.kosterror.testsforge.coreservice.mapper;
 
 import org.mapstruct.*;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.full.VariantDto;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.update.UpdateBlockVariantDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateBlockVariantDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.VariantDto;
 import ru.kosterror.testsforge.coreservice.entity.test.VariantEntity;
 import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
 

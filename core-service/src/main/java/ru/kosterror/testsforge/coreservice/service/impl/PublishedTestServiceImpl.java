@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kosterror.testsforge.commonmodel.user.UserDto;
 import ru.kosterror.testsforge.coreservice.client.UserClient;
-import ru.kosterror.testsforge.coreservice.dto.PublishTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.published.PublishTestDto;
 import ru.kosterror.testsforge.coreservice.entity.test.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
+import ru.kosterror.testsforge.coreservice.mapper.PublishedTestMapper;
 import ru.kosterror.testsforge.coreservice.repository.PublishedTestRepository;
 import ru.kosterror.testsforge.coreservice.service.MailService;
 import ru.kosterror.testsforge.coreservice.service.PublishedTestService;
@@ -27,14 +29,15 @@ public class PublishedTestServiceImpl implements PublishedTestService {
     private final TestPatternService testPatternService;
     private final PublishedTestRepository publishedTestRepository;
     private final MailService mailService;
+    private final PublishedTestMapper publishedTestMapper;
 
     @Override
     @Transactional
-    public void publishTest(PublishTestDto publishTestDto) {
-        var formPattern = testPatternService.getFormPatternEntity(publishTestDto.getFormPatternId());
+    public BasePublishedTestDto publishTest(PublishTestDto publishTestDto) {
+        var formPattern = testPatternService.getFormPatternEntity(publishTestDto.getTestPatternId());
         var emails = getUserEmails(publishTestDto.getGroupIds(), publishTestDto.getUserIds());
 
-        var publishedForm = PublishedTestEntity.builder()
+        var publishedTest = PublishedTestEntity.builder()
                 .deadline(publishTestDto.getDeadline())
                 .timer(publishTestDto.getTimer())
                 .groupIds(new ArrayList<>(publishTestDto.getGroupIds()))
@@ -42,8 +45,13 @@ public class PublishedTestServiceImpl implements PublishedTestService {
                 .formPattern(formPattern)
                 .build();
 
-        publishedTestRepository.save(publishedForm);
-        mailService.sendMailsAboutPublishingForm(publishedForm.getFormPattern().getName(), emails);
+        publishedTest = publishedTestRepository.save(publishedTest);
+        log.info("Published test {} created", publishedTest.getId());
+
+        mailService.sendMailsAboutPublishingTest(publishedTest.getFormPattern().getName(), emails);
+        log.info("Mails about publishing test {} sent", publishedTest.getId());
+
+        return publishedTestMapper.toBaseDto(publishedTest);
     }
 
     private List<String> getUserEmails(Set<UUID> groupIds, Set<UUID> userIds) {

@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.dto;
+package ru.kosterror.testsforge.coreservice.dto.test.published;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
@@ -21,7 +21,7 @@ public class PublishTestDto {
 
     @NotNull(message = "Идентификатор шаблона теста не может быть null")
     @Schema(description = "Идентификатор шаблона теста", requiredMode = REQUIRED)
-    private UUID formPatternId;
+    private UUID testPatternId;
 
     @Size(max = 10, message = "Количество групп не может быть больше 10")
     @NotNull(message = "Множество идентификаторов групп не может быть null")

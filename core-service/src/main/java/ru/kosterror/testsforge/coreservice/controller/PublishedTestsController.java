@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.kosterror.testsforge.coreservice.dto.PublishTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.published.PublishTestDto;
 import ru.kosterror.testsforge.coreservice.service.PublishedTestService;
 
 import static ru.kosterror.testsforge.coreservice.configuration.OpenApiConfiguration.JWT;
@@ -24,8 +25,8 @@ public class PublishedTestsController {
 
     @Operation(summary = "Опубликовать тест", security = @SecurityRequirement(name = JWT))
     @PostMapping
-    public void publishForm(@RequestBody @Valid PublishTestDto publishTestDto) {
-        service.publishTest(publishTestDto);
+    public BasePublishedTestDto publishTest(@RequestBody @Valid PublishTestDto publishTestDto) {
+        return service.publishTest(publishTestDto);
     }
 
 }

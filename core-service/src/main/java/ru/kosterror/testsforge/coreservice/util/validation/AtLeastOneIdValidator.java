@@ -2,7 +2,7 @@ package ru.kosterror.testsforge.coreservice.util.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import ru.kosterror.testsforge.coreservice.dto.PublishTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.published.PublishTestDto;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 

@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface MailService {
 
-    void sendMailsAboutPublishingForm(String formName, List<String> emails);
+    void sendMailsAboutPublishingTest(String testName, List<String> emails);
 
 }

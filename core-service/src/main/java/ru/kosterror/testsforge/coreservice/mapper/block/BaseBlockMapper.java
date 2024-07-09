@@ -1,7 +1,7 @@
 package ru.kosterror.testsforge.coreservice.mapper.block;
 
-import ru.kosterror.testsforge.coreservice.dto.testpattern.full.BlockDto;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.update.UpdateBlockDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.BlockDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateBlockDto;
 import ru.kosterror.testsforge.coreservice.entity.test.BlockEntity;
 
 public abstract class BaseBlockMapper {

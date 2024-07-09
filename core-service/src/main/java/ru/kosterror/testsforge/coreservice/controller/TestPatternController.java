@@ -10,9 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.full.BaseTestPatternDto;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.full.TestPatternDto;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.update.UpdateTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.BaseTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.TestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateTestPatternDto;
 import ru.kosterror.testsforge.coreservice.service.TestPatternService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 
@@ -28,7 +28,7 @@ public class TestPatternController {
 
     private final TestPatternService testPatternService;
 
-    @Operation(summary = "Создать шаблон формы", security = @SecurityRequirement(name = JWT))
+    @Operation(summary = "Создать шаблон теста", security = @SecurityRequirement(name = JWT))
     @PostMapping
     public TestPatternDto createTestPattern(@AuthenticationPrincipal JwtUser principal,
                                             @RequestBody @Valid UpdateTestPatternDto updateTestPatternDto) {

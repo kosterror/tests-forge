@@ -17,12 +17,12 @@ public class MailServiceImpl implements MailService {
     private final SendMailProducer sendMailProducer;
 
     @Override
-    public void sendMailsAboutPublishingForm(String formName, List<String> emails) {
-        String subject = "Создана форма \"%s\"".formatted(formName);
+    public void sendMailsAboutPublishingTest(String testName, List<String> emails) {
+        String subject = "Опубликован тест \"%s\"".formatted(testName);
 
         SendMailDto sendMailDto = SendMailDto.builder()
                 .subject(subject)
-                .body("Добрый день, создана форма \"%s\", не забудьте её заполнить".formatted(formName))
+                .body("Добрый день, опубликован тест \"%s\", не забудьте его пройти".formatted(testName))
                 .receivers(emails)
                 .build();
 

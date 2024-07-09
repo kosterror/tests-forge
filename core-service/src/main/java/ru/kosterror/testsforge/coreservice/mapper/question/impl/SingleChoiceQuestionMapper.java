@@ -58,6 +58,8 @@ public class SingleChoiceQuestionMapper extends BaseQuestionMapper {
     @Override
     public QuestionDto toDto(QuestionEntity baseEntity) {
         var dto = new SingleChoiceQuestionDto();
+        dto.setOptions(new ArrayList<>());
+
         mapBaseQuestionDtoFields(dto, baseEntity);
 
         var entity = (SingleChoiceQuestionEntity) baseEntity;

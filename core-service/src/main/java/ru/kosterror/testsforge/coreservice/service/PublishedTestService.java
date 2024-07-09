@@ -1,9 +1,10 @@
 package ru.kosterror.testsforge.coreservice.service;
 
-import ru.kosterror.testsforge.coreservice.dto.PublishTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.published.PublishTestDto;
 
 public interface PublishedTestService {
 
-    void publishTest(PublishTestDto publishTestDto);
+    BasePublishedTestDto publishTest(PublishTestDto publishTestDto);
 
 }

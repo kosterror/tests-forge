@@ -2,8 +2,8 @@ package ru.kosterror.testsforge.coreservice.mapper.block;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.full.BlockDto;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.update.UpdateBlockDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.BlockDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateBlockDto;
 import ru.kosterror.testsforge.coreservice.entity.test.BlockEntity;
 
 @Component

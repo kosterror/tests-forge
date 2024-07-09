@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.dto.testpattern.update;
+package ru.kosterror.testsforge.coreservice.dto.test.pattern;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;

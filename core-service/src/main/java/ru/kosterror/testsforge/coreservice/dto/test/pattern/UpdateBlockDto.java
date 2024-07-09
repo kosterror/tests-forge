@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.dto.testpattern.update;
+package ru.kosterror.testsforge.coreservice.dto.test.pattern;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

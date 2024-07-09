@@ -1,8 +1,8 @@
 package ru.kosterror.testsforge.coreservice.mapper;
 
 import org.mapstruct.*;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.full.PartitionDto;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.update.UpdatePartitionDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.PartitionDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdatePartitionDto;
 import ru.kosterror.testsforge.coreservice.entity.test.PartitionEntity;
 import ru.kosterror.testsforge.coreservice.mapper.block.BlockMapper;
 

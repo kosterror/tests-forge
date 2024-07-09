@@ -1,9 +1,9 @@
 package ru.kosterror.testsforge.coreservice.mapper;
 
 import org.mapstruct.*;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.full.BaseTestPatternDto;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.full.TestPatternDto;
-import ru.kosterror.testsforge.coreservice.dto.testpattern.update.UpdateTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.BaseTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.TestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateTestPatternDto;
 import ru.kosterror.testsforge.coreservice.entity.test.TestPatternEntity;
 
 @Mapper(
