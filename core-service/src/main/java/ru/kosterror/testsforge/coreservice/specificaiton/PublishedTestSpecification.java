@@ -21,7 +21,7 @@ public class PublishedTestSpecification {
         }
 
         return (root, query, cb) -> cb.like(
-                cb.lower(root.join(PublishedTestEntity_.FORM_PATTERN).get(TestPatternEntity_.NAME)),
+                cb.lower(root.join(PublishedTestEntity_.TEST_PATTERN).get(TestPatternEntity_.NAME)),
                 like(name.toLowerCase())
         );
     }
@@ -32,7 +32,7 @@ public class PublishedTestSpecification {
         }
 
         return (root, query, cb) -> cb.equal(
-                root.join(PublishedTestEntity_.FORM_PATTERN)
+                root.join(PublishedTestEntity_.TEST_PATTERN)
                         .join(TestPatternEntity_.SUBJECT)
                         .get(BaseEntity_.ID),
                 subjectId

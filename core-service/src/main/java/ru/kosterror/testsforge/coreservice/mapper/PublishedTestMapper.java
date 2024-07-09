@@ -13,7 +13,7 @@ import ru.kosterror.testsforge.coreservice.entity.test.PublishedTestEntity;
 )
 public interface PublishedTestMapper {
 
-    @Mapping(target = "testPatternId", source = "formPattern.id")
+    @Mapping(target = "testPatternId", source = "testPattern.id")
     BasePublishedTestDto toBaseDto(PublishedTestEntity entity);
 
 }

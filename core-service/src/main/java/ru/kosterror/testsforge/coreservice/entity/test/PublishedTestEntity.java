@@ -31,5 +31,5 @@ public class PublishedTestEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "test_pattern_id")
-    private TestPatternEntity formPattern;
+    private TestPatternEntity testPattern;
 }
