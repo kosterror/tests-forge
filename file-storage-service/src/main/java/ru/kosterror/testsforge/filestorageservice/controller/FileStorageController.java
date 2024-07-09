@@ -37,7 +37,7 @@ public class FileStorageController {
         return fileStorageService.uploadFile(principal.userId(), file);
     }
 
-    @Operation(summary = "Скачать файл")
+    @Operation(summary = "Скачать файл", security = @SecurityRequirement(name = OpenApiConfiguration.JWT))
     @GetMapping(value = "/{id}",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
     )
