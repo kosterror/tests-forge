@@ -1,9 +1,9 @@
 package ru.kosterror.testsforge.coreservice.mapper;
 
 import org.mapstruct.*;
-import ru.kosterror.testsforge.coreservice.dto.formpattern.full.VariantDto;
-import ru.kosterror.testsforge.coreservice.dto.formpattern.update.UpdateBlockVariantDto;
-import ru.kosterror.testsforge.coreservice.entity.form.VariantEntity;
+import ru.kosterror.testsforge.coreservice.dto.testpattern.full.VariantDto;
+import ru.kosterror.testsforge.coreservice.dto.testpattern.update.UpdateBlockVariantDto;
+import ru.kosterror.testsforge.coreservice.entity.test.VariantEntity;
 import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
 
 import java.util.List;

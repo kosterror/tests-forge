@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import ru.kosterror.testsforge.coreservice.entity.BaseEntity;
-import ru.kosterror.testsforge.coreservice.entity.form.DynamicBlockEntity;
-import ru.kosterror.testsforge.coreservice.entity.form.VariantEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.DynamicBlockEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.VariantEntity;
 
 import java.util.List;
 import java.util.UUID;

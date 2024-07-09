@@ -2,12 +2,12 @@ package ru.kosterror.testsforge.coreservice.mapper.block;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.kosterror.testsforge.coreservice.dto.formpattern.full.BlockDto;
-import ru.kosterror.testsforge.coreservice.dto.formpattern.full.DynamicBlockDto;
-import ru.kosterror.testsforge.coreservice.dto.formpattern.update.UpdateBlockDto;
-import ru.kosterror.testsforge.coreservice.dto.formpattern.update.UpdateDynamicBlockDto;
-import ru.kosterror.testsforge.coreservice.entity.form.BlockEntity;
-import ru.kosterror.testsforge.coreservice.entity.form.DynamicBlockEntity;
+import ru.kosterror.testsforge.coreservice.dto.testpattern.full.BlockDto;
+import ru.kosterror.testsforge.coreservice.dto.testpattern.full.DynamicBlockDto;
+import ru.kosterror.testsforge.coreservice.dto.testpattern.update.UpdateBlockDto;
+import ru.kosterror.testsforge.coreservice.dto.testpattern.update.UpdateDynamicBlockDto;
+import ru.kosterror.testsforge.coreservice.entity.test.BlockEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.DynamicBlockEntity;
 import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
 
 @Component

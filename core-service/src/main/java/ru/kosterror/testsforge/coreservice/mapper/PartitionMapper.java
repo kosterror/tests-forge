@@ -1,9 +1,9 @@
 package ru.kosterror.testsforge.coreservice.mapper;
 
 import org.mapstruct.*;
-import ru.kosterror.testsforge.coreservice.dto.formpattern.full.PartitionDto;
-import ru.kosterror.testsforge.coreservice.dto.formpattern.update.UpdatePartitionDto;
-import ru.kosterror.testsforge.coreservice.entity.form.PartitionEntity;
+import ru.kosterror.testsforge.coreservice.dto.testpattern.full.PartitionDto;
+import ru.kosterror.testsforge.coreservice.dto.testpattern.update.UpdatePartitionDto;
+import ru.kosterror.testsforge.coreservice.entity.test.PartitionEntity;
 import ru.kosterror.testsforge.coreservice.mapper.block.BlockMapper;
 
 @Mapper(
