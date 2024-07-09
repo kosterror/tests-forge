@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.published.PublishTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.published.PublishedTestDto;
 import ru.kosterror.testsforge.coreservice.service.PublishedTestService;
 
 import java.util.UUID;
@@ -37,6 +38,12 @@ public class PublishedTestsController {
                                                                       @RequestParam int page,
                                                                       @RequestParam int size) {
         return service.getPublishedTests(name, subjectId, groupId, page, size);
+    }
+
+    @Operation(summary = "Получить опубликованный тест по id", security = @SecurityRequirement(name = JWT))
+    @GetMapping("/{id}")
+    public PublishedTestDto getPublishedTest(@PathVariable UUID id) {
+        return service.getPublishedTest(id);
     }
 
 }

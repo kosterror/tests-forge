@@ -11,6 +11,7 @@ import ru.kosterror.testsforge.commonmodel.user.UserDto;
 import ru.kosterror.testsforge.coreservice.client.UserClient;
 import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.published.PublishTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.published.PublishedTestDto;
 import ru.kosterror.testsforge.coreservice.entity.test.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
 import ru.kosterror.testsforge.coreservice.mapper.PublishedTestMapper;
@@ -46,13 +47,13 @@ public class PublishedTestServiceImpl implements PublishedTestService {
                 .timer(publishTestDto.getTimer())
                 .groupIds(new ArrayList<>(publishTestDto.getGroupIds()))
                 .userIds(new ArrayList<>(publishTestDto.getUserIds()))
-                .formPattern(formPattern)
+                .testPattern(formPattern)
                 .build();
 
         publishedTest = publishedTestRepository.save(publishedTest);
         log.info("Published test {} created", publishedTest.getId());
 
-        mailService.sendMailsAboutPublishingTest(publishedTest.getFormPattern().getName(), emails);
+        mailService.sendMailsAboutPublishingTest(publishedTest.getTestPattern().getName(), emails);
         log.info("Mails about publishing test {} sent", publishedTest.getId());
 
         return publishedTestMapper.toBaseDto(publishedTest);
@@ -79,6 +80,14 @@ public class PublishedTestServiceImpl implements PublishedTestService {
                 .toList();
 
         return new PaginationResponse<>(page, size, publishedTests);
+    }
+
+    @Override
+    public PublishedTestDto getPublishedTest(UUID id) {
+        var publishedTest = publishedTestRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("Published test with id %s does not exist".formatted(id)));
+
+        return publishedTestMapper.toDto(publishedTest);
     }
 
     private List<String> getUserEmails(Set<UUID> groupIds, Set<UUID> userIds) {
