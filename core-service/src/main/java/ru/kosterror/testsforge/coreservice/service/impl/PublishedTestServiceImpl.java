@@ -93,6 +93,7 @@ public class PublishedTestServiceImpl implements PublishedTestService {
     }
 
     @Override
+    @Transactional
     public BasePublishedTestDto updatePublishedTest(UUID publishedTestId,
                                                     UpdatePublishedTestDto updatePublishedTestDto
     ) {
@@ -115,6 +116,14 @@ public class PublishedTestServiceImpl implements PublishedTestService {
         log.info("Notification mails about updating test {} sent", publishedTest.getId());
 
         return publishedTestMapper.toBaseDto(publishedTest);
+    }
+
+    @Override
+    @Transactional
+    public void deletePublishedTest(UUID id) {
+        var publishedTest = getPublishedTestEntity(id);
+
+        publishedTestRepository.delete(publishedTest);
     }
 
     private ArrayList<String> getNotRemovedEmailsWithUpdatingPublishedTest(List<String> appliedEmails,

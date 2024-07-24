@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
@@ -37,6 +39,14 @@ public class PublishedTestsController {
                                                     @RequestBody @Valid UpdatePublishedTestDto updatePublishedTestDto
     ) {
         return service.updatePublishedTest(id, updatePublishedTestDto);
+    }
+
+    @Operation(summary = "Удалить опубликованный тест", security = @SecurityRequirement(name = JWT))
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePublishedTest(@PathVariable UUID id) {
+        service.deletePublishedTest(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @Operation(summary = "Поиск по опубликованным формам с пагинацией", security = @SecurityRequirement(name = JWT))

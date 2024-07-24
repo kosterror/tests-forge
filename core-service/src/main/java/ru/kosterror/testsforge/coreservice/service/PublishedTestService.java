@@ -25,4 +25,6 @@ public interface PublishedTestService {
     BasePublishedTestDto updatePublishedTest(UUID publishedTestId,
                                              UpdatePublishedTestDto updatePublishedTestDto
     );
+
+    void deletePublishedTest(UUID id);
 }
