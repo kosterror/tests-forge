@@ -51,6 +51,12 @@ public class QuestionServiceImpl implements QuestionService {
         return questionMapper.toDto(entity);
     }
 
+    @Override
+    public void deleteQuestion(UUID id) {
+        var entity = getQuestionById(id);
+        questionRepository.delete(entity);
+    }
+
     private QuestionEntity getQuestionById(UUID id) {
         return questionRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Question with id %s not found", id)));

@@ -10,4 +10,6 @@ public interface QuestionService {
     QuestionDto createQuestion(UUID userId, UUID subjectId, CreateQuestionDto question);
 
     QuestionDto getQuestion(UUID id);
+
+    void deleteQuestion(UUID id);
 }

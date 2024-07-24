@@ -48,6 +48,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers(
                                 antMatcher(HttpMethod.POST, "/api/questions"),
+                                antMatcher(HttpMethod.DELETE, "/api/questions/**"),
                                 antMatcher(HttpMethod.POST, "/api/subjects/**"),
                                 antMatcher(HttpMethod.PUT, "/api/subjects/**"),
                                 antMatcher(HttpMethod.DELETE, "/api/subjects/**"),

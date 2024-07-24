@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
@@ -31,6 +33,14 @@ public class QuestionController {
                                       @RequestBody @Valid CreateQuestionDto question
     ) {
         return service.createQuestion(principal.userId(), subjectId, question);
+    }
+
+    @Operation(summary = "Удалить вопрос", security = @SecurityRequirement(name = JWT))
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteQuestion(@PathVariable UUID id) {
+        service.deleteQuestion(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @Operation(summary = "Получить вопрос")
