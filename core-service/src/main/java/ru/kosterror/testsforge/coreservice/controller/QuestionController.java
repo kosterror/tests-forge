@@ -7,8 +7,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.service.QuestionService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 

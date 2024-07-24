@@ -1,12 +1,12 @@
 package ru.kosterror.testsforge.coreservice.mapper.question.impl;
 
 import org.springframework.stereotype.Component;
+import ru.kosterror.testsforge.coreservice.dto.question.create.CreateMatchingQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.matching.MatchingOptionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.matching.MatchingQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.matching.TermDefinitionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.CreateMatchingQuestionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.matching.DefinitionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.matching.MatchingQuestionEntity;

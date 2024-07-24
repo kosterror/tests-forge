@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.dto.question.update;
+package ru.kosterror.testsforge.coreservice.dto.question.create;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

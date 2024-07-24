@@ -1,11 +1,11 @@
 package ru.kosterror.testsforge.coreservice.mapper.question.impl;
 
 import org.springframework.stereotype.Component;
+import ru.kosterror.testsforge.coreservice.dto.question.create.CreateMultipleChoiceQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.multiple.MultipleChoiceQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.multiple.MultipleOptionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.CreateMultipleChoiceQuestionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.multiple.MultipleChoiceQuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.multiple.MultipleOptionEntity;

@@ -1,7 +1,7 @@
 package ru.kosterror.testsforge.coreservice.mapper.question.impl;
 
+import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
 
 public abstract class BaseQuestionMapper {

@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.BlockType;
 
 import java.util.List;

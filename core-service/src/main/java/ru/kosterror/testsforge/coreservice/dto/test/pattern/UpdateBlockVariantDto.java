@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 
 import java.util.List;
 
