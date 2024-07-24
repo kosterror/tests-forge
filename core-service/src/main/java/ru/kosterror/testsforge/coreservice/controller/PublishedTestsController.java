@@ -10,6 +10,7 @@ import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.published.PublishTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.published.PublishedTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.published.UpdatePublishedTestDto;
 import ru.kosterror.testsforge.coreservice.service.PublishedTestService;
 
 import java.util.UUID;
@@ -28,6 +29,14 @@ public class PublishedTestsController {
     @PostMapping
     public BasePublishedTestDto publishTest(@RequestBody @Valid PublishTestDto publishTestDto) {
         return service.publishTest(publishTestDto);
+    }
+
+    @Operation(summary = "Изменить опубликованный тест", security = @SecurityRequirement(name = JWT))
+    @PutMapping("/{id}")
+    public BasePublishedTestDto updatePublishedTest(@PathVariable UUID id,
+                                                    @RequestBody @Valid UpdatePublishedTestDto updatePublishedTestDto
+    ) {
+        return service.updatePublishedTest(id, updatePublishedTestDto);
     }
 
     @Operation(summary = "Поиск по опубликованным формам с пагинацией", security = @SecurityRequirement(name = JWT))

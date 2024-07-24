@@ -6,7 +6,7 @@ import ru.kosterror.testsforge.coreservice.dto.test.published.PublishTestDto;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 
-public class AtLeastOneIdValidator implements ConstraintValidator<AtLeastOneId, PublishTestDto> {
+public class AtLeastOneIdValidatorPublishTestDto implements ConstraintValidator<AtLeastOneId, PublishTestDto> {
 
     @Override
     public boolean isValid(PublishTestDto value, ConstraintValidatorContext context) {

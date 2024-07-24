@@ -8,7 +8,7 @@ import ru.kosterror.testsforge.commonmodel.user.FoundGroupsDto;
 import ru.kosterror.testsforge.commonmodel.user.FoundUsersDto;
 import ru.kosterror.testsforge.coreservice.client.UserClient;
 
-import java.util.Set;
+import java.util.Collection;
 import java.util.UUID;
 
 @Slf4j
@@ -22,7 +22,7 @@ public class UserClientImpl implements UserClient {
     }
 
     @Override
-    public FoundGroupsDto getGroupsByIds(Set<UUID> groupIds) {
+    public FoundGroupsDto getGroupsByIds(Collection<UUID> groupIds) {
         return restClient.get()
                 .uri(builder -> builder
                         .path("/api/groups/search-by-ids")
@@ -34,7 +34,7 @@ public class UserClientImpl implements UserClient {
     }
 
     @Override
-    public FoundUsersDto getUsersByIds(Set<UUID> userIds) {
+    public FoundUsersDto getUsersByIds(Collection<UUID> userIds) {
         return restClient.get()
                 .uri(builder -> builder
                         .path("/api/users/search-by-ids")

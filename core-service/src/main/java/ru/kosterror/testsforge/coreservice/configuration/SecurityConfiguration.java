@@ -50,7 +50,10 @@ public class SecurityConfiguration {
                                 antMatcher(HttpMethod.POST, "/api/questions"),
                                 antMatcher(HttpMethod.POST, "/api/subjects/**"),
                                 antMatcher(HttpMethod.PUT, "/api/subjects/**"),
-                                antMatcher(HttpMethod.DELETE, "/api/subjects/**")
+                                antMatcher(HttpMethod.DELETE, "/api/subjects/**"),
+                                antMatcher(HttpMethod.POST, "/api/tests/published/**"),
+                                antMatcher(HttpMethod.PUT, "/api/tests/published/**"),
+                                antMatcher(HttpMethod.DELETE, "/api/tests/published/**")
                         ).hasRole("TEACHER")
                         .requestMatchers(
                                 new NegatedRequestMatcher(antMatcher(API_PATTERN))

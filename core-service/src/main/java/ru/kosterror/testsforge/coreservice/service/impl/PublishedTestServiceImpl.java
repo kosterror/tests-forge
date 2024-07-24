@@ -9,9 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.commonmodel.user.UserDto;
 import ru.kosterror.testsforge.coreservice.client.UserClient;
-import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
-import ru.kosterror.testsforge.coreservice.dto.test.published.PublishTestDto;
-import ru.kosterror.testsforge.coreservice.dto.test.published.PublishedTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.published.*;
 import ru.kosterror.testsforge.coreservice.entity.test.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
 import ru.kosterror.testsforge.coreservice.mapper.PublishedTestMapper;
@@ -84,13 +82,81 @@ public class PublishedTestServiceImpl implements PublishedTestService {
 
     @Override
     public PublishedTestDto getPublishedTest(UUID id) {
-        var publishedTest = publishedTestRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Published test with id %s does not exist".formatted(id)));
+        var publishedTest = getPublishedTestEntity(id);
 
         return publishedTestMapper.toDto(publishedTest);
     }
 
-    private List<String> getUserEmails(Set<UUID> groupIds, Set<UUID> userIds) {
+    private PublishedTestEntity getPublishedTestEntity(UUID id) {
+        return publishedTestRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("Published test with id %s does not exist".formatted(id)));
+    }
+
+    @Override
+    public BasePublishedTestDto updatePublishedTest(UUID publishedTestId,
+                                                    UpdatePublishedTestDto updatePublishedTestDto
+    ) {
+        var publishedTest = getPublishedTestEntity(publishedTestId);
+
+        var appliedEmails = getUserEmails(updatePublishedTestDto.groupIds(), updatePublishedTestDto.userIds());
+        var newEmails = getNewEmailWithUpdatingPublishedTest(appliedEmails, publishedTest);
+        var notRemovedEmails = getNotRemovedEmailsWithUpdatingPublishedTest(appliedEmails, newEmails);
+
+        var updatedAttributes = applyChanges(publishedTest, updatePublishedTestDto);
+
+        publishedTest = publishedTestRepository.save(publishedTest);
+        log.info("Published test {} updated", publishedTest.getId());
+
+        mailService.sendMailsAboutPublishingTest(publishedTest.getTestPattern().getName(), newEmails);
+        mailService.sendMailsAboutUpdatingPublishedTest(publishedTest.getTestPattern().getName(),
+                notRemovedEmails,
+                updatedAttributes
+        );
+        log.info("Notification mails about updating test {} sent", publishedTest.getId());
+
+        return publishedTestMapper.toBaseDto(publishedTest);
+    }
+
+    private ArrayList<String> getNotRemovedEmailsWithUpdatingPublishedTest(List<String> appliedEmails,
+                                                                           ArrayList<String> newEmails) {
+        var notRemovedEmails = new ArrayList<>(appliedEmails);
+        appliedEmails.removeAll(newEmails);
+        return notRemovedEmails;
+    }
+
+    private ArrayList<String> getNewEmailWithUpdatingPublishedTest(List<String> appliedEmails,
+                                                                   PublishedTestEntity publishedTest
+    ) {
+        var oldEmails = getUserEmails(publishedTest.getGroupIds(), publishedTest.getUserIds());
+
+        var newEmails = new ArrayList<>(appliedEmails);
+        newEmails.removeAll(oldEmails);
+
+        return newEmails;
+    }
+
+    private List<PublishedTestAttribute> applyChanges(PublishedTestEntity publishedTest,
+                                                      UpdatePublishedTestDto updatePublishedTestDto
+    ) {
+        var updatedAttributes = new ArrayList<PublishedTestAttribute>();
+
+        if (!publishedTest.getDeadline().isEqual(updatePublishedTestDto.deadline())) {
+            updatedAttributes.add(PublishedTestAttribute.DEADLINE);
+        }
+
+        if (!publishedTest.getTimer().equals(updatePublishedTestDto.timer())) {
+            updatedAttributes.add(PublishedTestAttribute.TIMER);
+        }
+
+        publishedTest.setDeadline(updatePublishedTestDto.deadline());
+        publishedTest.setTimer(updatePublishedTestDto.timer());
+        publishedTest.setGroupIds(new ArrayList<>(updatePublishedTestDto.groupIds()));
+        publishedTest.setUserIds(new ArrayList<>(updatePublishedTestDto.userIds()));
+
+        return updatedAttributes;
+    }
+
+    private List<String> getUserEmails(Collection<UUID> groupIds, Collection<UUID> userIds) {
         var users = new HashSet<>(getUsersByGroupIds(groupIds));
         users.addAll(getUsersByUserIds(userIds));
 
@@ -100,7 +166,7 @@ public class PublishedTestServiceImpl implements PublishedTestService {
                 .toList();
     }
 
-    private Set<UserDto> getUsersByUserIds(Set<UUID> userIds) {
+    private Set<UserDto> getUsersByUserIds(Collection<UUID> userIds) {
         if (!isEmpty(userIds)) {
             var foundUsersDto = userClient.getUsersByIds(userIds);
 
@@ -117,7 +183,7 @@ public class PublishedTestServiceImpl implements PublishedTestService {
         return Collections.emptySet();
     }
 
-    private Set<UserDto> getUsersByGroupIds(Set<UUID> groupIds) {
+    private Set<UserDto> getUsersByGroupIds(Collection<UUID> groupIds) {
         if (!isEmpty(groupIds)) {
             var foundGroupsDto = userClient.getGroupsByIds(groupIds);
 
