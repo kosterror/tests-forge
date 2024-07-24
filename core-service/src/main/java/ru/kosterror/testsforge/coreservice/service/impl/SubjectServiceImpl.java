@@ -35,6 +35,11 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+    public SubjectEntity getSubjectEntity(UUID id) {
+        return getSubjectById(id);
+    }
+
+    @Override
     public List<SubjectDto> findSubjects(String name) {
         var subjects = name == null
                 ? repository.findAll()
