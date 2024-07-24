@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.UpdateQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.service.QuestionService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 
@@ -27,7 +27,7 @@ public class QuestionController {
     @Operation(summary = "Создать вопрос", security = @SecurityRequirement(name = JWT))
     @PostMapping
     public QuestionDto createQuestion(@AuthenticationPrincipal JwtUser principal,
-                                      @RequestBody @Valid UpdateQuestionDto question) {
+                                      @RequestBody @Valid CreateQuestionDto question) {
         return service.createQuestion(principal.userId(), question);
     }
 

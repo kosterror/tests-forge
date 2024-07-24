@@ -16,7 +16,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class UpdateMatchingQuestionDto extends UpdateQuestionDto {
+public class CreateMatchingQuestionDto extends CreateQuestionDto {
 
     @Size(min = 2, max = 32, message = "Количество терминов и определений должно быть от 2 до 32")
     @Schema(description = "Словарь, где ключ - термин, а значение - определение", requiredMode = REQUIRED)
@@ -28,7 +28,7 @@ public class UpdateMatchingQuestionDto extends UpdateQuestionDto {
             "определений + 1")
     private Map<Integer, Integer> points;
 
-    public UpdateMatchingQuestionDto() {
+    public CreateMatchingQuestionDto() {
         super(QuestionType.MATCHING);
     }
 }

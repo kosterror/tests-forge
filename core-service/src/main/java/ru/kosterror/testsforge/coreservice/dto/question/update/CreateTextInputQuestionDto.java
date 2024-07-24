@@ -17,7 +17,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class UpdateTextInputQuestionDto extends UpdateQuestionDto {
+public class CreateTextInputQuestionDto extends CreateQuestionDto {
 
     @Schema(description = "Является ли ответ чувствительным к регистру", requiredMode = REQUIRED)
     @NotNull(message = "Чувствительность к регистру обязательна")
@@ -32,7 +32,7 @@ public class UpdateTextInputQuestionDto extends UpdateQuestionDto {
     @NotNull(message = "Количество баллов обязательно")
     private Integer points;
 
-    public UpdateTextInputQuestionDto() {
+    public CreateTextInputQuestionDto() {
         super(QuestionType.TEXT_INPUT);
     }
 }

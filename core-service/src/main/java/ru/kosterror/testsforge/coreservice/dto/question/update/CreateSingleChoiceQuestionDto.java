@@ -17,7 +17,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class UpdateSingleChoiceQuestionDto extends UpdateQuestionDto {
+public class CreateSingleChoiceQuestionDto extends CreateQuestionDto {
 
     @Schema(description = "Список вариантов ответа", requiredMode = REQUIRED)
     @NotNull(message = "Список вариантов обязателен")
@@ -32,7 +32,7 @@ public class UpdateSingleChoiceQuestionDto extends UpdateQuestionDto {
     @NotNull(message = "Количество баллов обязательно")
     private Integer points;
 
-    public UpdateSingleChoiceQuestionDto() {
+    public CreateSingleChoiceQuestionDto() {
         super(QuestionType.SINGLE_CHOICE);
     }
 }

@@ -1,16 +1,16 @@
 package ru.kosterror.testsforge.coreservice.mapper.question.impl;
 
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.UpdateQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
 
 public abstract class BaseQuestionMapper {
 
-    public abstract QuestionEntity toEntity(UpdateQuestionDto dto);
+    public abstract QuestionEntity toEntity(CreateQuestionDto dto);
 
     public abstract QuestionDto toDto(QuestionEntity entity);
 
-    protected void mapBaseQuestionEntityFields(QuestionEntity entity, UpdateQuestionDto dto) {
+    protected void mapBaseQuestionEntityFields(QuestionEntity entity, CreateQuestionDto dto) {
         entity.setName(dto.getName());
         entity.setType(dto.getType());
         entity.setAttachments(dto.getAttachments());

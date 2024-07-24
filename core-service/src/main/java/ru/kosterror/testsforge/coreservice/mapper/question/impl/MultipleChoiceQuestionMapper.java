@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.multiple.MultipleChoiceQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.multiple.MultipleOptionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.UpdateMultipleChoiceQuestionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.UpdateQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.update.CreateMultipleChoiceQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.multiple.MultipleChoiceQuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.multiple.MultipleOptionEntity;
@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class MultipleChoiceQuestionMapper extends BaseQuestionMapper {
 
-    private static MultipleOptionEntity mapToMultipleOptionEntity(UpdateMultipleChoiceQuestionDto dto,
+    private static MultipleOptionEntity mapToMultipleOptionEntity(CreateMultipleChoiceQuestionDto dto,
                                                                   int order) {
         var optionEntity = new MultipleOptionEntity();
         optionEntity.setName(dto.getOptions().get(order));
@@ -26,11 +26,11 @@ public class MultipleChoiceQuestionMapper extends BaseQuestionMapper {
     }
 
     @Override
-    public QuestionEntity toEntity(UpdateQuestionDto baseDto) {
+    public QuestionEntity toEntity(CreateQuestionDto baseDto) {
         var entity = new MultipleChoiceQuestionEntity();
         mapBaseQuestionEntityFields(entity, baseDto);
 
-        var dto = (UpdateMultipleChoiceQuestionDto) baseDto;
+        var dto = (CreateMultipleChoiceQuestionDto) baseDto;
 
         var optionNames = dto.getOptions();
         var options = new ArrayList<MultipleOptionEntity>(optionNames.size());

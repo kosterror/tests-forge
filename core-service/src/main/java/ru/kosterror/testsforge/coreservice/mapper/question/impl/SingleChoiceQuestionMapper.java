@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.single.SingleChoiceQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.single.SingleOptionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.UpdateQuestionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.UpdateSingleChoiceQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.update.CreateSingleChoiceQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.single.SingleChoiceQuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.single.SingleOptionEntity;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 @Component
 public class SingleChoiceQuestionMapper extends BaseQuestionMapper {
 
-    private static SingleOptionEntity mapToSingleOptionEntity(UpdateSingleChoiceQuestionDto dto,
+    private static SingleOptionEntity mapToSingleOptionEntity(CreateSingleChoiceQuestionDto dto,
                                                               int optionOrder) {
         var optionEntity = new SingleOptionEntity();
         optionEntity.setName(dto.getOptions().get(optionOrder));
@@ -34,11 +34,11 @@ public class SingleChoiceQuestionMapper extends BaseQuestionMapper {
     }
 
     @Override
-    public QuestionEntity toEntity(UpdateQuestionDto baseDto) {
+    public QuestionEntity toEntity(CreateQuestionDto baseDto) {
         var entity = new SingleChoiceQuestionEntity();
         mapBaseQuestionEntityFields(entity, baseDto);
 
-        var dto = (UpdateSingleChoiceQuestionDto) baseDto;
+        var dto = (CreateSingleChoiceQuestionDto) baseDto;
 
         entity.setPoints(dto.getPoints());
 

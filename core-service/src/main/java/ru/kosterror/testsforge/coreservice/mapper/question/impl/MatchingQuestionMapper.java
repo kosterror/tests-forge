@@ -5,8 +5,8 @@ import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.matching.MatchingOptionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.matching.MatchingQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.matching.TermDefinitionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.UpdateMatchingQuestionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.UpdateQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.update.CreateMatchingQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.matching.DefinitionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.matching.MatchingQuestionEntity;
@@ -32,11 +32,11 @@ public class MatchingQuestionMapper extends BaseQuestionMapper {
     }
 
     @Override
-    public QuestionEntity toEntity(UpdateQuestionDto baseDto) {
+    public QuestionEntity toEntity(CreateQuestionDto baseDto) {
         var entity = new MatchingQuestionEntity();
         mapBaseQuestionEntityFields(entity, baseDto);
 
-        var dto = (UpdateMatchingQuestionDto) baseDto;
+        var dto = (CreateMatchingQuestionDto) baseDto;
 
         int listsSize = dto.getTermsAndDefinitions().size();
         var terms = new ArrayList<TermEntity>(listsSize);

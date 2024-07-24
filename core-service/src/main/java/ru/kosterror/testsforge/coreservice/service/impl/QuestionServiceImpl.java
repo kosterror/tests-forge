@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.coreservice.client.FileStorageClient;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.update.UpdateQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
@@ -26,7 +26,7 @@ public class QuestionServiceImpl implements QuestionService {
     private final FileStorageClient fileStorageClient;
 
     @Override
-    public QuestionDto createQuestion(UUID userId, UpdateQuestionDto question) {
+    public QuestionDto createQuestion(UUID userId, CreateQuestionDto question) {
         if (question.getAttachments() != null && !question.getAttachments().isEmpty()) {
             validateAttachments(userId, question.getAttachments());
         }

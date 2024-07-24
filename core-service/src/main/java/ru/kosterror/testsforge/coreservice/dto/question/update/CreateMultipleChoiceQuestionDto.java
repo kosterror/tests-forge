@@ -18,7 +18,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class UpdateMultipleChoiceQuestionDto extends UpdateQuestionDto {
+public class CreateMultipleChoiceQuestionDto extends CreateQuestionDto {
 
     @Schema(description = "Список вариантов ответа", requiredMode = REQUIRED)
     @NotNull(message = "Список вариантов не может быть null")
@@ -35,7 +35,7 @@ public class UpdateMultipleChoiceQuestionDto extends UpdateQuestionDto {
             "значение - соответствующий балл. Количество пар не может быть больше, чем количество вариантов ответа + 1")
     private Map<Integer, Integer> points;
 
-    public UpdateMultipleChoiceQuestionDto() {
+    public CreateMultipleChoiceQuestionDto() {
         super(QuestionType.MULTIPLE_CHOICE);
     }
 }

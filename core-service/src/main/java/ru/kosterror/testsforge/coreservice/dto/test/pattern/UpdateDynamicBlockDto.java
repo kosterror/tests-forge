@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ru.kosterror.testsforge.coreservice.dto.question.update.UpdateQuestionDto;
+import ru.kosterror.testsforge.coreservice.dto.question.update.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.BlockType;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class UpdateDynamicBlockDto extends UpdateBlockDto {
     @NotNull(message = "Список вопросов не может быть null")
     @Size(min = 1, message = "Список вопросов должен содержать хотя бы один элемент")
     @Schema(description = "Список вопросов", requiredMode = REQUIRED)
-    List<@Valid UpdateQuestionDto> questions;
+    List<@Valid CreateQuestionDto> questions;
 
     protected UpdateDynamicBlockDto() {
         super(BlockType.DYNAMIC);
