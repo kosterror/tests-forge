@@ -9,11 +9,16 @@ import ru.kosterror.testsforge.coreservice.dto.question.full.single.SingleOption
 import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.single.SingleChoiceQuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.single.SingleOptionEntity;
+import ru.kosterror.testsforge.coreservice.mapper.SubjectMapper;
 
 import java.util.ArrayList;
 
 @Component
 public class SingleChoiceQuestionMapper extends BaseQuestionMapper {
+
+    public SingleChoiceQuestionMapper(SubjectMapper subjectMapper) {
+        super(subjectMapper);
+    }
 
     private static SingleOptionEntity mapToSingleOptionEntity(CreateSingleChoiceQuestionDto dto,
                                                               int optionOrder) {

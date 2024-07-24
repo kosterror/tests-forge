@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import ru.kosterror.testsforge.coreservice.entity.BaseEntity;
+import ru.kosterror.testsforge.coreservice.entity.subject.SubjectEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.DynamicBlockEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.VariantEntity;
 
@@ -40,5 +41,9 @@ public abstract class QuestionEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "dynamic_block_id")
     private DynamicBlockEntity dynamicBlock;
+
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private SubjectEntity subject;
 
 }

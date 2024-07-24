@@ -7,9 +7,14 @@ import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.textinput.TextInputQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.textinput.TextInputQuestionEntity;
+import ru.kosterror.testsforge.coreservice.mapper.SubjectMapper;
 
 @Component
 public class TextInputQuestionMapper extends BaseQuestionMapper {
+
+    public TextInputQuestionMapper(SubjectMapper subjectMapper) {
+        super(subjectMapper);
+    }
 
     @Override
     public QuestionEntity toEntity(CreateQuestionDto baseDto) {

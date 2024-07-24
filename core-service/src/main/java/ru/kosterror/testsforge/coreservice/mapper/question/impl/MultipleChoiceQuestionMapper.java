@@ -9,12 +9,17 @@ import ru.kosterror.testsforge.coreservice.dto.question.full.multiple.MultipleOp
 import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.multiple.MultipleChoiceQuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.multiple.MultipleOptionEntity;
+import ru.kosterror.testsforge.coreservice.mapper.SubjectMapper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class MultipleChoiceQuestionMapper extends BaseQuestionMapper {
+
+    public MultipleChoiceQuestionMapper(SubjectMapper subjectMapper) {
+        super(subjectMapper);
+    }
 
     private static MultipleOptionEntity mapToMultipleOptionEntity(CreateMultipleChoiceQuestionDto dto,
                                                                   int order) {

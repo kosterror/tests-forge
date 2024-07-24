@@ -11,12 +11,17 @@ import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.matching.DefinitionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.matching.MatchingQuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.question.matching.TermEntity;
+import ru.kosterror.testsforge.coreservice.mapper.SubjectMapper;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 @Component
 public class MatchingQuestionMapper extends BaseQuestionMapper {
+
+    public MatchingQuestionMapper(SubjectMapper subjectMapper) {
+        super(subjectMapper);
+    }
 
     private static void mapTermAndDefinition(Map.Entry<String, String> termAndDefinition,
                                              ArrayList<DefinitionEntity> definitions,

@@ -27,8 +27,10 @@ public class QuestionController {
     @Operation(summary = "Создать вопрос", security = @SecurityRequirement(name = JWT))
     @PostMapping
     public QuestionDto createQuestion(@AuthenticationPrincipal JwtUser principal,
-                                      @RequestBody @Valid CreateQuestionDto question) {
-        return service.createQuestion(principal.userId(), question);
+                                      @RequestParam UUID subjectId,
+                                      @RequestBody @Valid CreateQuestionDto question
+    ) {
+        return service.createQuestion(principal.userId(), subjectId, question);
     }
 
     @Operation(summary = "Получить вопрос")
