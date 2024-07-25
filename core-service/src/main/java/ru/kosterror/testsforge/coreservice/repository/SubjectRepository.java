@@ -8,6 +8,6 @@ import java.util.UUID;
 
 public interface SubjectRepository extends JpaRepository<SubjectEntity, UUID> {
 
-    List<SubjectEntity> findAllByNameContaining(String name);
+    List<SubjectEntity> findAllByNameContainingIgnoreCaseOrderByName(String name);
 
 }

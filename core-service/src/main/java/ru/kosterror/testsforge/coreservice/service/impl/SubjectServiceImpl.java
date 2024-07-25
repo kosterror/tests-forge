@@ -1,10 +1,12 @@
 package ru.kosterror.testsforge.coreservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.coreservice.dto.subject.SubjectDto;
 import ru.kosterror.testsforge.coreservice.dto.subject.UpdateSubjectDto;
 import ru.kosterror.testsforge.coreservice.entity.subject.SubjectEntity;
+import ru.kosterror.testsforge.coreservice.entity.subject.SubjectEntity_;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
 import ru.kosterror.testsforge.coreservice.mapper.SubjectMapper;
 import ru.kosterror.testsforge.coreservice.repository.SubjectRepository;
@@ -42,8 +44,8 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public List<SubjectDto> findSubjects(String name) {
         var subjects = name == null
-                ? repository.findAll()
-                : repository.findAllByNameContaining(name);
+                ? repository.findAll(Sort.by(Sort.Direction.ASC, SubjectEntity_.NAME))
+                : repository.findAllByNameContainingIgnoreCaseOrderByName(name);
 
         return subjects.stream()
                 .map(mapper::toDto)
