@@ -1,8 +1,11 @@
 package ru.kosterror.testsforge.coreservice.service;
 
+import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
+import ru.kosterror.testsforge.coreservice.entity.question.QuestionType;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface QuestionService {
@@ -12,4 +15,11 @@ public interface QuestionService {
     QuestionDto getQuestion(UUID id);
 
     void deleteQuestion(UUID id);
+
+    PaginationResponse<QuestionDto> getQuestions(UUID subjectId,
+                                                 String name,
+                                                 List<QuestionType> types,
+                                                 int page,
+                                                 int size
+    );
 }

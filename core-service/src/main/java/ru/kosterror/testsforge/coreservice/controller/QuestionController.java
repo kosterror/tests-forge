@@ -9,11 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
+import ru.kosterror.testsforge.coreservice.entity.question.QuestionType;
 import ru.kosterror.testsforge.coreservice.service.QuestionService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 
+import java.util.List;
 import java.util.UUID;
 
 import static ru.kosterror.testsforge.coreservice.configuration.OpenApiConfiguration.JWT;
@@ -21,7 +24,7 @@ import static ru.kosterror.testsforge.coreservice.configuration.OpenApiConfigura
 @RestController
 @RequestMapping("/api/questions")
 @RequiredArgsConstructor
-@Tag(name = "Question")
+@Tag(name = "Questions")
 public class QuestionController {
 
     private final QuestionService service;
@@ -43,10 +46,21 @@ public class QuestionController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @Operation(summary = "Получить вопрос")
+    @Operation(summary = "Получить вопрос", security = @SecurityRequirement(name = JWT))
     @GetMapping("/{id}")
     public QuestionDto getQuestion(@PathVariable UUID id) {
         return service.getQuestion(id);
+    }
+
+    @Operation(summary = "Получить вопросы", security = @SecurityRequirement(name = JWT))
+    @GetMapping
+    public PaginationResponse<QuestionDto> getQuestions(@RequestParam(required = false) UUID subjectId,
+                                                        @RequestParam(required = false) String name,
+                                                        @RequestParam(required = false) List<QuestionType> types,
+                                                        @RequestParam(required = false, defaultValue = "0") int page,
+                                                        @RequestParam(required = false, defaultValue = "20") int size
+    ) {
+        return service.getQuestions(subjectId, name, types, page, size);
     }
 
 }

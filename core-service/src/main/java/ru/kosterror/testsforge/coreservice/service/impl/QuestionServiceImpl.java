@@ -2,12 +2,18 @@ package ru.kosterror.testsforge.coreservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.client.FileStorageClient;
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
+import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity_;
+import ru.kosterror.testsforge.coreservice.entity.question.QuestionType;
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
 import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
@@ -17,6 +23,8 @@ import ru.kosterror.testsforge.coreservice.service.SubjectService;
 
 import java.util.List;
 import java.util.UUID;
+
+import static ru.kosterror.testsforge.coreservice.specificaiton.QuestionSpecification.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -55,6 +63,28 @@ public class QuestionServiceImpl implements QuestionService {
     public void deleteQuestion(UUID id) {
         var entity = getQuestionById(id);
         questionRepository.delete(entity);
+    }
+
+    @Override
+    public PaginationResponse<QuestionDto> getQuestions(UUID subjectId,
+                                                        String name,
+                                                        List<QuestionType> types,
+                                                        int page,
+                                                        int size
+    ) {
+        var specification = Specification.<QuestionEntity>where(null)
+                .and(hasSubject(subjectId))
+                .and(hasNameLike(name))
+                .and(hasTypeIn(types));
+
+        var pageable = PageRequest.of(page, size, Sort.Direction.ASC, QuestionEntity_.NAME);
+
+        var questions = questionRepository.findAll(specification, pageable).getContent()
+                .stream()
+                .map(questionMapper::toDto)
+                .toList();
+
+        return new PaginationResponse<>(page, size, questions);
     }
 
     private QuestionEntity getQuestionById(UUID id) {
