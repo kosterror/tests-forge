@@ -7,10 +7,10 @@ import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.matching.MatchingOptionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.matching.MatchingQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.matching.TermDefinitionDto;
-import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
-import ru.kosterror.testsforge.coreservice.entity.question.matching.DefinitionEntity;
-import ru.kosterror.testsforge.coreservice.entity.question.matching.MatchingQuestionEntity;
-import ru.kosterror.testsforge.coreservice.entity.question.matching.TermEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.matching.DefinitionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.matching.MatchingQuestionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.matching.TermEntity;
 import ru.kosterror.testsforge.coreservice.mapper.SubjectMapper;
 
 import java.util.ArrayList;

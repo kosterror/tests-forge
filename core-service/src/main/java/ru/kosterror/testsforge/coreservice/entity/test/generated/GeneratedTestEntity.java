@@ -1,10 +1,11 @@
-package ru.kosterror.testsforge.coreservice.entity.test;
+package ru.kosterror.testsforge.coreservice.entity.test.generated;
 
 import jakarta.persistence.*;
 import lombok.*;
 import ru.kosterror.testsforge.coreservice.entity.BaseEntity;
 import ru.kosterror.testsforge.coreservice.entity.converter.DynamicBlockLinksConverter;
 import ru.kosterror.testsforge.coreservice.entity.converter.StaticBlockLinksConverter;
+import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 
 import java.util.List;
 import java.util.UUID;

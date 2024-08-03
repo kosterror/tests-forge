@@ -5,8 +5,8 @@ import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateTextInputQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.textinput.TextInputQuestionDto;
-import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
-import ru.kosterror.testsforge.coreservice.entity.question.textinput.TextInputQuestionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.textinput.TextInputQuestionEntity;
 import ru.kosterror.testsforge.coreservice.mapper.SubjectMapper;
 
 @Component

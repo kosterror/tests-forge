@@ -6,7 +6,7 @@ import jakarta.persistence.AttributeConverter;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
-import ru.kosterror.testsforge.coreservice.entity.test.DynamicBlockLink;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.DynamicBlockLink;
 import ru.kosterror.testsforge.coreservice.exception.InternalException;
 
 import java.util.List;

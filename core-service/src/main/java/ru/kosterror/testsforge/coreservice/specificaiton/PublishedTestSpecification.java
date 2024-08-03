@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import ru.kosterror.testsforge.coreservice.entity.BaseEntity_;
-import ru.kosterror.testsforge.coreservice.entity.test.PublishedTestEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.PublishedTestEntity_;
 import ru.kosterror.testsforge.coreservice.entity.test.TestPatternEntity_;
 

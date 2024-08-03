@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.entity.question.multiple;
+package ru.kosterror.testsforge.coreservice.entity.test.pattern.question.multiple;
 
 import jakarta.persistence.*;
 import lombok.Getter;

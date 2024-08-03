@@ -3,7 +3,7 @@ package ru.kosterror.testsforge.coreservice.dto.test.pattern;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
-import ru.kosterror.testsforge.coreservice.entity.BlockType;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.BlockType;
 
 import java.util.UUID;
 

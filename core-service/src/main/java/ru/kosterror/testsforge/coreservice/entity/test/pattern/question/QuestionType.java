@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.entity.question;
+package ru.kosterror.testsforge.coreservice.entity.test.pattern.question;
 
 public enum QuestionType {
     MULTIPLE_CHOICE,

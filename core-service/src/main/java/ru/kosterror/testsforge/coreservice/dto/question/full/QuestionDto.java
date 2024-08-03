@@ -3,7 +3,7 @@ package ru.kosterror.testsforge.coreservice.dto.question.full;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import ru.kosterror.testsforge.coreservice.dto.subject.SubjectDto;
-import ru.kosterror.testsforge.coreservice.entity.question.QuestionType;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
 
 import java.util.List;
 import java.util.UUID;

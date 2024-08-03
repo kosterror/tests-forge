@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.BlockDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateBlockDto;
-import ru.kosterror.testsforge.coreservice.entity.test.BlockEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.BlockEntity;
 
 @Component
 @RequiredArgsConstructor

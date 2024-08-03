@@ -4,7 +4,7 @@ import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.BaseTestPatternDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.TestPatternDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateTestPatternDto;
-import ru.kosterror.testsforge.coreservice.entity.test.TestPatternEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.TestPatternEntity;
 
 import java.util.UUID;
 

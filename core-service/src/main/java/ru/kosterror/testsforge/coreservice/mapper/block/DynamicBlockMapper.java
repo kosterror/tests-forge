@@ -6,8 +6,8 @@ import ru.kosterror.testsforge.coreservice.dto.test.pattern.BlockDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.DynamicBlockDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateBlockDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateDynamicBlockDto;
-import ru.kosterror.testsforge.coreservice.entity.test.BlockEntity;
-import ru.kosterror.testsforge.coreservice.entity.test.DynamicBlockEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.BlockEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.DynamicBlockEntity;
 import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
 
 @Component

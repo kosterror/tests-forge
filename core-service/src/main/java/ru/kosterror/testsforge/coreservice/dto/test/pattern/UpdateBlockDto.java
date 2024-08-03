@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import ru.kosterror.testsforge.coreservice.entity.BlockType;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.BlockType;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

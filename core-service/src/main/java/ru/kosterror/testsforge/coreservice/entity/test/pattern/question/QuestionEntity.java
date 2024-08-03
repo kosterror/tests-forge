@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.entity.question;
+package ru.kosterror.testsforge.coreservice.entity.test.pattern.question;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -6,8 +6,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import ru.kosterror.testsforge.coreservice.entity.BaseEntity;
 import ru.kosterror.testsforge.coreservice.entity.subject.SubjectEntity;
-import ru.kosterror.testsforge.coreservice.entity.test.DynamicBlockEntity;
-import ru.kosterror.testsforge.coreservice.entity.test.VariantEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.DynamicBlockEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.VariantEntity;
 
 import java.util.List;
 import java.util.UUID;

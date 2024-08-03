@@ -9,7 +9,7 @@ import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.BaseTestPatternDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.TestPatternDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateTestPatternDto;
-import ru.kosterror.testsforge.coreservice.entity.test.TestPatternEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.TestPatternEntity;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
 import ru.kosterror.testsforge.coreservice.mapper.TestPatternMapper;
 import ru.kosterror.testsforge.coreservice.repository.TestPatternRepository;

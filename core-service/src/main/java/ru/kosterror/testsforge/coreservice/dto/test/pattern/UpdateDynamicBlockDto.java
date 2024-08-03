@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
-import ru.kosterror.testsforge.coreservice.entity.BlockType;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.BlockType;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
-import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.mapper.question.impl.MatchingQuestionMapper;
 import ru.kosterror.testsforge.coreservice.mapper.question.impl.MultipleChoiceQuestionMapper;
 import ru.kosterror.testsforge.coreservice.mapper.question.impl.SingleChoiceQuestionMapper;

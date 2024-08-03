@@ -1,8 +1,10 @@
-package ru.kosterror.testsforge.coreservice.entity.test;
+package ru.kosterror.testsforge.coreservice.entity.test.published;
 
 import jakarta.persistence.*;
 import lombok.*;
 import ru.kosterror.testsforge.coreservice.entity.BaseEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.TestPatternEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;

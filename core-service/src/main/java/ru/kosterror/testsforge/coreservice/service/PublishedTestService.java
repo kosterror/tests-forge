@@ -5,7 +5,7 @@ import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestD
 import ru.kosterror.testsforge.coreservice.dto.test.published.PublishTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.published.PublishedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.published.UpdatePublishedTestDto;
-import ru.kosterror.testsforge.coreservice.entity.test.PublishedTestEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 
 import java.util.UUID;
 

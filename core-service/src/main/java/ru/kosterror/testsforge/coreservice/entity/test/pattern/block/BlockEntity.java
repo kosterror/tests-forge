@@ -1,10 +1,10 @@
-package ru.kosterror.testsforge.coreservice.entity.test;
+package ru.kosterror.testsforge.coreservice.entity.test.pattern.block;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import ru.kosterror.testsforge.coreservice.entity.BaseEntity;
-import ru.kosterror.testsforge.coreservice.entity.BlockType;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.PartitionEntity;
 
 @Entity
 @Table(name = "block")

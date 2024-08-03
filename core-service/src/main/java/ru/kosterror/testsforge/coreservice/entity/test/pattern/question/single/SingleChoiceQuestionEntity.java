@@ -1,9 +1,9 @@
-package ru.kosterror.testsforge.coreservice.entity.question.single;
+package ru.kosterror.testsforge.coreservice.entity.test.pattern.question.single;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
 
 import java.util.List;
 

@@ -6,9 +6,9 @@ import ru.kosterror.testsforge.coreservice.dto.question.create.CreateSingleChoic
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.single.SingleChoiceQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.single.SingleOptionDto;
-import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
-import ru.kosterror.testsforge.coreservice.entity.question.single.SingleChoiceQuestionEntity;
-import ru.kosterror.testsforge.coreservice.entity.question.single.SingleOptionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.single.SingleChoiceQuestionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.single.SingleOptionEntity;
 import ru.kosterror.testsforge.coreservice.mapper.SubjectMapper;
 
 import java.util.ArrayList;

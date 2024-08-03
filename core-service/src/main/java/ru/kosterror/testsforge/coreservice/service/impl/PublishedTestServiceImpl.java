@@ -10,7 +10,7 @@ import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.commonmodel.user.UserDto;
 import ru.kosterror.testsforge.coreservice.client.UserClient;
 import ru.kosterror.testsforge.coreservice.dto.test.published.*;
-import ru.kosterror.testsforge.coreservice.entity.test.PublishedTestEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
 import ru.kosterror.testsforge.coreservice.mapper.PublishedTestMapper;
 import ru.kosterror.testsforge.coreservice.repository.PublishedTestRepository;

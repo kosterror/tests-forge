@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.entity.test;
+package ru.kosterror.testsforge.coreservice.entity.test.generated;
 
 import lombok.Data;
 

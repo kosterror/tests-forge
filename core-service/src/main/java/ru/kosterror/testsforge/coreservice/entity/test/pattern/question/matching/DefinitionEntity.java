@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.entity.question.matching;
+package ru.kosterror.testsforge.coreservice.entity.test.pattern.question.matching;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

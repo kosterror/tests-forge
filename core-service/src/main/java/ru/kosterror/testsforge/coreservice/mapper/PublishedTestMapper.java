@@ -6,7 +6,7 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.published.PublishedTestDto;
-import ru.kosterror.testsforge.coreservice.entity.test.PublishedTestEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 
 @Mapper(
         componentModel = MappingConstants.ComponentModel.SPRING,

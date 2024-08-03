@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ru.kosterror.testsforge.coreservice.entity.question.QuestionType;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
 
 import java.util.List;
 import java.util.Map;

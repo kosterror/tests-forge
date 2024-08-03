@@ -3,7 +3,7 @@ package ru.kosterror.testsforge.coreservice.service;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
-import ru.kosterror.testsforge.coreservice.entity.question.QuestionType;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
 
 import java.util.List;
 import java.util.UUID;

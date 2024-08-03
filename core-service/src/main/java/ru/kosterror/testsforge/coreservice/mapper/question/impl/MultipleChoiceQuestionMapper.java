@@ -6,9 +6,9 @@ import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.multiple.MultipleChoiceQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.multiple.MultipleOptionDto;
-import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
-import ru.kosterror.testsforge.coreservice.entity.question.multiple.MultipleChoiceQuestionEntity;
-import ru.kosterror.testsforge.coreservice.entity.question.multiple.MultipleOptionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.multiple.MultipleChoiceQuestionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.multiple.MultipleOptionEntity;
 import ru.kosterror.testsforge.coreservice.mapper.SubjectMapper;
 
 import java.util.ArrayList;

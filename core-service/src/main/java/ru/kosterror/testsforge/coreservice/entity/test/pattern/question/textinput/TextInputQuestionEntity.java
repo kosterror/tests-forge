@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.entity.question.textinput;
+package ru.kosterror.testsforge.coreservice.entity.test.pattern.question.textinput;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
 
 import java.util.List;
 
