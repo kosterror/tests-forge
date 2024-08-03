@@ -87,7 +87,8 @@ public class PublishedTestServiceImpl implements PublishedTestService {
         return publishedTestMapper.toDto(publishedTest);
     }
 
-    private PublishedTestEntity getPublishedTestEntity(UUID id) {
+    @Override
+    public PublishedTestEntity getPublishedTestEntity(UUID id) {
         return publishedTestRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Published test with id %s does not exist".formatted(id)));
     }
