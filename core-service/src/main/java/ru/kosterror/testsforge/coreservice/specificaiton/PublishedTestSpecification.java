@@ -4,9 +4,9 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import ru.kosterror.testsforge.coreservice.entity.BaseEntity_;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.TestPatternEntity_;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
-import ru.kosterror.testsforge.coreservice.entity.test.PublishedTestEntity_;
-import ru.kosterror.testsforge.coreservice.entity.test.TestPatternEntity_;
+import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity_;
 
 import java.util.UUID;
 

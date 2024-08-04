@@ -12,7 +12,7 @@ import ru.kosterror.testsforge.coreservice.client.FileStorageClient;
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
-import ru.kosterror.testsforge.coreservice.entity.question.QuestionEntity_;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity_;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
