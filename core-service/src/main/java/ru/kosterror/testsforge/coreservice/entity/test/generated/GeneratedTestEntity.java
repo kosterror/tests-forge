@@ -1,10 +1,10 @@
 package ru.kosterror.testsforge.coreservice.entity.test.generated;
 
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 import ru.kosterror.testsforge.coreservice.entity.BaseEntity;
-import ru.kosterror.testsforge.coreservice.entity.converter.DynamicBlockLinksConverter;
-import ru.kosterror.testsforge.coreservice.entity.converter.StaticBlockLinksConverter;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 
 import java.util.List;
@@ -28,12 +28,8 @@ public class GeneratedTestEntity extends BaseEntity {
 
     private UUID userId;
 
-    @Convert(converter = DynamicBlockLinksConverter.class)
-    @Column(columnDefinition = "json")
-    private List<DynamicBlockLink> dynamicBlockLinks;
-
-    @Convert(converter = StaticBlockLinksConverter.class)
-    @Column(columnDefinition = "json")
-    private List<StaticBlockLink> staticBlockLinks;
+    @Type(JsonType.class)
+    @Column(columnDefinition = "jsonb")
+    private List<Partition> partitions;
 
 }

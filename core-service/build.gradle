@@ -26,4 +26,6 @@ dependencies {
     implementation "org.hibernate.orm:hibernate-jpamodelgen:${jpaModelGenVersion}"
     annotationProcessor "org.hibernate.orm:hibernate-jpamodelgen:${jpaModelGenVersion}"
     compileOnly "org.hibernate.orm:hibernate-jpamodelgen:${jpaModelGenVersion}"
+
+    implementation "io.hypersistence:hypersistence-utils-hibernate-63:${hypersistenceutilsVersion}"
 }
