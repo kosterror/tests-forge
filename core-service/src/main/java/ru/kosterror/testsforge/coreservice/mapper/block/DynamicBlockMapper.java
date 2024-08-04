@@ -23,6 +23,8 @@ public class DynamicBlockMapper extends BaseBlockMapper {
 
         var dto = (UpdateDynamicBlockDto) baseDto;
 
+        entity.setQuestionCount(dto.getQuestionCount());
+
         mapQuestions(entity, dto);
 
         return entity;
@@ -48,6 +50,7 @@ public class DynamicBlockMapper extends BaseBlockMapper {
         var entity = (DynamicBlockEntity) baseEntity;
 
         dto.setQuestions(questionMapper.toDtos(entity.getQuestions()));
+        dto.setQuestionCount(entity.getQuestionCount());
 
         return dto;
     }

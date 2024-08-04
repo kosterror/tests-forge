@@ -19,4 +19,6 @@ public class DynamicBlockEntity extends BlockEntity {
     @OneToMany(mappedBy = "dynamicBlock", cascade = CascadeType.ALL)
     private List<QuestionEntity> questions;
 
+    private Integer questionCount;
+
 }

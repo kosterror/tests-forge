@@ -16,4 +16,7 @@ public class DynamicBlockDto extends BlockDto {
     @Schema(description = "Название блока", requiredMode = REQUIRED)
     private List<QuestionDto> questions;
 
+    @Schema(description = "Количество вопросов, которые будут в сгенерированном тесте", requiredMode = REQUIRED)
+    private Integer questionCount;
+
 }

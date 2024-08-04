@@ -24,7 +24,12 @@ public class UpdateDynamicBlockDto extends UpdateBlockDto {
     @NotNull(message = "Список вопросов не может быть null")
     @Size(min = 1, message = "Список вопросов должен содержать хотя бы один элемент")
     @Schema(description = "Список вопросов", requiredMode = REQUIRED)
-    List<@Valid CreateQuestionDto> questions;
+    private List<@Valid CreateQuestionDto> questions;
+
+    @NotNull(message = "Количество необходимых вопросов в блоке не может быть null")
+    @Size(min = 1, message = "В блоке должен быть хотя бы один вопрос")
+    @Schema(description = "Количество вопросов, которые будут в сгенерированном тесте", requiredMode = REQUIRED)
+    private Integer questionCount;
 
     protected UpdateDynamicBlockDto() {
         super(BlockType.DYNAMIC);
