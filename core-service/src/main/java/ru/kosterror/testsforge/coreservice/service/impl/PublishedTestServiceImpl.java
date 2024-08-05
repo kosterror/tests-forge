@@ -7,8 +7,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
-import ru.kosterror.testsforge.commonmodel.user.UserDto;
-import ru.kosterror.testsforge.coreservice.client.UserClient;
 import ru.kosterror.testsforge.coreservice.dto.test.published.*;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
@@ -17,10 +15,12 @@ import ru.kosterror.testsforge.coreservice.repository.PublishedTestRepository;
 import ru.kosterror.testsforge.coreservice.service.MailService;
 import ru.kosterror.testsforge.coreservice.service.PublishedTestService;
 import ru.kosterror.testsforge.coreservice.service.TestPatternService;
+import ru.kosterror.testsforge.coreservice.service.UserService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-import static org.springframework.util.CollectionUtils.isEmpty;
 import static ru.kosterror.testsforge.coreservice.specificaiton.PublishedTestSpecification.*;
 
 @Slf4j
@@ -28,17 +28,17 @@ import static ru.kosterror.testsforge.coreservice.specificaiton.PublishedTestSpe
 @RequiredArgsConstructor
 public class PublishedTestServiceImpl implements PublishedTestService {
 
-    private final UserClient userClient;
     private final TestPatternService testPatternService;
     private final PublishedTestRepository publishedTestRepository;
     private final MailService mailService;
     private final PublishedTestMapper publishedTestMapper;
+    private final UserService userService;
 
     @Override
     @Transactional
     public BasePublishedTestDto publishTest(PublishTestDto publishTestDto) {
         var formPattern = testPatternService.getFormPatternEntity(publishTestDto.getTestPatternId());
-        var emails = getUserEmails(publishTestDto.getGroupIds(), publishTestDto.getUserIds());
+        var emails = userService.getUserEmails(publishTestDto.getGroupIds(), publishTestDto.getUserIds());
 
         var publishedTest = PublishedTestEntity.builder()
                 .deadline(publishTestDto.getDeadline())
@@ -100,7 +100,7 @@ public class PublishedTestServiceImpl implements PublishedTestService {
     ) {
         var publishedTest = getPublishedTestEntity(publishedTestId);
 
-        var appliedEmails = getUserEmails(updatePublishedTestDto.groupIds(), updatePublishedTestDto.userIds());
+        var appliedEmails = userService.getUserEmails(updatePublishedTestDto.groupIds(), updatePublishedTestDto.userIds());
         var newEmails = getNewEmailWithUpdatingPublishedTest(appliedEmails, publishedTest);
         var notRemovedEmails = getNotRemovedEmailsWithUpdatingPublishedTest(appliedEmails, newEmails);
 
@@ -137,7 +137,7 @@ public class PublishedTestServiceImpl implements PublishedTestService {
     private ArrayList<String> getNewEmailWithUpdatingPublishedTest(List<String> appliedEmails,
                                                                    PublishedTestEntity publishedTest
     ) {
-        var oldEmails = getUserEmails(publishedTest.getGroupIds(), publishedTest.getUserIds());
+        var oldEmails = userService.getUserEmails(publishedTest.getGroupIds(), publishedTest.getUserIds());
 
         var newEmails = new ArrayList<>(appliedEmails);
         newEmails.removeAll(oldEmails);
@@ -165,55 +165,5 @@ public class PublishedTestServiceImpl implements PublishedTestService {
 
         return updatedAttributes;
     }
-
-    private List<String> getUserEmails(Collection<UUID> groupIds, Collection<UUID> userIds) {
-        var users = new HashSet<>(getUsersByGroupIds(groupIds));
-        users.addAll(getUsersByUserIds(userIds));
-
-        return users.stream()
-                .map(UserDto::email)
-                .distinct()
-                .toList();
-    }
-
-    private Set<UserDto> getUsersByUserIds(Collection<UUID> userIds) {
-        if (!isEmpty(userIds)) {
-            var foundUsersDto = userClient.getUsersByIds(userIds);
-
-            if (!isEmpty(foundUsersDto.notFoundUserIds())) {
-                throw new BadRequestException(
-                        "Users with ids %s do not exist".formatted(foundUsersDto.notFoundUserIds())
-                );
-            }
-
-            return foundUsersDto.users();
-        }
-
-        log.info("Set 'userIds' is empty, skipped getting users by ids");
-        return Collections.emptySet();
-    }
-
-    private Set<UserDto> getUsersByGroupIds(Collection<UUID> groupIds) {
-        if (!isEmpty(groupIds)) {
-            var foundGroupsDto = userClient.getGroupsByIds(groupIds);
-
-            if (!isEmpty(foundGroupsDto.notFoundGroupIds())) {
-                throw new BadRequestException(
-                        "Groups with ids %s do not exist".formatted(foundGroupsDto.notFoundGroupIds())
-                );
-            }
-
-            var users = new HashSet<UserDto>();
-
-            foundGroupsDto.groups()
-                    .forEach(group -> users.addAll(group.users()));
-
-            return users;
-        }
-
-        log.info("Set 'groupIds' is empty, skipped getting groups by ids");
-        return Collections.emptySet();
-    }
-
 
 }
