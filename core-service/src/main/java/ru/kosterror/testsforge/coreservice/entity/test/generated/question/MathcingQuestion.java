@@ -22,11 +22,10 @@ public class MathcingQuestion extends Question {
 
     public MathcingQuestion(UUID id,
                             String name,
-                            String description,
                             List<UUID> attachments,
                             List<MatchingOption> terms,
                             List<MatchingOption> definitions) {
-        super(id, name, description, QuestionType.MATCHING, attachments, null);
+        super(id, name, QuestionType.MATCHING, attachments, null);
         this.terms = terms;
         this.definitions = definitions;
     }

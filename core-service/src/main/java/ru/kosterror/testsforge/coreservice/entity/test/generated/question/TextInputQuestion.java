@@ -15,8 +15,7 @@ public class TextInputQuestion extends Question {
 
     public TextInputQuestion(UUID id,
                              String name,
-                             String description,
                              List<UUID> attachments) {
-        super(id, name, description, QuestionType.TEXT_INPUT, attachments, null);
+        super(id, name, QuestionType.TEXT_INPUT, attachments, null);
     }
 }

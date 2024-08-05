@@ -25,10 +25,9 @@ public class MultipleChoiceQuestion extends Question {
 
     public MultipleChoiceQuestion(UUID id,
                                   String name,
-                                  String description,
                                   List<UUID> attachments,
                                   List<ChoiceOption> options) {
-        super(id, name, description, QuestionType.MULTIPLE_CHOICE, attachments, null);
+        super(id, name, QuestionType.MULTIPLE_CHOICE, attachments, null);
         this.options = options;
     }
 }

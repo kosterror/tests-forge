@@ -25,10 +25,9 @@ public class SingleChoiceQuestion extends Question {
 
     public SingleChoiceQuestion(UUID id,
                                 String name,
-                                String description,
                                 List<UUID> attachments,
                                 List<ChoiceOption> options) {
-        super(id, name, description, QuestionType.SINGLE_CHOICE, attachments, null);
+        super(id, name, QuestionType.SINGLE_CHOICE, attachments, null);
         this.options = options;
     }
 

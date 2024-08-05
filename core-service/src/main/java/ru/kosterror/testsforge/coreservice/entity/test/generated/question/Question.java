@@ -23,9 +23,6 @@ public abstract class Question {
     @Schema(description = "Текст вопроса", requiredMode = REQUIRED)
     private String name;
 
-    @Schema(description = "Описание вопроса", requiredMode = NOT_REQUIRED)
-    private String description;
-
     @Schema(description = "Тип вопроса", requiredMode = REQUIRED)
     private QuestionType type;
 
