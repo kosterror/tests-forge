@@ -1,7 +1,10 @@
 package ru.kosterror.testsforge.coreservice.entity.test.generated;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.question.Question;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.BlockType;
 
@@ -12,6 +15,9 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIR
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Block {
 
     @Schema(description = "Идентификатор", requiredMode = REQUIRED)
@@ -26,8 +32,8 @@ public class Block {
     @Schema(description = "Описание блока", requiredMode = NOT_REQUIRED)
     private String description;
 
-    @Schema(description = "Варианты. Заполнено, если type = STATIC", requiredMode = NOT_REQUIRED)
-    private List<Variant> variants;
+    @Schema(description = "Вариант. Заполнено, если type = STATIC", requiredMode = NOT_REQUIRED)
+    private Variant variant;
 
     @Schema(description = "Вопросы. Заполнено, если type = DYNAMIC", requiredMode = NOT_REQUIRED)
     private List<Question> questions;

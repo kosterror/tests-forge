@@ -1,6 +1,7 @@
 package ru.kosterror.testsforge.coreservice.entity.test.generated;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIR
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 @Data
+@AllArgsConstructor
 public class Partition {
 
     @Schema(description = "Идентификатор", requiredMode = REQUIRED)

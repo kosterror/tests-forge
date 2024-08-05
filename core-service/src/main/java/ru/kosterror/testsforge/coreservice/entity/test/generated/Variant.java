@@ -1,6 +1,8 @@
 package ru.kosterror.testsforge.coreservice.entity.test.generated;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.question.Question;
 
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.UUID;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIRED;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
+@Data
+@AllArgsConstructor
 public class Variant {
 
     @Schema(description = "Идентификатор", requiredMode = REQUIRED)
