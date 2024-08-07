@@ -22,32 +22,14 @@ public class MultipleChoiceQuestionMapper extends BaseQuestionMapper {
     }
 
     private static MultipleOptionEntity mapToMultipleOptionEntity(CreateMultipleChoiceQuestionDto dto,
-                                                                  int order) {
+                                                                  int order,
+                                                                  MultipleChoiceQuestionEntity question) {
         var optionEntity = new MultipleOptionEntity();
         optionEntity.setName(dto.getOptions().get(order));
         optionEntity.setOrder(order);
         optionEntity.setIsRight(dto.getCorrectOptionIndices().contains(order));
+        optionEntity.setQuestion(question);
         return optionEntity;
-    }
-
-    @Override
-    public QuestionEntity toEntity(CreateQuestionDto baseDto) {
-        var entity = new MultipleChoiceQuestionEntity();
-        mapBaseQuestionEntityFields(entity, baseDto);
-
-        var dto = (CreateMultipleChoiceQuestionDto) baseDto;
-
-        var optionNames = dto.getOptions();
-        var options = new ArrayList<MultipleOptionEntity>(optionNames.size());
-
-        for (int order = 0; order < optionNames.size(); order++) {
-            var option = mapToMultipleOptionEntity(dto, order);
-            options.add(option);
-        }
-
-        entity.setOptions(options);
-
-        return entity;
     }
 
     @Override
@@ -64,6 +46,26 @@ public class MultipleChoiceQuestionMapper extends BaseQuestionMapper {
         }
 
         return dto;
+    }
+
+    @Override
+    public QuestionEntity toEntity(CreateQuestionDto baseDto) {
+        var entity = new MultipleChoiceQuestionEntity();
+        mapBaseQuestionEntityFields(entity, baseDto);
+
+        var dto = (CreateMultipleChoiceQuestionDto) baseDto;
+
+        var optionNames = dto.getOptions();
+        var options = new ArrayList<MultipleOptionEntity>(optionNames.size());
+
+        for (int order = 0; order < optionNames.size(); order++) {
+            var option = mapToMultipleOptionEntity(dto, order, entity);
+            options.add(option);
+        }
+
+        entity.setOptions(options);
+
+        return entity;
     }
 
     private List<MultipleOptionDto> mapToMultipleOptionDtos(List<MultipleOptionEntity> options) {

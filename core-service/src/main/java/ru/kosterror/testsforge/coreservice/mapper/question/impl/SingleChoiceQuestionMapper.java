@@ -21,11 +21,13 @@ public class SingleChoiceQuestionMapper extends BaseQuestionMapper {
     }
 
     private static SingleOptionEntity mapToSingleOptionEntity(CreateSingleChoiceQuestionDto dto,
-                                                              int optionOrder) {
+                                                              int optionOrder,
+                                                              SingleChoiceQuestionEntity question) {
         var optionEntity = new SingleOptionEntity();
         optionEntity.setName(dto.getOptions().get(optionOrder));
         optionEntity.setOrder(optionOrder);
         optionEntity.setIsRight(dto.getCorrectOptionIndex() == optionOrder);
+        optionEntity.setQuestion(question);
         return optionEntity;
     }
 
@@ -51,7 +53,7 @@ public class SingleChoiceQuestionMapper extends BaseQuestionMapper {
         var options = new ArrayList<SingleOptionEntity>(optionNames.size());
 
         for (int order = 0; order < optionNames.size(); order++) {
-            var option = mapToSingleOptionEntity(dto, order);
+            var option = mapToSingleOptionEntity(dto, order, entity);
             options.add(option);
         }
 
