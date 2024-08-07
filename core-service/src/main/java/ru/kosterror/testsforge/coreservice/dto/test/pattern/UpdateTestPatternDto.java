@@ -13,7 +13,6 @@ public record UpdateTestPatternDto(
         @Schema(description = "Название теста", requiredMode = Schema.RequiredMode.REQUIRED)
         String name,
 
-        @NotNull(message = "Описание не может быть null")
         @Schema(description = "Описание теста", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
         String description,
 
