@@ -28,28 +28,28 @@ public class TestPatternServiceImpl implements TestPatternService {
 
     @Override
     @Transactional
-    public TestPatternDto createFormPattern(UUID userId, UpdateTestPatternDto updateTestPatternDto) {
-        var form = testPatternMapper.toEntity(updateTestPatternDto);
-        form = testPatternRepository.save(form);
+    public TestPatternDto createTestPattern(UUID userId, UpdateTestPatternDto updateTestPatternDto) {
+        var testPattern = testPatternMapper.toEntity(updateTestPatternDto);
+        testPattern = testPatternRepository.save(testPattern);
 
-        return testPatternMapper.toDto(form);
+        return testPatternMapper.toDto(testPattern);
     }
 
     @Override
-    public TestPatternDto getFormPattern(UUID id) {
-        var form = getFormPatternEntity(id);
+    public TestPatternDto getTestPattern(UUID id) {
+        var testPattern = getTestPatternEntity(id);
 
-        return testPatternMapper.toDto(form);
+        return testPatternMapper.toDto(testPattern);
     }
 
     @Override
-    public TestPatternEntity getFormPatternEntity(UUID id) {
+    public TestPatternEntity getTestPatternEntity(UUID id) {
         return testPatternRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Form pattern with id %s not found".formatted(id)));
+                .orElseThrow(() -> new NotFoundException("Test pattern with id %s not found".formatted(id)));
     }
 
     @Override
-    public PaginationResponse<BaseTestPatternDto> getFormPatterns(int page,
+    public PaginationResponse<BaseTestPatternDto> getTestPatterns(int page,
                                                                   int size,
                                                                   String name,
                                                                   UUID ownerId,
@@ -61,14 +61,14 @@ public class TestPatternServiceImpl implements TestPatternService {
                 .and(hasSubject(subjectId))
                 .and(orderByName());
 
-        var formPage = testPatternRepository.findAll(specification, PageRequest.of(page, size));
+        var testPage = testPatternRepository.findAll(specification, PageRequest.of(page, size));
 
-        var formDtos = formPage.getContent()
+        var testDtos = testPage.getContent()
                 .stream()
                 .map(testPatternMapper::toBaseDto)
                 .toList();
 
-        return new PaginationResponse<>(page, size, formDtos);
+        return new PaginationResponse<>(page, size, testDtos);
     }
 
 }

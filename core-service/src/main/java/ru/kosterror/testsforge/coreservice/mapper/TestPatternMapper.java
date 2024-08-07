@@ -13,7 +13,7 @@ import ru.kosterror.testsforge.coreservice.entity.test.pattern.TestPatternEntity
 )
 public abstract class TestPatternMapper {
 
-    public abstract TestPatternEntity toEntity(UpdateTestPatternDto formDto);
+    public abstract TestPatternEntity toEntity(UpdateTestPatternDto testPatternDto);
 
     public abstract TestPatternDto toDto(TestPatternEntity testPatternEntity);
 
@@ -29,7 +29,7 @@ public abstract class TestPatternMapper {
     }
 
     @AfterMapping
-    void addFormToPartition(@MappingTarget TestPatternEntity testPatternEntity) {
+    void addTestToPartition(@MappingTarget TestPatternEntity testPatternEntity) {
         if (testPatternEntity.getPartitions() != null) {
             for (var partition : testPatternEntity.getPartitions()) {
                 partition.setTest(testPatternEntity);

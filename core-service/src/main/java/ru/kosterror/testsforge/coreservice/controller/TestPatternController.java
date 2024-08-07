@@ -32,23 +32,23 @@ public class TestPatternController {
     @PostMapping
     public TestPatternDto createTestPattern(@AuthenticationPrincipal JwtUser principal,
                                             @RequestBody @Valid UpdateTestPatternDto updateTestPatternDto) {
-        return testPatternService.createFormPattern(principal.userId(), updateTestPatternDto);
+        return testPatternService.createTestPattern(principal.userId(), updateTestPatternDto);
     }
 
     @Operation(summary = "Получить шаблон теста", security = @SecurityRequirement(name = JWT))
     @GetMapping("/{id}")
     public TestPatternDto getTestPattern(@PathVariable UUID id) {
-        return testPatternService.getFormPattern(id);
+        return testPatternService.getTestPattern(id);
     }
 
     @Operation(summary = "Получить шаблоны тестов с фильтрацией", security = @SecurityRequirement(name = JWT))
     @GetMapping
-    public PaginationResponse<BaseTestPatternDto> getFormPatterns(@Min(0) @RequestParam(defaultValue = "0") int page,
+    public PaginationResponse<BaseTestPatternDto> getTestPatterns(@Min(0) @RequestParam(defaultValue = "0") int page,
                                                                   @Min(1) @Max(200) @RequestParam(defaultValue = "10") int size,
                                                                   @RequestParam(required = false) String name,
                                                                   @RequestParam(required = false) UUID ownerId,
                                                                   @RequestParam(required = false) UUID subjectId) {
-        return testPatternService.getFormPatterns(page, size, name, ownerId, subjectId);
+        return testPatternService.getTestPatterns(page, size, name, ownerId, subjectId);
     }
 
 }

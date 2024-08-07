@@ -10,13 +10,13 @@ import java.util.UUID;
 
 public interface TestPatternService {
 
-    TestPatternDto createFormPattern(UUID userId, UpdateTestPatternDto updateTestPatternDto);
+    TestPatternDto createTestPattern(UUID userId, UpdateTestPatternDto updateTestPatternDto);
 
-    TestPatternDto getFormPattern(UUID id);
+    TestPatternDto getTestPattern(UUID id);
 
-    TestPatternEntity getFormPatternEntity(UUID id);
+    TestPatternEntity getTestPatternEntity(UUID id);
 
-    PaginationResponse<BaseTestPatternDto> getFormPatterns(int page,
+    PaginationResponse<BaseTestPatternDto> getTestPatterns(int page,
                                                            int size,
                                                            String name,
                                                            UUID ownerId,

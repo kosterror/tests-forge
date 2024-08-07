@@ -49,7 +49,7 @@ public class PublishedTestsController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @Operation(summary = "Поиск по опубликованным формам с пагинацией", security = @SecurityRequirement(name = JWT))
+    @Operation(summary = "Поиск по опубликованным тестам с пагинацией", security = @SecurityRequirement(name = JWT))
     @GetMapping
     public PaginationResponse<BasePublishedTestDto> getPublishedTests(@RequestParam(required = false) String name,
                                                                       @RequestParam(required = false) UUID subjectId,

@@ -37,7 +37,7 @@ public class PublishedTestServiceImpl implements PublishedTestService {
     @Override
     @Transactional
     public BasePublishedTestDto publishTest(PublishTestDto publishTestDto) {
-        var formPattern = testPatternService.getFormPatternEntity(publishTestDto.getTestPatternId());
+        var formPattern = testPatternService.getTestPatternEntity(publishTestDto.getTestPatternId());
         var emails = userService.getUserEmails(publishTestDto.getGroupIds(), publishTestDto.getUserIds());
 
         var publishedTest = PublishedTestEntity.builder()
