@@ -3,6 +3,7 @@ package ru.kosterror.testsforge.coreservice.dto.test.generated;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.data.util.Pair;
 
 import java.util.List;
 import java.util.Map;
@@ -31,11 +32,9 @@ public record AnswersDto(
         Map<UUID, @NotEmpty String> textAnswers,
 
         @NotNull(message = "Не может быть null, должно быть хотя бы пустым")
-        @Schema(description = "Мапа для ответов на вопросы с сопоставлением. " +
-                "Должна быть хотя бы пустой, но не null. Ключ - ID вопроса, значение - список из мап, " +
-                "где ключ - ID термина, " +
-                "значение - ID соответствующего определения",
+        @Schema(description = "Мапа для ответов на вопросы с сопоставлением. Ключ - ID вопроса, значение - список, " +
+                "где элементы списка - пары. Первый элемент пары - ID термина, второй - ID определения",
                 requiredMode = REQUIRED)
-        Map<UUID, @NotEmpty List<Map<UUID, @NotNull UUID>>> matchingAnswers
+        Map<UUID, @NotEmpty List<Pair<@NotNull UUID, @NotNull UUID>>> matchingAnswers
 ) {
 }
