@@ -30,9 +30,7 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
     @Override
     public GeneratedTestDto getMyGeneratedTest(UUID userId, UUID publishedTestId) {
         var publishedTest = publishedTestService.getPublishedTestEntity(publishedTestId);
-
         checkUserAccessForPublishedTest(publishedTest, userId);
-        log.info("User {} has access to published test {}", userId, publishedTestId);
 
         var generatedTest = generatedTestRepository
                 .findByPublishedTestIdAndUserId(publishedTestId, userId)
@@ -53,6 +51,9 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
         )) {
             throw new ForbiddenException("You don't have access to this published test");
         }
+
+        log.info("User {} has access to published test {}", userId, publishedTest.getId());
     }
+
 
 }
