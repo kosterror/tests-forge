@@ -20,8 +20,8 @@ public class SingleChoiceQuestion extends Question {
     @Schema(description = "Варианты ответов", requiredMode = REQUIRED)
     private List<ChoiceOption> options;
 
-    @Schema(description = "Введенный ответ", requiredMode = NOT_REQUIRED)
-    private Integer enteredAnswerIndex;
+    @Schema(description = "Введенный ответ. ID объекта из options", requiredMode = NOT_REQUIRED)
+    private UUID enteredAnswerId;
 
     public SingleChoiceQuestion(UUID id,
                                 String name,

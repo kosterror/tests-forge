@@ -20,8 +20,8 @@ public class MultipleChoiceQuestion extends Question {
     @Schema(description = "Варианты ответов", requiredMode = REQUIRED)
     private List<ChoiceOption> options;
 
-    @Schema(description = "Введенные ответы", requiredMode = NOT_REQUIRED)
-    private List<Integer> enteredAnswerIndexes;
+    @Schema(description = "Введенные ответы. Элемент списка - ID элемента из options", requiredMode = NOT_REQUIRED)
+    private List<UUID> enteredAnswers;
 
     public MultipleChoiceQuestion(UUID id,
                                   String name,

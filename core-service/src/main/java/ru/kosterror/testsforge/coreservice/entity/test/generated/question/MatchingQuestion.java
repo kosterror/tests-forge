@@ -3,10 +3,10 @@ package ru.kosterror.testsforge.coreservice.entity.test.generated.question;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.data.util.Pair;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Data
@@ -18,7 +18,7 @@ public class MathcingQuestion extends Question {
 
     private List<MatchingOption> definitions;
 
-    private Map<Integer, Integer> enteredAnswersIndexes;
+    private List<Pair<UUID, UUID>> enteredAnswersIndexes;
 
     public MathcingQuestion(UUID id,
                             String name,
