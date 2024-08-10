@@ -20,7 +20,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = MultipleChoiceQuestion.class, name = "MULTIPLE_CHOICE"),
         @JsonSubTypes.Type(value = SingleChoiceQuestion.class, name = "SINGLE_CHOICE"),
-        @JsonSubTypes.Type(value = MathcingQuestion.class, name = "MATCHING"),
+        @JsonSubTypes.Type(value = MatchingQuestion.class, name = "MATCHING"),
         @JsonSubTypes.Type(value = TextInputQuestion.class, name = "TEXT_INPUT"),
 })
 @Data

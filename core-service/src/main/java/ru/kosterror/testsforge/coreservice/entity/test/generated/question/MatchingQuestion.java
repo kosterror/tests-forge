@@ -12,7 +12,7 @@ import java.util.UUID;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class MathcingQuestion extends Question {
+public class MatchingQuestion extends Question {
 
     private List<MatchingOption> terms;
 
@@ -20,7 +20,7 @@ public class MathcingQuestion extends Question {
 
     private List<Pair<UUID, UUID>> enteredAnswersIndexes;
 
-    public MathcingQuestion(UUID id,
+    public MatchingQuestion(UUID id,
                             String name,
                             List<UUID> attachments,
                             List<MatchingOption> terms,
