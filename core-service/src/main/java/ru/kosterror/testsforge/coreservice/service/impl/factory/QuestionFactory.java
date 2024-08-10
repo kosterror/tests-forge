@@ -70,7 +70,7 @@ public class QuestionFactory {
         );
     }
 
-    private MathcingQuestion buildMatchingQuestion(MatchingQuestionEntity questionEntity) {
+    private MatchingQuestion buildMatchingQuestion(MatchingQuestionEntity questionEntity) {
         var termOptions = questionEntity.getTerms()
                 .stream()
                 .map(term -> new MatchingOption(term.getId(), term.getText()))
@@ -81,7 +81,7 @@ public class QuestionFactory {
                 .map(definition -> new MatchingOption(definition.getId(), definition.getText()))
                 .toList();
 
-        return new MathcingQuestion(questionEntity.getId(),
+        return new MatchingQuestion(questionEntity.getId(),
                 questionEntity.getName(),
                 questionEntity.getAttachments(),
                 termOptions,

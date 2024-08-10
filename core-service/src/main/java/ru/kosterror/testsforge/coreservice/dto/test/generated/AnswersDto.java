@@ -35,6 +35,6 @@ public record AnswersDto(
         @Schema(description = "Мапа для ответов на вопросы с сопоставлением. Ключ - ID вопроса, значение - список, " +
                 "где элементы списка - пары. Первый элемент пары - ID термина, второй - ID определения",
                 requiredMode = REQUIRED)
-        Map<UUID, @NotEmpty List<Pair<@NotNull UUID, @NotNull UUID>>> matchingAnswers
+        Map<UUID, List<Pair<UUID, UUID>>> matchingAnswers
 ) {
 }
