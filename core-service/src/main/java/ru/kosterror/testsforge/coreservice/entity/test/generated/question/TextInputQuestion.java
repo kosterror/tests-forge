@@ -1,5 +1,6 @@
 package ru.kosterror.testsforge.coreservice.entity.test.generated.question;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -12,6 +13,9 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class TextInputQuestion extends Question {
+
+    @Schema(description = "Введенный ответ", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private String enteredAnswer;
 
     public TextInputQuestion(UUID id,
                              String name,
