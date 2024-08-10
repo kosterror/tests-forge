@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.kosterror.testsforge.commonmodel.ErrorResponse;
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
+import ru.kosterror.testsforge.coreservice.exception.ConflictException;
 import ru.kosterror.testsforge.coreservice.exception.ForbiddenException;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
 
@@ -114,6 +115,19 @@ public class ControllerExceptionHandler {
         ErrorResponse response = buildErrorResponse(exception.getMessage(),
                 request.getRequestURI(),
                 HttpStatus.NOT_FOUND
+        );
+
+        return ResponseEntity.status(response.getCode()).body(response);
+    }
+
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<ErrorResponse> handleConflictException(HttpServletRequest request,
+                                                                 ConflictException exception) {
+        logException(request, exception);
+
+        ErrorResponse response = buildErrorResponse(exception.getMessage(),
+                request.getRequestURI(),
+                HttpStatus.CONFLICT
         );
 
         return ResponseEntity.status(response.getCode()).body(response);
