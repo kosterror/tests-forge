@@ -43,6 +43,8 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
                 .findByPublishedTestIdAndUserId(publishedTestId, userId)
                 .orElse(buildAndSaveGeneratedTest(publishedTest, userId));
 
+        checkGeneratedTestStatus(generatedTest);
+
         return generatedTestMapper.toDto(generatedTest);
     }
 
