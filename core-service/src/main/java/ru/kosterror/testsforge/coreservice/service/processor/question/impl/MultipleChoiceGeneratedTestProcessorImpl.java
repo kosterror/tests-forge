@@ -1,5 +1,6 @@
-package ru.kosterror.testsforge.coreservice.service.processor.impl;
+package ru.kosterror.testsforge.coreservice.service.processor.question.impl;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
@@ -8,19 +9,24 @@ import ru.kosterror.testsforge.coreservice.entity.test.generated.question.Multip
 import ru.kosterror.testsforge.coreservice.entity.test.generated.question.Question;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
+import ru.kosterror.testsforge.coreservice.service.processor.question.QuestionProcessor;
+import ru.kosterror.testsforge.coreservice.service.processor.util.TestProcessorUtilService;
 
 import java.util.List;
 import java.util.UUID;
 
 @Slf4j
 @Service
-public class MultipleChoiceQuestionProcessor extends DefaultQuestionProcessor<MultipleChoiceQuestion> {
+@RequiredArgsConstructor
+public class MultipleChoiceGeneratedTestProcessorImpl implements QuestionProcessor {
+
+    private final TestProcessorUtilService<MultipleChoiceQuestion> testProcessorUtilService;
 
     @Override
-    public void process(List<Question> questions, AnswersDto answersDto) {
+    public void markQuestionAnswers(List<Question> questions, AnswersDto answersDto) {
         log.info("Started processing multiple choice question answers...");
 
-        var multipleChoiceQuestions = filterQuestions(questions,
+        var multipleChoiceQuestions = testProcessorUtilService.filterQuestions(questions,
                 QuestionType.MULTIPLE_CHOICE,
                 MultipleChoiceQuestion.class
         );
@@ -32,7 +38,7 @@ public class MultipleChoiceQuestionProcessor extends DefaultQuestionProcessor<Mu
             var enteredOptionIds = answerEntry.getValue();
 
             processConcreteQuestionAnswer(
-                    findQuestion(multipleChoiceQuestions, questionId),
+                    testProcessorUtilService.findQuestion(multipleChoiceQuestions, questionId),
                     questionId,
                     enteredOptionIds
             );

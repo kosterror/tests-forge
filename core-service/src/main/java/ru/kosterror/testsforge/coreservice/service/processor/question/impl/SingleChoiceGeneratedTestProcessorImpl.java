@@ -1,5 +1,6 @@
-package ru.kosterror.testsforge.coreservice.service.processor.impl;
+package ru.kosterror.testsforge.coreservice.service.processor.question.impl;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
@@ -8,19 +9,28 @@ import ru.kosterror.testsforge.coreservice.entity.test.generated.question.Questi
 import ru.kosterror.testsforge.coreservice.entity.test.generated.question.SingleChoiceQuestion;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
+import ru.kosterror.testsforge.coreservice.service.processor.question.QuestionProcessor;
+import ru.kosterror.testsforge.coreservice.service.processor.util.TestProcessorUtilService;
 
 import java.util.List;
 import java.util.UUID;
 
 @Slf4j
 @Service
-public class SingleChoiceQuestionProcessor extends DefaultQuestionProcessor<SingleChoiceQuestion> {
+@RequiredArgsConstructor
+public class SingleChoiceGeneratedTestProcessorImpl implements QuestionProcessor {
+
+    private final TestProcessorUtilService<SingleChoiceQuestion> testProcessorUtilService;
 
     @Override
-    public void process(List<Question> questions, AnswersDto answersDto) {
+    public void markQuestionAnswers(List<Question> questions, AnswersDto answersDto) {
         log.info("Started processing single choice question answers...");
 
-        var singleChoiceQuestions = filterQuestions(questions, QuestionType.SINGLE_CHOICE, SingleChoiceQuestion.class);
+        var singleChoiceQuestions = testProcessorUtilService.filterQuestions(
+                questions,
+                QuestionType.SINGLE_CHOICE,
+                SingleChoiceQuestion.class
+        );
         var answers = answersDto.singleChoiceAnswers();
 
         for (var answerEntry : answers.entrySet()) {
@@ -28,7 +38,7 @@ public class SingleChoiceQuestionProcessor extends DefaultQuestionProcessor<Sing
             var optionId = answerEntry.getValue();
 
             processConcreteAnswer(
-                    findQuestion(singleChoiceQuestions, questionId),
+                    testProcessorUtilService.findQuestion(singleChoiceQuestions, questionId),
                     questionId,
                     optionId
             );

@@ -1,5 +1,6 @@
-package ru.kosterror.testsforge.coreservice.service.processor.impl;
+package ru.kosterror.testsforge.coreservice.service.processor.question.impl;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,8 @@ import ru.kosterror.testsforge.coreservice.entity.test.generated.question.Matchi
 import ru.kosterror.testsforge.coreservice.entity.test.generated.question.Question;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
+import ru.kosterror.testsforge.coreservice.service.processor.question.QuestionProcessor;
+import ru.kosterror.testsforge.coreservice.service.processor.util.TestProcessorUtilService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +19,19 @@ import java.util.UUID;
 
 @Slf4j
 @Service
-public class MatchingQuestionProcessor extends DefaultQuestionProcessor<MatchingQuestion> {
+@RequiredArgsConstructor
+public class MatchingGeneratedTestProcessorImpl implements QuestionProcessor {
 
-    @Override
-    public void process(List<Question> questions, AnswersDto answersDto) {
+    private final TestProcessorUtilService<MatchingQuestion> testProcessorUtilService;
+
+    public void markQuestionAnswers(List<Question> questions, AnswersDto answersDto) {
         log.info("Started processing matching question answers...");
 
-        var matchingQuestions = filterQuestions(questions, QuestionType.MATCHING, MatchingQuestion.class);
+        var matchingQuestions = testProcessorUtilService.filterQuestions(
+                questions,
+                QuestionType.MATCHING,
+                MatchingQuestion.class
+        );
         var answers = answersDto.matchingAnswers();
 
         for (var answerEntry : answers.entrySet()) {
@@ -33,7 +42,7 @@ public class MatchingQuestionProcessor extends DefaultQuestionProcessor<Matching
             processConcreteQuestionAnswer(
                     questionId,
                     termDefinitionPairList,
-                    findQuestion(matchingQuestions, questionId)
+                    testProcessorUtilService.findQuestion(matchingQuestions, questionId)
             );
         }
 

@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
-import ru.kosterror.testsforge.coreservice.entity.test.generated.Variant;
-import ru.kosterror.testsforge.coreservice.entity.test.generated.question.Question;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.exception.ConflictException;
 import ru.kosterror.testsforge.coreservice.exception.ForbiddenException;
@@ -18,14 +16,10 @@ import ru.kosterror.testsforge.coreservice.service.GeneratedTestService;
 import ru.kosterror.testsforge.coreservice.service.PublishedTestService;
 import ru.kosterror.testsforge.coreservice.service.UserService;
 import ru.kosterror.testsforge.coreservice.service.impl.factory.GeneratedTestFactory;
-import ru.kosterror.testsforge.coreservice.service.processor.QuestionProcessor;
+import ru.kosterror.testsforge.coreservice.service.processor.test.GeneratedTestProcessor;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -37,7 +31,7 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
     private final GeneratedTestMapper generatedTestMapper;
     private final GeneratedTestFactory generatedTestFactory;
     private final UserService userService;
-    private final List<QuestionProcessor> questionProcessors;
+    private final GeneratedTestProcessor generatedTestProcessor;
 
     @Override
     public GeneratedTestDto getMyGeneratedTest(UUID userId, UUID publishedTestId) {
@@ -64,33 +58,11 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
         checkDeadline(publishedTest);
         checkTimer(generatedTest);
 
-        var questions = extractQuestions(generatedTest);
-        questionProcessors.forEach(processor -> processor.process(questions, answers));
+        generatedTestProcessor.markAnswers(generatedTest, answers);
 
         generatedTest = generatedTestRepository.save(generatedTest);
 
         return generatedTestMapper.toDto(generatedTest);
-    }
-
-
-    private List<Question> extractQuestions(GeneratedTestEntity generatedTest) {
-        return generatedTest.getPartitions()
-                .stream()
-                .flatMap(partition -> partition.getBlocks().stream())
-                .flatMap(block -> {
-                            var blockQuestions = Optional.ofNullable(block.getQuestions())
-                                    .stream()
-                                    .flatMap(Collection::stream);
-
-                            var variantQuestions = Optional.ofNullable(block.getVariant())
-                                    .map(Variant::getQuestions)
-                                    .stream()
-                                    .flatMap(Collection::stream);
-
-                            return Stream.concat(blockQuestions, variantQuestions);
-                        }
-
-                ).toList();
     }
 
     private GeneratedTestEntity getGeneratedTestEntity(UUID userId, UUID publishedTestId, UUID generatedTestId) {
@@ -115,7 +87,9 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
         if (!publishedTest.getUserIds().contains(userId)
                 && !userService.isAnyGroupContainsUser(publishedTest.getGroupIds(), userId
         )) {
-            throw new ForbiddenException("You don't have access to this published test");
+            throw new ForbiddenException(
+                    "You don't have access to published test %s".formatted(publishedTest.getId())
+            );
         }
 
         log.info("User {} has access to published test {}", userId, publishedTest.getId());
@@ -129,7 +103,7 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
 
         var timerFinish = generatedTest.getCreatedAt().plusMinutes(timer);
         if (timerFinish.isBefore(LocalDateTime.now())) {
-            throw new ConflictException("Timer for this test is expired");
+            throw new ConflictException("Timer for generated test %s is expired".formatted(generatedTest.getId()));
         }
 
         log.info("Timer for generated test {} is not expired", generatedTest.getId());
@@ -137,7 +111,7 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
 
     private void checkDeadline(PublishedTestEntity publishedTest) {
         if (publishedTest.getDeadline() != null && publishedTest.getDeadline().isBefore(LocalDateTime.now())) {
-            throw new ConflictException("Deadline for this test is expired");
+            throw new ConflictException("Deadline for published test %s is expired".formatted(publishedTest.getId()));
         }
 
         log.info("Deadline for published test {} is not expired", publishedTest.getId());
