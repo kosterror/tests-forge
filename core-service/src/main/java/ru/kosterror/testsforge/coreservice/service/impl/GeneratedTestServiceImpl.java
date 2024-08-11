@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.exception.ConflictException;
 import ru.kosterror.testsforge.coreservice.exception.ForbiddenException;
@@ -57,12 +58,44 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
 
         checkDeadline(publishedTest);
         checkTimer(generatedTest);
+        checkGeneratedTestStatus(generatedTest);
 
         generatedTestProcessor.markAnswers(generatedTest, answers);
+        generatedTest.setStatus(GeneratedTestStatus.SAVED);
 
         generatedTest = generatedTestRepository.save(generatedTest);
 
         return generatedTestMapper.toDto(generatedTest);
+    }
+
+    @Override
+    public void submitTest(UUID userId, UUID publishedTestId, UUID generatedTestId, AnswersDto answers) {
+        var publishedTest = publishedTestService.getPublishedTestEntity(publishedTestId);
+        checkUserAccessForPublishedTest(publishedTest, userId);
+        var generatedTest = getGeneratedTestEntity(userId, publishedTestId, generatedTestId);
+
+        checkDeadline(publishedTest);
+        checkTimer(generatedTest);
+        checkGeneratedTestStatus(generatedTest);
+
+        generatedTestProcessor.markAnswersAndCalculatePoints(generatedTest,
+                publishedTest.getTestPattern(),
+                answers
+        );
+
+        generatedTest.setStatus(GeneratedTestStatus.SUBMITTED);
+
+        generatedTestRepository.save(generatedTest);
+
+        log.info("Generated test {} submitted successfully", generatedTestId);
+    }
+
+    private void checkGeneratedTestStatus(GeneratedTestEntity generatedTest) {
+        if (generatedTest.getStatus() != GeneratedTestStatus.CREATED
+                && generatedTest.getStatus() != GeneratedTestStatus.SAVED
+        ) {
+            throw new ConflictException("Generated test %s is already submitted".formatted(generatedTest.getId()));
+        }
     }
 
     private GeneratedTestEntity getGeneratedTestEntity(UUID userId, UUID publishedTestId, UUID generatedTestId) {

@@ -32,4 +32,6 @@ public class GeneratedTestEntity extends BaseEntity {
     @Column(columnDefinition = "jsonb")
     private List<Partition> partitions;
 
+    private Integer points;
+
 }

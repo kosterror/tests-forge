@@ -10,4 +10,6 @@ public interface GeneratedTestService {
     GeneratedTestDto getMyGeneratedTest(UUID userId, UUID publishedTestId);
 
     GeneratedTestDto saveAnswers(UUID userId, UUID publishedTestId, UUID generatedTestId, AnswersDto answers);
+
+    void submitTest(UUID userId, UUID publishedTestId, UUID generatedTestId, AnswersDto answers);
 }

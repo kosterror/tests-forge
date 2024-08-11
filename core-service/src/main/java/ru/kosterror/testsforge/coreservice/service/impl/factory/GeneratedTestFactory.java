@@ -15,11 +15,11 @@ public class GeneratedTestFactory {
     private final PartitionFactory partitionFactory;
 
     public GeneratedTestEntity buildGeneratedTestEntity(PublishedTestEntity publishedTest, UUID userId) {
-        return new GeneratedTestEntity(
-                GeneratedTestStatus.CREATED,
-                publishedTest,
-                userId,
-                partitionFactory.buildPartitions(publishedTest.getTestPattern().getPartitions())
-        );
+        return GeneratedTestEntity.builder()
+                .status(GeneratedTestStatus.CREATED)
+                .publishedTest(publishedTest)
+                .userId(userId)
+                .partitions(partitionFactory.buildPartitions(publishedTest.getTestPattern().getPartitions()))
+                .build();
     }
 }

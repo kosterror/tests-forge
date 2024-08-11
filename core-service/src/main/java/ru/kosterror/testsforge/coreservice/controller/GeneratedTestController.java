@@ -40,4 +40,13 @@ public class GeneratedTestController {
         return generatedTestService.saveAnswers(principal.userId(), publishedTestId, generatedTestId, answers);
     }
 
+    @Operation(summary = "Сдать тест", security = @SecurityRequirement(name = JWT))
+    @PostMapping("/{generatedTestId}/submit")
+    public void submitTest(@AuthenticationPrincipal JwtUser principal,
+                           @PathVariable UUID publishedTestId,
+                           @PathVariable UUID generatedTestId,
+                           @RequestBody @Valid AnswersDto answers) {
+        generatedTestService.submitTest(principal.userId(), publishedTestId, generatedTestId, answers);
+    }
+
 }
