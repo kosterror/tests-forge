@@ -64,6 +64,7 @@ public class MultipleChoiceQuestionMapper extends BaseQuestionMapper {
         }
 
         entity.setOptions(options);
+        entity.setPoints(dto.getPoints());
 
         return entity;
     }
