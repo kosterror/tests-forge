@@ -74,10 +74,9 @@ services:
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
   kafka-ui:
     image: provectuslabs/kafka-ui:v0.7.2
-    container_name: trb-kafka-ui
+    container_name: kafka-ui
     ports:
       - "8079:8080"
-    restart: always
     environment:
       - KAFKA_CLUSTERS_0_NAME=forms-kafka
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9094
