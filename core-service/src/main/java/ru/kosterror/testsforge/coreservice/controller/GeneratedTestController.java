@@ -9,6 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.generated.MyGeneratedTestDto;
 import ru.kosterror.testsforge.coreservice.service.test.GeneratedTestService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 
@@ -42,11 +43,11 @@ public class GeneratedTestController {
 
     @Operation(summary = "Сдать тест", security = @SecurityRequirement(name = JWT))
     @PostMapping("/{generatedTestId}/submit")
-    public void submitTest(@AuthenticationPrincipal JwtUser principal,
-                           @PathVariable UUID publishedTestId,
-                           @PathVariable UUID generatedTestId,
-                           @RequestBody @Valid AnswersDto answers) {
-        generatedTestService.submitTest(principal.userId(), publishedTestId, generatedTestId, answers);
+    public MyGeneratedTestDto submitTest(@AuthenticationPrincipal JwtUser principal,
+                                         @PathVariable UUID publishedTestId,
+                                         @PathVariable UUID generatedTestId,
+                                         @RequestBody @Valid AnswersDto answers) {
+        return generatedTestService.submitTest(principal.userId(), publishedTestId, generatedTestId, answers);
     }
 
 }

@@ -7,6 +7,7 @@ import org.hibernate.annotations.Type;
 import ru.kosterror.testsforge.coreservice.entity.BaseEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,5 +34,7 @@ public class GeneratedTestEntity extends BaseEntity {
     private List<Partition> partitions;
 
     private Integer points;
+
+    private LocalDateTime submitDateTime;
 
 }

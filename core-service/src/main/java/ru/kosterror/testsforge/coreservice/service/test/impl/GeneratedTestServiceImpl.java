@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.generated.MyGeneratedTestDto;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
@@ -71,7 +72,8 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
     }
 
     @Override
-    public void submitTest(UUID userId, UUID publishedTestId, UUID generatedTestId, AnswersDto answers) {
+    public MyGeneratedTestDto submitTest(UUID userId, UUID publishedTestId, UUID generatedTestId, AnswersDto answers) {
+
         var publishedTest = publishedTestService.getPublishedTestEntity(publishedTestId);
         checkUserAccessForPublishedTest(publishedTest, userId);
         var generatedTest = getGeneratedTestEntity(userId, publishedTestId, generatedTestId);
@@ -86,10 +88,13 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
         );
 
         generatedTest.setStatus(GeneratedTestStatus.SUBMITTED);
+        generatedTest.setSubmitDateTime(LocalDateTime.now());
 
-        generatedTestRepository.save(generatedTest);
+        generatedTest = generatedTestRepository.save(generatedTest);
 
         log.info("Generated test {} submitted successfully", generatedTestId);
+
+        return generatedTestMapper.toMyDto(generatedTest);
     }
 
     private void checkGeneratedTestStatus(GeneratedTestEntity generatedTest) {
