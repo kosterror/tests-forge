@@ -54,8 +54,8 @@ public class PublishedTestsController {
     public PaginationResponse<BasePublishedTestDto> getPublishedTests(@RequestParam(required = false) String name,
                                                                       @RequestParam(required = false) UUID subjectId,
                                                                       @RequestParam(required = false) UUID groupId,
-                                                                      @RequestParam int page,
-                                                                      @RequestParam int size) {
+                                                                      @RequestParam(defaultValue = "0") int page,
+                                                                      @RequestParam(defaultValue = "10") int size) {
         return service.getPublishedTests(name, subjectId, groupId, page, size);
     }
 
