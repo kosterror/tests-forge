@@ -33,6 +33,10 @@ public record UpdatePublishedTestDto(
         @Size(max = 50, message = "Количество пользователей не может быть больше 50")
         @NotNull(message = "Множество идентификаторов пользователей не может быть null")
         @Schema(description = "Идентификаторы пользователей", requiredMode = REQUIRED)
-        Set<UUID> userIds
+        Set<UUID> userIds,
+
+        @NotNull(message = "Показывать ли баллы студентам не может быть null")
+        @Schema(description = "Показывать ли баллы студентам", requiredMode = REQUIRED)
+        Boolean showPointsToStudents
 ) {
 }

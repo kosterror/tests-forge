@@ -30,4 +30,7 @@ public class BasePublishedTestDto {
 
     @Schema(description = "ID шаблона теста", requiredMode = REQUIRED)
     private UUID testPatternId;
+
+    @Schema(description = "Показывать ли баллы студентам", requiredMode = REQUIRED)
+    private boolean showPointsToStudents;
 }

@@ -45,6 +45,7 @@ public class PublishedTestServiceImpl implements PublishedTestService {
                 .timer(publishTestDto.getTimer())
                 .groupIds(new ArrayList<>(publishTestDto.getGroupIds()))
                 .userIds(new ArrayList<>(publishTestDto.getUserIds()))
+                .showPointsToStudents(publishTestDto.getShowPointsToStudents())
                 .testPattern(formPattern)
                 .build();
 
@@ -162,6 +163,7 @@ public class PublishedTestServiceImpl implements PublishedTestService {
         publishedTest.setTimer(updatePublishedTestDto.timer());
         publishedTest.setGroupIds(new ArrayList<>(updatePublishedTestDto.groupIds()));
         publishedTest.setUserIds(new ArrayList<>(updatePublishedTestDto.userIds()));
+        publishedTest.setShowPointsToStudents(updatePublishedTestDto.showPointsToStudents());
 
         return updatedAttributes;
     }

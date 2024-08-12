@@ -41,4 +41,8 @@ public class PublishTestDto {
     @Schema(description = "Время таймера в минутах", requiredMode = NOT_REQUIRED)
     private Integer timer;
 
+    @NotNull(message = "Показывать ли баллы студентам не может быть null")
+    @Schema(description = "Показывать ли баллы студентам", requiredMode = REQUIRED)
+    private Boolean showPointsToStudents;
+
 }

@@ -23,6 +23,8 @@ public class PublishedTestEntity extends BaseEntity {
 
     private Integer timer;
 
+    private boolean showPointsToStudents;
+
     @ElementCollection
     @CollectionTable(name = "group_id", joinColumns = @JoinColumn(name = "test_published_id"))
     private List<UUID> groupIds;

@@ -32,4 +32,7 @@ public class PublishedTestDto {
     @Schema(description = "Шаблон теста", requiredMode = REQUIRED)
     private TestPatternDto testPattern;
 
+    @Schema(description = "Показывать ли баллы студентам", requiredMode = REQUIRED)
+    private boolean showPointsToStudents;
+
 }
