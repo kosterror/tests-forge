@@ -20,7 +20,7 @@ import static ru.kosterror.testsforge.coreservice.configuration.OpenApiConfigura
 @Tag(name = "Generated Tests")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/tests/published/{publishedTestId}/generated-tests/")
+@RequestMapping("/api/tests/published/{publishedTestId}/generated")
 public class GeneratedTestController {
 
     private final GeneratedTestService generatedTestService;
