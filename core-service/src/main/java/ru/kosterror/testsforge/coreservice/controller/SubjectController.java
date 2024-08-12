@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.coreservice.dto.subject.SubjectDto;
 import ru.kosterror.testsforge.coreservice.dto.subject.UpdateSubjectDto;
-import ru.kosterror.testsforge.coreservice.service.SubjectService;
+import ru.kosterror.testsforge.coreservice.service.subject.SubjectService;
 
 import java.util.List;
 import java.util.UUID;

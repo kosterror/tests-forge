@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service.impl;
+package ru.kosterror.testsforge.coreservice.service.test.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +13,11 @@ import ru.kosterror.testsforge.coreservice.exception.ForbiddenException;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
 import ru.kosterror.testsforge.coreservice.mapper.GeneratedTestMapper;
 import ru.kosterror.testsforge.coreservice.repository.GeneratedTestRepository;
-import ru.kosterror.testsforge.coreservice.service.GeneratedTestService;
-import ru.kosterror.testsforge.coreservice.service.PublishedTestService;
-import ru.kosterror.testsforge.coreservice.service.UserService;
-import ru.kosterror.testsforge.coreservice.service.impl.factory.GeneratedTestFactory;
+import ru.kosterror.testsforge.coreservice.service.factory.GeneratedTestFactory;
 import ru.kosterror.testsforge.coreservice.service.processor.test.GeneratedTestProcessor;
+import ru.kosterror.testsforge.coreservice.service.test.GeneratedTestService;
+import ru.kosterror.testsforge.coreservice.service.test.PublishedTestService;
+import ru.kosterror.testsforge.coreservice.service.user.UserService;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

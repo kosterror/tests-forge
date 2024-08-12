@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service.impl.factory;
+package ru.kosterror.testsforge.coreservice.service.factory;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

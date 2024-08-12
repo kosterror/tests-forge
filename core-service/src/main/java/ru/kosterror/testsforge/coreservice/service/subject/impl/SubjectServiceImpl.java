@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service.impl;
+package ru.kosterror.testsforge.coreservice.service.subject.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -10,7 +10,7 @@ import ru.kosterror.testsforge.coreservice.entity.subject.SubjectEntity_;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
 import ru.kosterror.testsforge.coreservice.mapper.SubjectMapper;
 import ru.kosterror.testsforge.coreservice.repository.SubjectRepository;
-import ru.kosterror.testsforge.coreservice.service.SubjectService;
+import ru.kosterror.testsforge.coreservice.service.subject.SubjectService;
 
 import java.util.List;
 import java.util.UUID;

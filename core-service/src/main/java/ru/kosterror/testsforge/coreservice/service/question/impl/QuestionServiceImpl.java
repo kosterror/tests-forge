@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service.impl;
+package ru.kosterror.testsforge.coreservice.service.question.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +18,8 @@ import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
 import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
 import ru.kosterror.testsforge.coreservice.repository.QuestionRepository;
-import ru.kosterror.testsforge.coreservice.service.QuestionService;
-import ru.kosterror.testsforge.coreservice.service.SubjectService;
+import ru.kosterror.testsforge.coreservice.service.question.QuestionService;
+import ru.kosterror.testsforge.coreservice.service.subject.SubjectService;
 
 import java.util.List;
 import java.util.UUID;

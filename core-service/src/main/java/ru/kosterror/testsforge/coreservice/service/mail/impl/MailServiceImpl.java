@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service.impl;
+package ru.kosterror.testsforge.coreservice.service.mail.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.commonmodel.mail.SendMailDto;
 import ru.kosterror.testsforge.coreservice.dto.test.published.PublishedTestAttribute;
 import ru.kosterror.testsforge.coreservice.producer.SendMailProducer;
-import ru.kosterror.testsforge.coreservice.service.MailService;
+import ru.kosterror.testsforge.coreservice.service.mail.MailService;
 
 import java.util.List;
 

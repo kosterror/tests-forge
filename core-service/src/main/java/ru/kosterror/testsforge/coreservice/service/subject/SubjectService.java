@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service;
+package ru.kosterror.testsforge.coreservice.service.subject;
 
 import ru.kosterror.testsforge.coreservice.dto.subject.SubjectDto;
 import ru.kosterror.testsforge.coreservice.dto.subject.UpdateSubjectDto;

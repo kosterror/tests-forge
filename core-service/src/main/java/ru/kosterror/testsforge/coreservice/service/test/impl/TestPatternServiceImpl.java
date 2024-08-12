@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service.impl;
+package ru.kosterror.testsforge.coreservice.service.test.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +13,7 @@ import ru.kosterror.testsforge.coreservice.entity.test.pattern.TestPatternEntity
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
 import ru.kosterror.testsforge.coreservice.mapper.TestPatternMapper;
 import ru.kosterror.testsforge.coreservice.repository.TestPatternRepository;
-import ru.kosterror.testsforge.coreservice.service.TestPatternService;
+import ru.kosterror.testsforge.coreservice.service.test.TestPatternService;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service;
+package ru.kosterror.testsforge.coreservice.service.test;
 
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;

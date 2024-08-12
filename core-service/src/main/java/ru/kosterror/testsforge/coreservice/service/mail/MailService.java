@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service;
+package ru.kosterror.testsforge.coreservice.service.mail;
 
 import ru.kosterror.testsforge.coreservice.dto.test.published.PublishedTestAttribute;
 

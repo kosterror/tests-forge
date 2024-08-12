@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service.impl.factory;
+package ru.kosterror.testsforge.coreservice.service.factory;
 
 import org.springframework.stereotype.Component;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.question.*;

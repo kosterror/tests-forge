@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service.impl;
+package ru.kosterror.testsforge.coreservice.service.user.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.commonmodel.user.UserDto;
 import ru.kosterror.testsforge.coreservice.client.UserClient;
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
-import ru.kosterror.testsforge.coreservice.service.UserService;
+import ru.kosterror.testsforge.coreservice.service.user.UserService;
 
 import java.util.*;
 

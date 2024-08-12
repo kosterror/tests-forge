@@ -13,7 +13,7 @@ import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.BaseTestPatternDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.TestPatternDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateTestPatternDto;
-import ru.kosterror.testsforge.coreservice.service.TestPatternService;
+import ru.kosterror.testsforge.coreservice.service.test.TestPatternService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 
 import java.util.UUID;

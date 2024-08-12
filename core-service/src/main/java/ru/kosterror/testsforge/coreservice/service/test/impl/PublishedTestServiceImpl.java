@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service.impl;
+package ru.kosterror.testsforge.coreservice.service.test.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +12,10 @@ import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEn
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
 import ru.kosterror.testsforge.coreservice.mapper.PublishedTestMapper;
 import ru.kosterror.testsforge.coreservice.repository.PublishedTestRepository;
-import ru.kosterror.testsforge.coreservice.service.MailService;
-import ru.kosterror.testsforge.coreservice.service.PublishedTestService;
-import ru.kosterror.testsforge.coreservice.service.TestPatternService;
-import ru.kosterror.testsforge.coreservice.service.UserService;
+import ru.kosterror.testsforge.coreservice.service.mail.MailService;
+import ru.kosterror.testsforge.coreservice.service.test.PublishedTestService;
+import ru.kosterror.testsforge.coreservice.service.test.TestPatternService;
+import ru.kosterror.testsforge.coreservice.service.user.UserService;
 
 import java.util.ArrayList;
 import java.util.List;

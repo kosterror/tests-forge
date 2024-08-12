@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.service;
+package ru.kosterror.testsforge.coreservice.service.user;
 
 import java.util.Collection;
 import java.util.List;

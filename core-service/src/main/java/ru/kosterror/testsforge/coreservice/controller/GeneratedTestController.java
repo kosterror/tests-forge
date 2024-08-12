@@ -9,7 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
-import ru.kosterror.testsforge.coreservice.service.GeneratedTestService;
+import ru.kosterror.testsforge.coreservice.service.test.GeneratedTestService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 
 import java.util.UUID;

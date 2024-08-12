@@ -13,7 +13,7 @@ import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
-import ru.kosterror.testsforge.coreservice.service.QuestionService;
+import ru.kosterror.testsforge.coreservice.service.question.QuestionService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 
 import java.util.List;

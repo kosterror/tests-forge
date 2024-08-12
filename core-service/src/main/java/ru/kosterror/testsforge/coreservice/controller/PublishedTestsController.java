@@ -13,7 +13,7 @@ import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestD
 import ru.kosterror.testsforge.coreservice.dto.test.published.PublishTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.published.PublishedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.published.UpdatePublishedTestDto;
-import ru.kosterror.testsforge.coreservice.service.PublishedTestService;
+import ru.kosterror.testsforge.coreservice.service.test.PublishedTestService;
 
 import java.util.UUID;
 
