@@ -2,7 +2,10 @@ package ru.kosterror.testsforge.coreservice.service.test.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.MyGeneratedTestDto;
@@ -22,6 +25,9 @@ import ru.kosterror.testsforge.coreservice.service.user.UserService;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static ru.kosterror.testsforge.coreservice.specificaiton.GeneratedTestSpecification.hasSubjectId;
+import static ru.kosterror.testsforge.coreservice.specificaiton.GeneratedTestSpecification.hasUserId;
 
 @Slf4j
 @Service
@@ -73,7 +79,6 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
 
     @Override
     public MyGeneratedTestDto submitTest(UUID userId, UUID publishedTestId, UUID generatedTestId, AnswersDto answers) {
-
         var publishedTest = publishedTestService.getPublishedTestEntity(publishedTestId);
         checkUserAccessForPublishedTest(publishedTest, userId);
         var generatedTest = getGeneratedTestEntity(userId, publishedTestId, generatedTestId);
@@ -95,6 +100,26 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
         log.info("Generated test {} submitted successfully", generatedTestId);
 
         return generatedTestMapper.toMyDto(generatedTest);
+    }
+
+    @Override
+    public PaginationResponse<MyGeneratedTestDto> getMyGeneratedTests(UUID userId,
+                                                                      UUID subjectId,
+                                                                      int page,
+                                                                      int size) {
+        var specification = Specification.<GeneratedTestEntity>where(null)
+                .and(hasUserId(userId))
+                .and(hasSubjectId(subjectId));
+
+        var pageable = PageRequest.of(page, size);
+
+        var generatedTests = generatedTestRepository.findAll(specification, pageable)
+                .getContent()
+                .stream()
+                .map(generatedTestMapper::toMyDto)
+                .toList();
+
+        return new PaginationResponse<>(page, size, generatedTests);
     }
 
     private void checkGeneratedTestStatus(GeneratedTestEntity generatedTest) {
