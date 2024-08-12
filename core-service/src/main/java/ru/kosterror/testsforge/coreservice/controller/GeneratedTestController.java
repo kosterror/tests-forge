@@ -18,7 +18,7 @@ import java.util.UUID;
 
 import static ru.kosterror.testsforge.coreservice.configuration.OpenApiConfiguration.JWT;
 
-@Tag(name = "Generated Tests")
+@Tag(name = "Generated tests")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/tests/published")
@@ -51,8 +51,8 @@ public class GeneratedTestController {
         return generatedTestService.submitTest(principal.userId(), publishedTestId, generatedTestId, answers);
     }
 
-    @Operation(summary = "Получить сгенерированные тесты", security = @SecurityRequirement(name = JWT))
-    @GetMapping("/generated")
+    @Operation(summary = "Получить мои сгенерированные тесты", security = @SecurityRequirement(name = JWT))
+    @GetMapping("/generated/my")
     public PaginationResponse<MyGeneratedTestDto> getMyGeneratedTests(
             @AuthenticationPrincipal JwtUser principal,
             @RequestParam(required = false) UUID subjectId,
