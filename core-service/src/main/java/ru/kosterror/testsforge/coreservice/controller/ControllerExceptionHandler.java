@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -87,6 +88,21 @@ public class ControllerExceptionHandler {
         logException(request, exception);
 
         ErrorResponse response = buildErrorResponse(exception.getMessage(),
+                request.getRequestURI(),
+                HttpStatus.BAD_REQUEST
+        );
+
+        return ResponseEntity.status(response.getCode()).body(response);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(
+            HttpServletRequest request,
+            HttpMessageNotReadableException exception
+    ) {
+        logException(request, exception);
+
+        ErrorResponse response = buildErrorResponse("Request body is not readable",
                 request.getRequestURI(),
                 HttpStatus.BAD_REQUEST
         );
