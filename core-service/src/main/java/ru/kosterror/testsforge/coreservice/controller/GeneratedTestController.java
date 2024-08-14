@@ -21,38 +21,38 @@ import static ru.kosterror.testsforge.coreservice.configuration.OpenApiConfigura
 @Tag(name = "Generated tests")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/tests/published")
+@RequestMapping("/api/tests/generated")
 public class GeneratedTestController {
 
     private final GeneratedTestService generatedTestService;
 
     @Operation(summary = "Получить сгенерированный тест", security = @SecurityRequirement(name = JWT))
-    @GetMapping("/{publishedTestId}/generated/my")
+    @GetMapping
     public GeneratedTestDto getMyGeneratedTest(@AuthenticationPrincipal JwtUser principal,
-                                               @PathVariable UUID publishedTestId) {
+                                               @RequestParam UUID publishedTestId) {
         return generatedTestService.getMyGeneratedTest(principal.userId(), publishedTestId);
     }
 
     @Operation(summary = "Сохранить ответы", security = @SecurityRequirement(name = JWT))
-    @PostMapping("/{publishedTestId}/generated/{generatedTestId}/save")
+    @PostMapping("/{generatedTestId}/save")
     public GeneratedTestDto saveAnswers(@AuthenticationPrincipal JwtUser principal,
-                                        @PathVariable UUID publishedTestId,
                                         @PathVariable UUID generatedTestId,
+                                        @RequestParam UUID publishedTestId,
                                         @RequestBody @Valid AnswersDto answers) {
         return generatedTestService.saveAnswers(principal.userId(), publishedTestId, generatedTestId, answers);
     }
 
     @Operation(summary = "Сдать тест", security = @SecurityRequirement(name = JWT))
-    @PostMapping("/{publishedTestId}/generated/{generatedTestId}/submit")
+    @PostMapping("/{generatedTestId}/submit")
     public MyGeneratedTestDto submitTest(@AuthenticationPrincipal JwtUser principal,
-                                         @PathVariable UUID publishedTestId,
                                          @PathVariable UUID generatedTestId,
+                                         @RequestParam UUID publishedTestId,
                                          @RequestBody @Valid AnswersDto answers) {
         return generatedTestService.submitTest(principal.userId(), publishedTestId, generatedTestId, answers);
     }
 
     @Operation(summary = "Получить мои сгенерированные тесты", security = @SecurityRequirement(name = JWT))
-    @GetMapping("/generated/my")
+    @GetMapping("/all")
     public PaginationResponse<MyGeneratedTestDto> getMyGeneratedTests(
             @AuthenticationPrincipal JwtUser principal,
             @RequestParam(required = false) UUID subjectId,
