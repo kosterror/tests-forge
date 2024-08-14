@@ -3,6 +3,7 @@ package ru.kosterror.testsforge.coreservice.mapper;
 import org.mapstruct.*;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.MyGeneratedTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.generated.SubmittedTest;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,8 @@ public abstract class GeneratedTestMapper {
 
     public abstract MyGeneratedTestDto toMyDto(GeneratedTestEntity entity);
 
+    public abstract SubmittedTest toSubmittedTest(GeneratedTestEntity generatedTestEntity);
+
     @AfterMapping
     void hidePointsIfNeeds(@MappingTarget MyGeneratedTestDto dto) {
         if (!dto.getPublishedTest().isShowPointsToStudents()
@@ -25,5 +28,4 @@ public abstract class GeneratedTestMapper {
             dto.setPoints(null);
         }
     }
-
 }

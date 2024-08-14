@@ -11,6 +11,8 @@ import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.MyGeneratedTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.generated.SubmittedTest;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
 import ru.kosterror.testsforge.coreservice.service.test.GeneratedTestService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 
@@ -60,6 +62,18 @@ public class GeneratedTestController {
             @RequestParam(defaultValue = "10") int size
     ) {
         return generatedTestService.getMyGeneratedTests(principal.userId(), subjectId, page, size);
+    }
+
+    @Operation(summary = "Получить сданные тесты", security = @SecurityRequirement(name = JWT))
+    @GetMapping("/submitted")
+    public PaginationResponse<SubmittedTest> getSubmittedTests(
+            @RequestParam UUID publishedTestId,
+            @RequestParam(required = false) UUID userId,
+            @RequestParam(required = false) GeneratedTestStatus status,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return generatedTestService.getSubmittedTests(userId, publishedTestId, status, page, size);
     }
 
 }

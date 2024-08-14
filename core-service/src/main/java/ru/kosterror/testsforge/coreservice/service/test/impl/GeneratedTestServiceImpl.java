@@ -9,6 +9,7 @@ import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.MyGeneratedTestDto;
+import ru.kosterror.testsforge.coreservice.dto.test.generated.SubmittedTest;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
@@ -26,8 +27,7 @@ import ru.kosterror.testsforge.coreservice.service.user.UserService;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static ru.kosterror.testsforge.coreservice.specificaiton.GeneratedTestSpecification.hasSubjectId;
-import static ru.kosterror.testsforge.coreservice.specificaiton.GeneratedTestSpecification.hasUserId;
+import static ru.kosterror.testsforge.coreservice.specificaiton.GeneratedTestSpecification.*;
 
 @Slf4j
 @Service
@@ -117,6 +117,30 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
                 .getContent()
                 .stream()
                 .map(generatedTestMapper::toMyDto)
+                .toList();
+
+        return new PaginationResponse<>(page, size, generatedTests);
+    }
+
+    @Override
+    public PaginationResponse<SubmittedTest> getSubmittedTests(UUID userId,
+                                                               UUID publishedTestId,
+                                                               GeneratedTestStatus status,
+                                                               int page,
+                                                               int size
+    ) {
+        var specification = Specification.<GeneratedTestEntity>where(null)
+                .and(hasUserId(userId))
+                .and(hasPublishedTestId(publishedTestId))
+                .and(hasStatus(status));
+
+
+        var pageable = PageRequest.of(page, size);
+
+        var generatedTests = generatedTestRepository.findAll(specification, pageable)
+                .getContent()
+                .stream()
+                .map(generatedTestMapper::toSubmittedTest)
                 .toList();
 
         return new PaginationResponse<>(page, size, generatedTests);
