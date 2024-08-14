@@ -25,6 +25,8 @@ import ru.kosterror.testsforge.coreservice.service.test.PublishedTestService;
 import ru.kosterror.testsforge.coreservice.service.user.UserService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static ru.kosterror.testsforge.coreservice.specificaiton.GeneratedTestSpecification.*;
@@ -144,6 +146,24 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
                 .toList();
 
         return new PaginationResponse<>(page, size, generatedTests);
+    }
+
+    @Override
+    public List<UUID> getUserIdsWithUnsubmittedTests(UUID publishedTestId) {
+        var publishedTest = publishedTestService.getPublishedTestEntity(publishedTestId);
+        var userIdsWithAccess = userService.getUserIds(
+                publishedTest.getGroupIds(),
+                publishedTest.getUserIds()
+        );
+        var userIdsWithGeneratedTest = publishedTest
+                .getGeneratedTests()
+                .stream()
+                .map(GeneratedTestEntity::getUserId)
+                .toList();
+
+        userIdsWithGeneratedTest.forEach(userIdsWithAccess::remove);
+
+        return new ArrayList<>(userIdsWithAccess);
     }
 
     private void checkGeneratedTestStatus(GeneratedTestEntity generatedTest) {

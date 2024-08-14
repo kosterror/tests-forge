@@ -9,6 +9,7 @@ import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
 import ru.kosterror.testsforge.coreservice.service.user.UserService;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 
@@ -43,6 +44,22 @@ public class UserServiceImpl implements UserService {
                 .map(UserDto::email)
                 .distinct()
                 .toList();
+    }
+
+    @Override
+    public Set<UUID> getUserIds(Collection<UUID> groupIds, Collection<UUID> userIds) {
+        var groups = userClient.getGroupsByIds(groupIds);
+
+        var resultUserIds = groups.groups()
+                .stream()
+                .flatMap(group -> group.users()
+                        .stream()
+                        .map(UserDto::id)
+                ).collect(Collectors.toSet());
+
+        resultUserIds.addAll(userIds);
+
+        return resultUserIds;
     }
 
     private Set<UserDto> getUsersByUserIds(Collection<UUID> userIds) {

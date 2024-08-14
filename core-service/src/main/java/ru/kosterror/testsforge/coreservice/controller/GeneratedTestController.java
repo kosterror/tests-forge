@@ -16,6 +16,7 @@ import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestSt
 import ru.kosterror.testsforge.coreservice.service.test.GeneratedTestService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 
+import java.util.List;
 import java.util.UUID;
 
 import static ru.kosterror.testsforge.coreservice.configuration.OpenApiConfiguration.JWT;
@@ -74,6 +75,12 @@ public class GeneratedTestController {
             @RequestParam(defaultValue = "10") int size
     ) {
         return generatedTestService.getSubmittedTests(userId, publishedTestId, status, page, size);
+    }
+
+    @Operation(summary = "Получить ID пользователей, не открывших тест", security = @SecurityRequirement(name = JWT))
+    @GetMapping("/unsubmitted")
+    public List<UUID> getUserIdsWithUnsubmittedTests(@RequestParam UUID publishedTestId) {
+        return generatedTestService.getUserIdsWithUnsubmittedTests(publishedTestId);
     }
 
 }

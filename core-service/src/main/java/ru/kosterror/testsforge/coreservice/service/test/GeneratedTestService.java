@@ -7,6 +7,7 @@ import ru.kosterror.testsforge.coreservice.dto.test.generated.MyGeneratedTestDto
 import ru.kosterror.testsforge.coreservice.dto.test.generated.SubmittedTest;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface GeneratedTestService {
@@ -25,4 +26,6 @@ public interface GeneratedTestService {
                                                         int page,
                                                         int size
     );
+
+    List<UUID> getUserIdsWithUnsubmittedTests(UUID publishedTestId);
 }
