@@ -10,15 +10,17 @@ import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.MyGeneratedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.SubmittedTest;
+import ru.kosterror.testsforge.coreservice.dto.test.generated.verification.VerificationGeneratedTest;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.exception.ConflictException;
 import ru.kosterror.testsforge.coreservice.exception.ForbiddenException;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
+import ru.kosterror.testsforge.coreservice.factory.GeneratedTestFactory;
+import ru.kosterror.testsforge.coreservice.factory.VerificationGeneratedTestFactory;
 import ru.kosterror.testsforge.coreservice.mapper.GeneratedTestMapper;
 import ru.kosterror.testsforge.coreservice.repository.GeneratedTestRepository;
-import ru.kosterror.testsforge.coreservice.service.factory.GeneratedTestFactory;
 import ru.kosterror.testsforge.coreservice.service.processor.test.GeneratedTestProcessor;
 import ru.kosterror.testsforge.coreservice.service.test.GeneratedTestService;
 import ru.kosterror.testsforge.coreservice.service.test.PublishedTestService;
@@ -42,6 +44,7 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
     private final GeneratedTestFactory generatedTestFactory;
     private final UserService userService;
     private final GeneratedTestProcessor generatedTestProcessor;
+    private final VerificationGeneratedTestFactory verificationGeneratedTestFactory;
 
     @Override
     public GeneratedTestDto getMyGeneratedTest(UUID userId, UUID publishedTestId) {
@@ -166,12 +169,24 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
         return new ArrayList<>(userIdsWithAccess);
     }
 
+    @Override
+    public VerificationGeneratedTest getSubmittedTest(UUID generatedTestId) {
+        var generatedTest = getGeneratedTestEntityById(generatedTestId);
+        return verificationGeneratedTestFactory.build(generatedTest);
+    }
+
     private void checkGeneratedTestStatus(GeneratedTestEntity generatedTest) {
         if (generatedTest.getStatus() != GeneratedTestStatus.CREATED
                 && generatedTest.getStatus() != GeneratedTestStatus.SAVED
         ) {
             throw new ConflictException("Generated test %s is already submitted".formatted(generatedTest.getId()));
         }
+    }
+
+    private GeneratedTestEntity getGeneratedTestEntityById(UUID generatedTestId) {
+        return generatedTestRepository
+                .findById(generatedTestId)
+                .orElseThrow(() -> new NotFoundException("Generated test %s not found".formatted(generatedTestId)));
     }
 
     private GeneratedTestEntity getGeneratedTestEntity(UUID userId, UUID publishedTestId, UUID generatedTestId) {

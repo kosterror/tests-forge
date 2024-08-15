@@ -12,6 +12,7 @@ import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.MyGeneratedTestDto;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.SubmittedTest;
+import ru.kosterror.testsforge.coreservice.dto.test.generated.verification.VerificationGeneratedTest;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
 import ru.kosterror.testsforge.coreservice.service.test.GeneratedTestService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
@@ -81,6 +82,14 @@ public class GeneratedTestController {
     @GetMapping("/unsubmitted")
     public List<UUID> getUserIdsWithUnsubmittedTests(@RequestParam UUID publishedTestId) {
         return generatedTestService.getUserIdsWithUnsubmittedTests(publishedTestId);
+    }
+
+    @Operation(summary = "Получить сгенерированный тест пользователя с правильными ответами",
+            security = @SecurityRequirement(name = JWT)
+    )
+    @GetMapping("/submitted/{generatedTestId}")
+    public VerificationGeneratedTest getSubmittedTest(@PathVariable UUID generatedTestId) {
+        return generatedTestService.getSubmittedTest(generatedTestId);
     }
 
 }
