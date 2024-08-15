@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
+import ru.kosterror.testsforge.coreservice.dto.test.generated.CheckTestDto;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.question.Question;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.TestPatternEntity;
+import ru.kosterror.testsforge.coreservice.exception.InternalException;
 import ru.kosterror.testsforge.coreservice.service.processor.question.QuestionProcessor;
 import ru.kosterror.testsforge.coreservice.service.processor.test.GeneratedTestProcessor;
 import ru.kosterror.testsforge.coreservice.service.util.TestUtilService;
@@ -54,6 +57,58 @@ public class GeneratedTestProcessorImpl implements GeneratedTestProcessor {
         generatedTest.setPoints(points);
 
         log.info("Generated test {} answers processed and points calculated successfully", generatedTest.getId());
+    }
+
+    @Override
+    public void verifyTest(GeneratedTestEntity generatedTest, CheckTestDto checkTestDto) {
+        log.info("Started verifying generated test {}...", generatedTest.getId());
+
+        var questions = testUtilService.extractQuestions(generatedTest);
+
+        if (checkTestDto.points() != null) {
+            for (var points : checkTestDto.points()) {
+                var question = testUtilService.findQuestionById(questions, points.getFirst());
+
+                applyNewPoints(generatedTest, question, points.getSecond());
+            }
+        }
+
+        generatedTest.setStatus(checkTestDto.status());
+
+        log.info("Generated test {} verified successfully", generatedTest.getId());
+    }
+
+    private void applyNewPoints(GeneratedTestEntity generatedTest,
+                                Question question,
+                                Integer newQuestionPoints
+    ) {
+        var oldPoints = generatedTest.getPoints();
+        var oldQuestionPoints = question.getPoints();
+
+        if (oldPoints == null) {
+            throw new InternalException("Points of generated test %s are null".formatted(generatedTest.getId()));
+        }
+
+        if (newQuestionPoints == null) {
+            question.setPoints(null);
+
+            if (oldQuestionPoints != null) {
+                generatedTest.setPoints(oldPoints - oldQuestionPoints);
+            }
+
+            return;
+        }
+
+        if (oldQuestionPoints == null) {
+            question.setPoints(newQuestionPoints);
+            generatedTest.setPoints(oldPoints + newQuestionPoints);
+
+            return;
+        }
+
+        var difference = oldQuestionPoints - newQuestionPoints;
+        question.setPoints(newQuestionPoints);
+        generatedTest.setPoints(oldPoints - difference);
     }
 
 

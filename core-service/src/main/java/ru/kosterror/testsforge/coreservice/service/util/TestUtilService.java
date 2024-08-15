@@ -18,4 +18,6 @@ public interface TestUtilService {
 
     Map<UUID, QuestionDto> extractQuestionDtoMap(TestPatternEntity generatedTest);
 
+    Question findQuestionById(List<Question> questions, UUID questionId);
+
 }

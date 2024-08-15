@@ -67,4 +67,19 @@ public class CheckerUtilServiceImpl implements CheckerUtilService {
         }
     }
 
+    @Override
+    public void checkTestStatusForVerification(GeneratedTestStatus oldStatus, GeneratedTestStatus newStatus) {
+        if (oldStatus != GeneratedTestStatus.COMPLETED && oldStatus != GeneratedTestStatus.SUBMITTED) {
+            throw new ConflictException(
+                    "Old status %s of generated test is not suitable for verification".formatted(oldStatus)
+            );
+        }
+
+        if (newStatus != GeneratedTestStatus.COMPLETED && newStatus != GeneratedTestStatus.SUBMITTED) {
+            throw new ConflictException(
+                    "New status %s of generated test is not suitable for verification".formatted(newStatus)
+            );
+        }
+    }
+
 }

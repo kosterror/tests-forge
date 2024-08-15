@@ -1,6 +1,7 @@
 package ru.kosterror.testsforge.coreservice.service.processor.test;
 
 import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
+import ru.kosterror.testsforge.coreservice.dto.test.generated.CheckTestDto;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.TestPatternEntity;
 
@@ -12,4 +13,6 @@ public interface GeneratedTestProcessor {
                                        TestPatternEntity testPattern,
                                        AnswersDto answers
     );
+
+    void verifyTest(GeneratedTestEntity generatedTest, CheckTestDto checkTestDto);
 }

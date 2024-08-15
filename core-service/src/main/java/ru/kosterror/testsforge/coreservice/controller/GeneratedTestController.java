@@ -1,6 +1,7 @@
 package ru.kosterror.testsforge.coreservice.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -8,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
-import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
-import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
-import ru.kosterror.testsforge.coreservice.dto.test.generated.MyGeneratedTestDto;
-import ru.kosterror.testsforge.coreservice.dto.test.generated.SubmittedTest;
+import ru.kosterror.testsforge.coreservice.dto.test.generated.*;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.verification.VerificationGeneratedTest;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
 import ru.kosterror.testsforge.coreservice.service.test.GeneratedTestService;
@@ -90,6 +88,13 @@ public class GeneratedTestController {
     @GetMapping("/submitted/{generatedTestId}")
     public VerificationGeneratedTest getSubmittedTest(@PathVariable UUID generatedTestId) {
         return generatedTestService.getSubmittedTest(generatedTestId);
+    }
+
+    @Operation(summary = "Проверить тест и изменить баллы", security = @SecurityRequirement(name = JWT))
+    @PostMapping("/{generatedTestId}/verify")
+    public GeneratedTestDto verifyTest(@PathVariable UUID generatedTestId,
+                                       @RequestBody @Valid @Schema CheckTestDto checkTestDto) {
+        return generatedTestService.verifyTest(generatedTestId, checkTestDto);
     }
 
 }

@@ -1,10 +1,7 @@
 package ru.kosterror.testsforge.coreservice.service.test;
 
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
-import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
-import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
-import ru.kosterror.testsforge.coreservice.dto.test.generated.MyGeneratedTestDto;
-import ru.kosterror.testsforge.coreservice.dto.test.generated.SubmittedTest;
+import ru.kosterror.testsforge.coreservice.dto.test.generated.*;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.verification.VerificationGeneratedTest;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
 
@@ -31,4 +28,6 @@ public interface GeneratedTestService {
     List<UUID> getUserIdsWithUnsubmittedTests(UUID publishedTestId);
 
     VerificationGeneratedTest getSubmittedTest(UUID generatedTestId);
+
+    GeneratedTestDto verifyTest(UUID generatedTestId, CheckTestDto checkTestDto);
 }

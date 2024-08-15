@@ -71,4 +71,12 @@ public class TestUtilServiceImpl implements TestUtilService {
                         HashMap::putAll
                 );
     }
+
+    @Override
+    public Question findQuestionById(List<Question> questions, UUID questionId) {
+        return questions.stream()
+                .filter(question -> question.getId().equals(questionId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Question %s not found".formatted(questionId)));
+    }
 }

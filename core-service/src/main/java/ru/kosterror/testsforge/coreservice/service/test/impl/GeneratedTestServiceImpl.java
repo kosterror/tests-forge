@@ -6,10 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
-import ru.kosterror.testsforge.coreservice.dto.test.generated.AnswersDto;
-import ru.kosterror.testsforge.coreservice.dto.test.generated.GeneratedTestDto;
-import ru.kosterror.testsforge.coreservice.dto.test.generated.MyGeneratedTestDto;
-import ru.kosterror.testsforge.coreservice.dto.test.generated.SubmittedTest;
+import ru.kosterror.testsforge.coreservice.dto.test.generated.*;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.verification.VerificationGeneratedTest;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
@@ -173,6 +170,18 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
     public VerificationGeneratedTest getSubmittedTest(UUID generatedTestId) {
         var generatedTest = getGeneratedTestEntityById(generatedTestId);
         return verificationGeneratedTestFactory.build(generatedTest);
+    }
+
+    @Override
+    public GeneratedTestDto verifyTest(UUID generatedTestId, CheckTestDto checkTestDto) {
+        var generatedTest = getGeneratedTestEntityById(generatedTestId);
+        checkerUtilService.checkTestStatusForVerification(generatedTest.getStatus(), checkTestDto.status());
+
+        generatedTestProcessor.verifyTest(generatedTest, checkTestDto);
+
+        generatedTest = generatedTestRepository.save(generatedTest);
+
+        return generatedTestMapper.toDto(generatedTest);
     }
 
     private GeneratedTestEntity getGeneratedTestEntityById(UUID generatedTestId) {
