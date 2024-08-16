@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "generated_test")
+@Table(name = "test_generated")
 @Getter
 @Setter
 @Builder

@@ -1,9 +1,6 @@
 package ru.kosterror.testsforge.coreservice.entity.test.pattern.question.textinput;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
@@ -20,7 +17,8 @@ public class TextInputQuestionEntity extends QuestionEntity {
 
     private Boolean isCaseSensitive;
 
-    @CollectionTable(name = "text_input_answer_question")
+    @Column(name = "answer")
+    @CollectionTable(name = "text_input_answer_question", joinColumns = @JoinColumn(name = "question_id"))
     @ElementCollection
     private List<String> answers;
 

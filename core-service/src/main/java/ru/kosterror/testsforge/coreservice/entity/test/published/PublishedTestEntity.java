@@ -25,10 +25,12 @@ public class PublishedTestEntity extends BaseEntity {
 
     private boolean showPointsToStudents;
 
+    @Column(name = "group_id")
     @ElementCollection
     @CollectionTable(name = "group_id", joinColumns = @JoinColumn(name = "test_published_id"))
     private List<UUID> groupIds;
 
+    @Column(name = "user_id")
     @ElementCollection
     @CollectionTable(name = "user_id", joinColumns = @JoinColumn(name = "test_published_id"))
     private List<UUID> userIds;
