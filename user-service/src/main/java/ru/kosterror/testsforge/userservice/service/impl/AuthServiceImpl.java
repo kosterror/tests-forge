@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.commonmodel.user.UserDto;
 import ru.kosterror.testsforge.commonmodel.user.UserRole;
+import ru.kosterror.testsforge.userservice.dto.ChangePasswordDto;
 import ru.kosterror.testsforge.userservice.dto.CredentialsDto;
 import ru.kosterror.testsforge.userservice.dto.TokensDto;
 import ru.kosterror.testsforge.userservice.dto.UpdateUserDto;
@@ -17,10 +18,7 @@ import ru.kosterror.testsforge.userservice.exception.UnauthorizedException;
 import ru.kosterror.testsforge.userservice.mapper.UserMapper;
 import ru.kosterror.testsforge.userservice.repository.RefreshTokenRepository;
 import ru.kosterror.testsforge.userservice.repository.UserRepository;
-import ru.kosterror.testsforge.userservice.service.AuthService;
-import ru.kosterror.testsforge.userservice.service.JwtService;
-import ru.kosterror.testsforge.userservice.service.MailService;
-import ru.kosterror.testsforge.userservice.service.PasswordGeneratorService;
+import ru.kosterror.testsforge.userservice.service.*;
 
 import java.util.UUID;
 
@@ -36,6 +34,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final PasswordGeneratorService passwordGeneratorService;
     private final MailService mailService;
+    private final UserService userService;
 
     private static void validateRefreshTokenOwner(UUID userId,
                                                   String refreshToken,
@@ -124,6 +123,35 @@ public class AuthServiceImpl implements AuthService {
 
         userRepository.save(user);
         refreshTokenRepository.deleteAllByOwnerId(user.getId());
+    }
+
+    @Override
+    @Transactional
+    public void changePassword(UUID userId, ChangePasswordDto changePasswordDto) {
+        var user = userService.findUser(userId);
+        var encodedExistingPassword = user.getPassword();
+        var encodedNewPassword = passwordEncoder.encode(changePasswordDto.newPassword());
+
+        checkExistingAndOldPasswordEquals(encodedExistingPassword, changePasswordDto.oldPassword());
+        checkNewAndPasswordEquals(changePasswordDto);
+
+        user.setPassword(encodedNewPassword);
+
+        userRepository.save(user);
+        refreshTokenRepository.deleteAllByOwnerId(userId);
+    }
+
+    private void checkExistingAndOldPasswordEquals(String encodedExistingPassword,
+                                                   String oldPassword) {
+        if (!passwordEncoder.matches(oldPassword, encodedExistingPassword)) {
+            throw new ConflictException("Incorrect old password");
+        }
+    }
+
+    private void checkNewAndPasswordEquals(ChangePasswordDto changePasswordDto) {
+        if (changePasswordDto.oldPassword().equals(changePasswordDto.newPassword())) {
+            throw new ConflictException("Old and new passwords are the same");
+        }
     }
 
     private void deleteRefreshToken(RefreshTokenEntity foundRefreshToken,

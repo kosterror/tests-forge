@@ -10,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.user.UserDto;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
+import ru.kosterror.testsforge.userservice.dto.ChangePasswordDto;
 import ru.kosterror.testsforge.userservice.dto.CredentialsDto;
 import ru.kosterror.testsforge.userservice.dto.TokensDto;
 import ru.kosterror.testsforge.userservice.dto.UpdateUserDto;
@@ -52,6 +53,14 @@ public class AuthController {
     public void resetPassword(@RequestParam String email) {
         authService.resetPassword(email);
 
+    }
+
+    @PreAuthorize(TEACHER_OR_STUDENT)
+    @Operation(summary = "Изменить пароль", security = @SecurityRequirement(name = JWT))
+    @PostMapping("/change-password")
+    public void changePassword(@RequestBody @Valid ChangePasswordDto changePasswordDto,
+                               @AuthenticationPrincipal JwtUser principal) {
+        authService.changePassword(principal.userId(), changePasswordDto);
     }
 
     @Operation(summary = "Зарегистрироваться студентом")
