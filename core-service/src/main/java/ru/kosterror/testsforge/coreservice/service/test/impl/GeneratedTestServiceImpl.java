@@ -9,7 +9,7 @@ import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.*;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.verification.VerificationGeneratedTest;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
-import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.TestStatus;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
 import ru.kosterror.testsforge.coreservice.factory.GeneratedTestFactory;
@@ -72,7 +72,7 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
         checkerUtilService.checkGeneratedTestStatus(generatedTest);
 
         generatedTestProcessor.markAnswers(generatedTest, answers);
-        generatedTest.setStatus(GeneratedTestStatus.SAVED);
+        generatedTest.setStatus(TestStatus.IN_PROGRESS);
 
         generatedTest = generatedTestRepository.save(generatedTest);
 
@@ -95,8 +95,8 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
         );
 
         var status = publishedTest.getIsNeedPostModeration()
-                ? GeneratedTestStatus.SUBMITTED
-                : GeneratedTestStatus.COMPLETED;
+                ? TestStatus.SUBMITTED
+                : TestStatus.COMPLETED;
 
         generatedTest.setStatus(status);
         generatedTest.setSubmitDateTime(LocalDateTime.now());
@@ -131,7 +131,7 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
     @Override
     public PaginationResponse<SubmittedTest> getSubmittedTests(UUID userId,
                                                                UUID publishedTestId,
-                                                               GeneratedTestStatus status,
+                                                               TestStatus status,
                                                                int page,
                                                                int size
     ) {

@@ -1,7 +1,7 @@
 package ru.kosterror.testsforge.coreservice.dto.test.generated;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.TestStatus;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,7 +12,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 public record SubmittedTest(
 
         @Schema(description = "Статус теста", requiredMode = REQUIRED)
-        GeneratedTestStatus status,
+        TestStatus status,
 
         @Schema(description = "ID пользователя", requiredMode = REQUIRED)
         UUID userId,

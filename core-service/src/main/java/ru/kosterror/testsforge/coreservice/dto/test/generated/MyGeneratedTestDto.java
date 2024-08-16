@@ -3,7 +3,7 @@ package ru.kosterror.testsforge.coreservice.dto.test.generated;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
-import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.TestStatus;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -18,7 +18,7 @@ public class MyGeneratedTestDto {
     UUID id;
 
     @Schema(description = "Статус", requiredMode = REQUIRED)
-    GeneratedTestStatus status;
+    TestStatus status;
 
     @Schema(description = "Опубликованный тест", requiredMode = REQUIRED)
     BasePublishedTestDto publishedTest;

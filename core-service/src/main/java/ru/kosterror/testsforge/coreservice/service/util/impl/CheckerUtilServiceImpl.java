@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
-import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.TestStatus;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.exception.ConflictException;
 import ru.kosterror.testsforge.coreservice.exception.ForbiddenException;
@@ -60,22 +60,22 @@ public class CheckerUtilServiceImpl implements CheckerUtilService {
 
     @Override
     public void checkGeneratedTestStatus(GeneratedTestEntity generatedTest) {
-        if (generatedTest.getStatus() != GeneratedTestStatus.CREATED
-                && generatedTest.getStatus() != GeneratedTestStatus.SAVED
+        if (generatedTest.getStatus() != TestStatus.NEW
+                && generatedTest.getStatus() != TestStatus.IN_PROGRESS
         ) {
             throw new ConflictException("Generated test %s is already submitted".formatted(generatedTest.getId()));
         }
     }
 
     @Override
-    public void checkTestStatusForVerification(GeneratedTestStatus oldStatus, GeneratedTestStatus newStatus) {
-        if (oldStatus != GeneratedTestStatus.COMPLETED && oldStatus != GeneratedTestStatus.SUBMITTED) {
+    public void checkTestStatusForVerification(TestStatus oldStatus, TestStatus newStatus) {
+        if (oldStatus != TestStatus.COMPLETED && oldStatus != TestStatus.SUBMITTED) {
             throw new ConflictException(
                     "Old status %s of generated test is not suitable for verification".formatted(oldStatus)
             );
         }
 
-        if (newStatus != GeneratedTestStatus.COMPLETED && newStatus != GeneratedTestStatus.SUBMITTED) {
+        if (newStatus != TestStatus.COMPLETED && newStatus != TestStatus.SUBMITTED) {
             throw new ConflictException(
                     "New status %s of generated test is not suitable for verification".formatted(newStatus)
             );

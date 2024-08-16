@@ -1,8 +1,8 @@
 package ru.kosterror.testsforge.coreservice.entity.test.generated;
 
-public enum GeneratedTestStatus {
-    CREATED,
-    SAVED,
+public enum TestStatus {
+    NEW,
+    IN_PROGRESS,
     SUBMITTED,
     COMPLETED
 }

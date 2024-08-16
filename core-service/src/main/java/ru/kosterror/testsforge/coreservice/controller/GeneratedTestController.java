@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.*;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.verification.VerificationGeneratedTest;
-import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.TestStatus;
 import ru.kosterror.testsforge.coreservice.service.test.GeneratedTestService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 
@@ -77,7 +77,7 @@ public class GeneratedTestController {
     public PaginationResponse<SubmittedTest> getSubmittedTests(
             @RequestParam UUID publishedTestId,
             @RequestParam(required = false) UUID userId,
-            @RequestParam(required = false) GeneratedTestStatus status,
+            @RequestParam(required = false) TestStatus status,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {

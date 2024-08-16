@@ -6,7 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 import ru.kosterror.testsforge.coreservice.entity.BaseEntity_;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity_;
-import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.TestStatus;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.TestPatternEntity_;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity_;
 
@@ -52,7 +52,7 @@ public class GeneratedTestSpecification {
         );
     }
 
-    public static Specification<GeneratedTestEntity> hasStatus(GeneratedTestStatus status) {
+    public static Specification<GeneratedTestEntity> hasStatus(TestStatus status) {
         if (status == null) {
             return null;
         }

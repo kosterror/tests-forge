@@ -3,7 +3,7 @@ package ru.kosterror.testsforge.coreservice.dto.test.generated.verification;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.TestStatus;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,7 +18,7 @@ public class VerificationGeneratedTest {
     private UUID id;
 
     @Schema(description = "Статус", requiredMode = REQUIRED)
-    private GeneratedTestStatus status;
+    private TestStatus status;
 
     @Schema(description = "ID студента", requiredMode = REQUIRED)
     private UUID userId;

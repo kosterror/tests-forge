@@ -3,7 +3,7 @@ package ru.kosterror.testsforge.coreservice.service.test;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.*;
 import ru.kosterror.testsforge.coreservice.dto.test.generated.verification.VerificationGeneratedTest;
-import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.TestStatus;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +20,7 @@ public interface GeneratedTestService {
 
     PaginationResponse<SubmittedTest> getSubmittedTests(UUID userId,
                                                         UUID publishedTestId,
-                                                        GeneratedTestStatus status,
+                                                        TestStatus status,
                                                         int page,
                                                         int size
     );

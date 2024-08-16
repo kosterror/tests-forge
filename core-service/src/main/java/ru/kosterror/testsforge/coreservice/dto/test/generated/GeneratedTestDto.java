@@ -3,8 +3,8 @@ package ru.kosterror.testsforge.coreservice.dto.test.generated;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
-import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.Partition;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.TestStatus;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,7 +18,7 @@ public class GeneratedTestDto {
     private UUID id;
 
     @Schema(description = "Статус", requiredMode = REQUIRED)
-    private GeneratedTestStatus status;
+    private TestStatus status;
 
     @Schema(description = "Опубликованный тест", requiredMode = REQUIRED)
     private BasePublishedTestDto publishedTest;

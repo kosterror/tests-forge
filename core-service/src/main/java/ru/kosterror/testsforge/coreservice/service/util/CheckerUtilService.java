@@ -1,7 +1,7 @@
 package ru.kosterror.testsforge.coreservice.service.util;
 
 import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
-import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestStatus;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.TestStatus;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 
 import java.util.UUID;
@@ -16,5 +16,5 @@ public interface CheckerUtilService {
 
     void checkGeneratedTestStatus(GeneratedTestEntity generatedTest);
 
-    void checkTestStatusForVerification(GeneratedTestStatus oldStatus, GeneratedTestStatus newStatus);
+    void checkTestStatusForVerification(TestStatus oldStatus, TestStatus newStatus);
 }

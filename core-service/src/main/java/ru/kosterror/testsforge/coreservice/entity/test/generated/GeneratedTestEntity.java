@@ -21,7 +21,7 @@ import java.util.UUID;
 public class GeneratedTestEntity extends BaseEntity {
 
     @Enumerated(value = EnumType.STRING)
-    private GeneratedTestStatus status;
+    private TestStatus status;
 
     @ManyToOne
     @JoinColumn(name = "published_test_id")
