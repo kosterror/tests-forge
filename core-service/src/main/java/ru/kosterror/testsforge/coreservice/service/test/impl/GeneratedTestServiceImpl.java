@@ -94,7 +94,11 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
                 answers
         );
 
-        generatedTest.setStatus(GeneratedTestStatus.SUBMITTED);
+        var status = publishedTest.getIsNeedPostModeration()
+                ? GeneratedTestStatus.SUBMITTED
+                : GeneratedTestStatus.COMPLETED;
+
+        generatedTest.setStatus(status);
         generatedTest.setSubmitDateTime(LocalDateTime.now());
 
         generatedTest = generatedTestRepository.save(generatedTest);

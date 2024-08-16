@@ -46,7 +46,9 @@ public class PublishedTestServiceImpl implements PublishedTestService {
                 .groupIds(new ArrayList<>(publishTestDto.getGroupIds()))
                 .userIds(new ArrayList<>(publishTestDto.getUserIds()))
                 .showPointsToStudents(publishTestDto.getShowPointsToStudents())
+                .isNeedPostModeration(publishTestDto.getIsNeedPostModeration())
                 .testPattern(formPattern)
+
                 .build();
 
         publishedTest = publishedTestRepository.save(publishedTest);

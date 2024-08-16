@@ -39,4 +39,6 @@ public class PublishedTestEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "publishedTest")
     private List<GeneratedTestEntity> generatedTests;
+
+    private Boolean isNeedPostModeration;
 }

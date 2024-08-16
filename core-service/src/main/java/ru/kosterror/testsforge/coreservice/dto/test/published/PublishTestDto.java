@@ -45,4 +45,8 @@ public class PublishTestDto {
     @Schema(description = "Показывать ли баллы студентам", requiredMode = REQUIRED)
     private Boolean showPointsToStudents;
 
+    @NotNull(message = "Требуется ли пост-модерация не может быть null")
+    @Schema(description = "Требуется ли пост-модерация", requiredMode = REQUIRED)
+    private Boolean isNeedPostModeration;
+
 }
