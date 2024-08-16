@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
@@ -19,6 +20,8 @@ import java.util.List;
 import java.util.UUID;
 
 import static ru.kosterror.testsforge.coreservice.configuration.OpenApiConfiguration.JWT;
+import static ru.kosterror.testsforge.securitystarter.util.RoleExpressions.TEACHER;
+import static ru.kosterror.testsforge.securitystarter.util.RoleExpressions.TEACHER_OR_STUDENT;
 
 @Tag(name = "Generated tests")
 @RequiredArgsConstructor
@@ -28,6 +31,7 @@ public class GeneratedTestController {
 
     private final GeneratedTestService generatedTestService;
 
+    @PreAuthorize(TEACHER_OR_STUDENT)
     @Operation(summary = "Получить сгенерированный тест", security = @SecurityRequirement(name = JWT))
     @GetMapping
     public GeneratedTestDto getMyGeneratedTest(@AuthenticationPrincipal JwtUser principal,
@@ -35,6 +39,7 @@ public class GeneratedTestController {
         return generatedTestService.getMyGeneratedTest(principal.userId(), publishedTestId);
     }
 
+    @PreAuthorize(TEACHER_OR_STUDENT)
     @Operation(summary = "Сохранить ответы", security = @SecurityRequirement(name = JWT))
     @PostMapping("/{generatedTestId}/save")
     public GeneratedTestDto saveAnswers(@AuthenticationPrincipal JwtUser principal,
@@ -44,6 +49,7 @@ public class GeneratedTestController {
         return generatedTestService.saveAnswers(principal.userId(), publishedTestId, generatedTestId, answers);
     }
 
+    @PreAuthorize(TEACHER_OR_STUDENT)
     @Operation(summary = "Сдать тест", security = @SecurityRequirement(name = JWT))
     @PostMapping("/{generatedTestId}/submit")
     public MyGeneratedTestDto submitTest(@AuthenticationPrincipal JwtUser principal,
@@ -53,6 +59,7 @@ public class GeneratedTestController {
         return generatedTestService.submitTest(principal.userId(), publishedTestId, generatedTestId, answers);
     }
 
+    @PreAuthorize(TEACHER_OR_STUDENT)
     @Operation(summary = "Получить мои сгенерированные тесты", security = @SecurityRequirement(name = JWT))
     @GetMapping("/all")
     public PaginationResponse<MyGeneratedTestDto> getMyGeneratedTests(
@@ -64,6 +71,7 @@ public class GeneratedTestController {
         return generatedTestService.getMyGeneratedTests(principal.userId(), subjectId, page, size);
     }
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Получить сданные тесты", security = @SecurityRequirement(name = JWT))
     @GetMapping("/submitted")
     public PaginationResponse<SubmittedTest> getSubmittedTests(
@@ -76,12 +84,14 @@ public class GeneratedTestController {
         return generatedTestService.getSubmittedTests(userId, publishedTestId, status, page, size);
     }
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Получить ID пользователей, не открывших тест", security = @SecurityRequirement(name = JWT))
     @GetMapping("/unsubmitted")
     public List<UUID> getUserIdsWithUnsubmittedTests(@RequestParam UUID publishedTestId) {
         return generatedTestService.getUserIdsWithUnsubmittedTests(publishedTestId);
     }
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Получить сгенерированный тест пользователя с правильными ответами",
             security = @SecurityRequirement(name = JWT)
     )
@@ -90,6 +100,7 @@ public class GeneratedTestController {
         return generatedTestService.getSubmittedTest(generatedTestId);
     }
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Проверить тест и изменить баллы", security = @SecurityRequirement(name = JWT))
     @PostMapping("/{generatedTestId}/verify")
     public GeneratedTestDto verifyTest(@PathVariable UUID generatedTestId,

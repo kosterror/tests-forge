@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.published.BasePublishedTestDto;
@@ -18,6 +19,8 @@ import ru.kosterror.testsforge.coreservice.service.test.PublishedTestService;
 import java.util.UUID;
 
 import static ru.kosterror.testsforge.coreservice.configuration.OpenApiConfiguration.JWT;
+import static ru.kosterror.testsforge.securitystarter.util.RoleExpressions.TEACHER;
+import static ru.kosterror.testsforge.securitystarter.util.RoleExpressions.TEACHER_OR_STUDENT;
 
 @Tag(name = "Published tests")
 @RestController
@@ -27,12 +30,14 @@ public class PublishedTestsController {
 
     private final PublishedTestService service;
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Опубликовать тест", security = @SecurityRequirement(name = JWT))
     @PostMapping
     public BasePublishedTestDto publishTest(@RequestBody @Valid PublishTestDto publishTestDto) {
         return service.publishTest(publishTestDto);
     }
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Изменить опубликованный тест", security = @SecurityRequirement(name = JWT))
     @PutMapping("/{id}")
     public BasePublishedTestDto updatePublishedTest(@PathVariable UUID id,
@@ -41,6 +46,7 @@ public class PublishedTestsController {
         return service.updatePublishedTest(id, updatePublishedTestDto);
     }
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Удалить опубликованный тест", security = @SecurityRequirement(name = JWT))
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePublishedTest(@PathVariable UUID id) {
@@ -49,7 +55,8 @@ public class PublishedTestsController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @Operation(summary = "Поиск по опубликованным тестам с пагинацией", security = @SecurityRequirement(name = JWT))
+    @PreAuthorize(TEACHER_OR_STUDENT)
+    @Operation(summary = "Получить опубликованные тесты", security = @SecurityRequirement(name = JWT))
     @GetMapping
     public PaginationResponse<BasePublishedTestDto> getPublishedTests(@RequestParam(required = false) String name,
                                                                       @RequestParam(required = false) UUID subjectId,
@@ -59,6 +66,7 @@ public class PublishedTestsController {
         return service.getPublishedTests(name, subjectId, groupId, page, size);
     }
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Получить опубликованный тест по id", security = @SecurityRequirement(name = JWT))
     @GetMapping("/{id}")
     public PublishedTestDto getPublishedTest(@PathVariable UUID id) {

@@ -3,7 +3,6 @@ package ru.kosterror.testsforge.coreservice.configuration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -33,7 +32,6 @@ public class SecurityConfiguration {
     private final AccessDeniedHandler accessDeniedHandler;
 
     @Bean
-    @SuppressWarnings("java:S1192")
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
@@ -42,23 +40,9 @@ public class SecurityConfiguration {
                 .exceptionHandling(configurer -> configurer
                         .authenticationEntryPoint(authenticationEntryPoint)
                         .accessDeniedHandler(accessDeniedHandler)
-                )
-                .sessionManagement(sessionManagement ->
+                ).sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(registry -> registry
-                        .requestMatchers(
-                                antMatcher(HttpMethod.POST, "/api/tests/published/*/generated/*/save")
-                        ).hasAnyRole("TEACHER", "STUDENT")
-                        .requestMatchers(
-                                antMatcher(HttpMethod.POST, "/api/questions"),
-                                antMatcher(HttpMethod.DELETE, "/api/questions/**"),
-                                antMatcher(HttpMethod.POST, "/api/subjects/**"),
-                                antMatcher(HttpMethod.PUT, "/api/subjects/**"),
-                                antMatcher(HttpMethod.DELETE, "/api/subjects/**"),
-                                antMatcher(HttpMethod.POST, "/api/tests/published/**"),
-                                antMatcher(HttpMethod.PUT, "/api/tests/published/**"),
-                                antMatcher(HttpMethod.DELETE, "/api/tests/published/**")
-                        ).hasRole("TEACHER")
                         .requestMatchers(
                                 new NegatedRequestMatcher(antMatcher(API_PATTERN))
                         ).permitAll()
