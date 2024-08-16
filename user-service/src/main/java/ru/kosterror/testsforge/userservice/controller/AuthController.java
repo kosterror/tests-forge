@@ -47,6 +47,13 @@ public class AuthController {
         authService.logout(principal.userId(), refreshToken);
     }
 
+    @Operation(summary = "Сбросить пароль")
+    @PostMapping("/reset-password")
+    public void resetPassword(@RequestParam String email) {
+        authService.resetPassword(email);
+
+    }
+
     @Operation(summary = "Зарегистрироваться студентом")
     @PostMapping("/students/register")
     public TokensDto registerStudent(@RequestBody @Valid UpdateUserDto updateUserDto) {

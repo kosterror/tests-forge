@@ -18,4 +18,6 @@ public interface AuthService {
     TokensDto registerStudent(UpdateUserDto updateUserDto);
 
     void logout(UUID userId, String refreshToken);
+
+    void resetPassword(String email);
 }

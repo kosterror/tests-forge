@@ -19,6 +19,8 @@ import ru.kosterror.testsforge.userservice.repository.RefreshTokenRepository;
 import ru.kosterror.testsforge.userservice.repository.UserRepository;
 import ru.kosterror.testsforge.userservice.service.AuthService;
 import ru.kosterror.testsforge.userservice.service.JwtService;
+import ru.kosterror.testsforge.userservice.service.MailService;
+import ru.kosterror.testsforge.userservice.service.PasswordGeneratorService;
 
 import java.util.UUID;
 
@@ -32,6 +34,8 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final PasswordGeneratorService passwordGeneratorService;
+    private final MailService mailService;
 
     private static void validateRefreshTokenOwner(UUID userId,
                                                   String refreshToken,
@@ -104,6 +108,22 @@ public class AuthServiceImpl implements AuthService {
 
         validateRefreshTokenOwner(userId, refreshToken, user);
         deleteRefreshToken(refreshTokenEntity, user);
+    }
+
+    @Override
+    @Transactional
+    public void resetPassword(String email) {
+        var user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UnauthorizedException("User with email '%s' not found".formatted(email)));
+
+        var password = passwordGeneratorService.generatePassword();
+
+        mailService.sendResettingPasswordMail(email, password);
+
+        user.setPassword(passwordEncoder.encode(password));
+
+        userRepository.save(user);
+        refreshTokenRepository.deleteAllByOwnerId(user.getId());
     }
 
     private void deleteRefreshToken(RefreshTokenEntity foundRefreshToken,

@@ -46,20 +46,10 @@ public class SecurityConfiguration {
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers(
-                                antMatcher(HttpMethod.POST, "/api/auth/teachers/register"),
-                                antMatcher(HttpMethod.PUT, "/api/users/*/role"),
-                                antMatcher(HttpMethod.POST, "/api/groups"),
-                                antMatcher(HttpMethod.PUT, "/api/groups/*"),
-                                antMatcher(HttpMethod.DELETE, "/api/groups/*")
-                        ).hasRole("TEACHER")
-                        .requestMatchers(
-                                antMatcher(HttpMethod.GET, "/api/groups/search-by-ids"),
-                                antMatcher(HttpMethod.GET, "/api/users/search-by-ids")
-                        ).hasRole("SERVICE")
-                        .requestMatchers(
                                 antMatcher(HttpMethod.POST, "/api/auth/login"),
                                 antMatcher(HttpMethod.POST, "/api/auth/students/register"),
                                 antMatcher(HttpMethod.POST, "/api/auth/refresh"),
+                                antMatcher(HttpMethod.POST, "/api/auth/reset-password"),
                                 new NegatedRequestMatcher(antMatcher(API_PATTERN))
                         ).permitAll()
                         .anyRequest().authenticated())
