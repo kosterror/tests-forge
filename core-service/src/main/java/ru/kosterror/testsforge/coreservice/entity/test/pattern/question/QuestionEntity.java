@@ -6,8 +6,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import ru.kosterror.testsforge.coreservice.entity.BaseEntity;
 import ru.kosterror.testsforge.coreservice.entity.subject.SubjectEntity;
-import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.DynamicBlockEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.VariantEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.DynamicBlockEntity;
 
 import java.util.List;
 import java.util.UUID;
@@ -45,5 +45,7 @@ public abstract class QuestionEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "subject_id")
     private SubjectEntity subject;
+
+    private boolean isQuestionFromBank;
 
 }

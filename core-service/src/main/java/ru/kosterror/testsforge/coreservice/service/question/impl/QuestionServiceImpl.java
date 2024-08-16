@@ -15,6 +15,7 @@ import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.Question
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity_;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
+import ru.kosterror.testsforge.coreservice.exception.ConflictException;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
 import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
 import ru.kosterror.testsforge.coreservice.repository.QuestionRepository;
@@ -44,8 +45,8 @@ public class QuestionServiceImpl implements QuestionService {
         log.info("Attachments for question {} validated", question);
 
         var entity = questionMapper.toEntity(question);
-        entity.setOwnerId(userId);
         entity.setSubject(subject);
+        entity.setQuestionFromBank(true);
 
         entity = questionRepository.save(entity);
         log.info("Question with id {} created", entity.getId());
@@ -62,6 +63,11 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void deleteQuestion(UUID id) {
         var entity = getQuestionById(id);
+
+        if (!entity.isQuestionFromBank()) {
+            throw new ConflictException("Question with id %s is not from question bank".formatted(id));
+        }
+
         questionRepository.delete(entity);
     }
 
