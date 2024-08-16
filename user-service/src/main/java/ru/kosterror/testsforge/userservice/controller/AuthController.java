@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.user.UserDto;
@@ -14,6 +15,8 @@ import ru.kosterror.testsforge.userservice.dto.TokensDto;
 import ru.kosterror.testsforge.userservice.dto.UpdateUserDto;
 import ru.kosterror.testsforge.userservice.service.AuthService;
 
+import static ru.kosterror.testsforge.securitystarter.util.RoleExpressions.TEACHER;
+import static ru.kosterror.testsforge.securitystarter.util.RoleExpressions.TEACHER_OR_STUDENT;
 import static ru.kosterror.testsforge.userservice.configuration.OpenApiConfiguration.JWT;
 
 @RestController
@@ -36,6 +39,7 @@ public class AuthController {
         return authService.refresh(refreshToken);
     }
 
+    @PreAuthorize(TEACHER_OR_STUDENT)
     @Operation(summary = "Выход", security = @SecurityRequirement(name = JWT))
     @PostMapping("/logout")
     public void logout(@AuthenticationPrincipal JwtUser principal,
@@ -49,6 +53,7 @@ public class AuthController {
         return authService.registerStudent(updateUserDto);
     }
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Зарегистрировать преподавателя", security = @SecurityRequirement(name = JWT))
     @PostMapping("/teachers/register")
     public UserDto registerTeacher(@RequestBody @Valid UpdateUserDto updateUserDto) {

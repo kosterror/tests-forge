@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import static ru.kosterror.testsforge.securitystarter.util.RoleExpressions.*;
 import static ru.kosterror.testsforge.userservice.configuration.OpenApiConfiguration.API_KEY;
 import static ru.kosterror.testsforge.userservice.configuration.OpenApiConfiguration.JWT;
 
@@ -32,6 +34,7 @@ public class GroupController {
 
     private final GroupService service;
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Создать новую группу", security = @SecurityRequirement(name = JWT))
     @PostMapping
     public GroupDto createGroup(@RequestBody @Valid UpdateGroupDto request) {
@@ -44,18 +47,21 @@ public class GroupController {
         return service.getGroup(id);
     }
 
+    @PreAuthorize(STUDENT)
     @Operation(summary = "Получить группы пользователя", security = @SecurityRequirement(name = JWT))
     @GetMapping
     public List<GroupDto> getUserGroups(@AuthenticationPrincipal JwtUser principal) {
         return service.getUserGroups(principal.userId());
     }
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Изменить группу", security = @SecurityRequirement(name = JWT))
     @PutMapping("/{id}")
     public GroupDto updateGroup(@PathVariable UUID id, @RequestBody UpdateGroupDto groupDto) {
         return service.updateGroup(id, groupDto);
     }
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Удалить группу по id", security = @SecurityRequirement(name = JWT))
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGroup(@PathVariable UUID id) {
@@ -63,6 +69,7 @@ public class GroupController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @PreAuthorize(TEACHER)
     @Operation(summary = "Поиск по группам", security = @SecurityRequirement(name = JWT))
     @GetMapping("/search")
     public PaginationResponse<GroupDto> getGroups(@Parameter(description = "Фильтр по имени")
@@ -74,6 +81,7 @@ public class GroupController {
         return service.getGroups(name, page, size);
     }
 
+    @PreAuthorize(SERVICE)
     @Operation(summary = "Найти группы по идентификаторам", security = @SecurityRequirement(name = API_KEY))
     @GetMapping("/search-by-ids")
     public FoundGroupsDto getGroupsByIds(@RequestParam Set<UUID> groupIds) {

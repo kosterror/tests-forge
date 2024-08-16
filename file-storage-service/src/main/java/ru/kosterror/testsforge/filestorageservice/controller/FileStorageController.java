@@ -10,6 +10,7 @@ import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +22,9 @@ import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
+import static ru.kosterror.testsforge.securitystarter.util.RoleExpressions.TEACHER_OR_STUDENT;
+import static ru.kosterror.testsforge.securitystarter.util.RoleExpressions.TEACHER_OR_STUDENT_OR_SERVICE;
+
 @RestController
 @RequestMapping("/api/files")
 @RequiredArgsConstructor
@@ -29,6 +33,7 @@ public class FileStorageController {
 
     private final FileStorageService fileStorageService;
 
+    @PreAuthorize(TEACHER_OR_STUDENT)
     @Operation(summary = "Загрузить файл в хранилище", security = @SecurityRequirement(name = OpenApiConfiguration.JWT))
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public FileMetaInfoDto uploadFile(@AuthenticationPrincipal JwtUser principal,
@@ -37,6 +42,7 @@ public class FileStorageController {
         return fileStorageService.uploadFile(principal.userId(), file);
     }
 
+    @PreAuthorize(TEACHER_OR_STUDENT)
     @Operation(summary = "Скачать файл", security = @SecurityRequirement(name = OpenApiConfiguration.JWT))
     @GetMapping(value = "/{id}",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
@@ -54,6 +60,7 @@ public class FileStorageController {
                 .body(new ByteArrayResource(nameAndFile.getRight()));
     }
 
+    @PreAuthorize(TEACHER_OR_STUDENT_OR_SERVICE)
     @Operation(
             summary = "Получить метаинформацию о файле",
             security = {
