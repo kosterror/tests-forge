@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
+import ru.kosterror.testsforge.coreservice.dto.question.NewQuestionType;
 
 import java.util.Map;
 
@@ -16,7 +16,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CreateMatchingQuestionDto extends CreateQuestionDto {
+public class NewMatchingQuestionDto extends NewQuestionDto {
 
     @Size(min = 2, max = 32, message = "Количество терминов и определений должно быть от 2 до 32")
     @Schema(description = "Словарь, где ключ - термин, а значение - определение", requiredMode = REQUIRED)
@@ -28,7 +28,7 @@ public class CreateMatchingQuestionDto extends CreateQuestionDto {
             "определений + 1")
     private Map<Integer, Integer> points;
 
-    public CreateMatchingQuestionDto() {
-        super(QuestionType.MATCHING);
+    public NewMatchingQuestionDto() {
+        super(NewQuestionType.MATCHING);
     }
 }

@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.factory;
+package ru.kosterror.testsforge.coreservice.factory.test.generated;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class GeneratedTestFactory {
 
-    private final PartitionFactory partitionFactory;
+    private final GeneratedPartitionFactory partitionFactory;
 
     public GeneratedTestEntity buildGeneratedTestEntity(PublishedTestEntity publishedTest, UUID userId) {
         return GeneratedTestEntity.builder()

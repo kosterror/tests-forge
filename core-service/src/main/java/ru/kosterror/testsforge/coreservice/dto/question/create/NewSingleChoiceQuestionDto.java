@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
+import ru.kosterror.testsforge.coreservice.dto.question.NewQuestionType;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CreateSingleChoiceQuestionDto extends CreateQuestionDto {
+public class NewSingleChoiceQuestionDto extends NewQuestionDto {
 
     @Schema(description = "Список вариантов ответа", requiredMode = REQUIRED)
     @NotNull(message = "Список вариантов обязателен")
@@ -32,7 +32,7 @@ public class CreateSingleChoiceQuestionDto extends CreateQuestionDto {
     @NotNull(message = "Количество баллов обязательно")
     private Integer points;
 
-    public CreateSingleChoiceQuestionDto() {
-        super(QuestionType.SINGLE_CHOICE);
+    public NewSingleChoiceQuestionDto() {
+        super(NewQuestionType.SINGLE_CHOICE);
     }
 }

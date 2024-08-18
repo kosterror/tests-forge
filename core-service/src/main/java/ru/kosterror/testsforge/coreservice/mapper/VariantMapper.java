@@ -4,6 +4,7 @@ import org.mapstruct.*;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateBlockVariantDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.VariantDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.VariantEntity;
+import ru.kosterror.testsforge.coreservice.factory.question.QuestionFactory;
 import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 @Mapper(
         componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.WARN,
-        uses = QuestionMapper.class
+        uses = {QuestionMapper.class, QuestionFactory.class}
 )
 public abstract class VariantMapper {
 

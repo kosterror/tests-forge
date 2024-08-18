@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.factory;
+package ru.kosterror.testsforge.coreservice.factory.test.verification;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

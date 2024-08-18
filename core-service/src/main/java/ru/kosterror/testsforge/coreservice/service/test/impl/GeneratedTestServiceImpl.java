@@ -12,8 +12,8 @@ import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEn
 import ru.kosterror.testsforge.coreservice.entity.test.generated.TestStatus;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
-import ru.kosterror.testsforge.coreservice.factory.GeneratedTestFactory;
-import ru.kosterror.testsforge.coreservice.factory.VerificationGeneratedTestFactory;
+import ru.kosterror.testsforge.coreservice.factory.test.generated.GeneratedTestFactory;
+import ru.kosterror.testsforge.coreservice.factory.test.verification.VerificationGeneratedTestFactory;
 import ru.kosterror.testsforge.coreservice.mapper.GeneratedTestMapper;
 import ru.kosterror.testsforge.coreservice.repository.GeneratedTestRepository;
 import ru.kosterror.testsforge.coreservice.service.processor.test.GeneratedTestProcessor;

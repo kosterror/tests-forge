@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.factory;
+package ru.kosterror.testsforge.coreservice.factory.test.generated;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -9,9 +9,9 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class PartitionFactory {
+public class GeneratedPartitionFactory {
 
-    private final BlockFactory blockFactory;
+    private final GeneratedBlockFactory generatedBlockFactory;
 
     public List<Partition> buildPartitions(List<PartitionEntity> partitionEntities) {
         return partitionEntities.stream()
@@ -24,7 +24,7 @@ public class PartitionFactory {
                 partitionEntity.getId(),
                 partitionEntity.getName(),
                 partitionEntity.getDescription(),
-                blockFactory.buildBlocks(partitionEntity.getBlocks())
+                generatedBlockFactory.buildBlocks(partitionEntity.getBlocks())
         );
     }
 

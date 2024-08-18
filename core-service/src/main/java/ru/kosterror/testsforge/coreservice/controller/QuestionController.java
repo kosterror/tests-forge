@@ -8,14 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
 import ru.kosterror.testsforge.coreservice.service.question.QuestionService;
-import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 
 import java.util.List;
 import java.util.UUID;
@@ -34,11 +32,10 @@ public class QuestionController {
     @PreAuthorize(TEACHER)
     @Operation(summary = "Создать вопрос", security = @SecurityRequirement(name = JWT))
     @PostMapping
-    public QuestionDto createQuestion(@AuthenticationPrincipal JwtUser principal,
-                                      @RequestParam UUID subjectId,
+    public QuestionDto createQuestion(@RequestParam UUID subjectId,
                                       @RequestBody @Valid CreateQuestionDto question
     ) {
-        return service.createQuestion(principal.userId(), subjectId, question);
+        return service.createQuestion(subjectId, question);
     }
 
     @PreAuthorize(TEACHER)

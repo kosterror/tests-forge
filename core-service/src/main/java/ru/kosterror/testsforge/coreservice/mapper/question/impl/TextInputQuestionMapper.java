@@ -1,8 +1,6 @@
 package ru.kosterror.testsforge.coreservice.mapper.question.impl;
 
 import org.springframework.stereotype.Component;
-import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.create.CreateTextInputQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.textinput.TextInputQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
@@ -14,20 +12,6 @@ public class TextInputQuestionMapper extends BaseQuestionMapper {
 
     public TextInputQuestionMapper(SubjectMapper subjectMapper) {
         super(subjectMapper);
-    }
-
-    @Override
-    public QuestionEntity toEntity(CreateQuestionDto baseDto) {
-        var entity = new TextInputQuestionEntity();
-        mapBaseQuestionEntityFields(entity, baseDto);
-
-        var dto = (CreateTextInputQuestionDto) baseDto;
-
-        entity.setPoints(dto.getPoints());
-        entity.setIsCaseSensitive(dto.isCaseSensitive());
-        entity.setAnswers(dto.getAnswers());
-
-        return entity;
     }
 
     @Override

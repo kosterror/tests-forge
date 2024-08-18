@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.factory;
+package ru.kosterror.testsforge.coreservice.factory.test.generated;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,10 +15,10 @@ import java.util.Random;
 
 @Component
 @RequiredArgsConstructor
-public class BlockFactory {
+public class GeneratedBlockFactory {
 
-    private final VariantFactory variantFactory;
-    private final QuestionFactory questionFactory;
+    private final GeneratedVariantFactory generatedVariantFactory;
+    private final GeneratedQuestionFactory generatedQuestionFactory;
     private final Random random;
 
     public List<Block> buildBlocks(List<BlockEntity> blockEntities) {
@@ -35,7 +35,7 @@ public class BlockFactory {
     }
 
     private Block buildStaticBlock(StaticBlockEntity blockEntity) {
-        var variant = variantFactory.buildVariant(blockEntity.getVariants());
+        var variant = generatedVariantFactory.buildVariant(blockEntity.getVariants());
 
         return Block.builder()
                 .id(blockEntity.getId())
@@ -53,7 +53,7 @@ public class BlockFactory {
 
         for (int i = 0; i < questionCount; i++) {
             var questionEntity = getRandomQuestionEntity(questionEntities);
-            var question = questionFactory.buildQuestion(questionEntity);
+            var question = generatedQuestionFactory.buildQuestion(questionEntity);
 
             questionEntities.remove(questionEntity);
             questionsForBlock.add(question);

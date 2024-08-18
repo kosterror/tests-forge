@@ -3,6 +3,7 @@ package ru.kosterror.testsforge.coreservice.service.question;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.UUID;
 
 public interface QuestionService {
 
-    QuestionDto createQuestion(UUID userId, UUID subjectId, CreateQuestionDto question);
+    QuestionDto createQuestion(UUID subjectId, CreateQuestionDto question);
 
     QuestionDto getQuestion(UUID id);
 
@@ -22,4 +23,6 @@ public interface QuestionService {
                                                  int page,
                                                  int size
     );
+
+    QuestionEntity getQuestionEntity(UUID id);
 }

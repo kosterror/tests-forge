@@ -14,9 +14,9 @@ import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity_;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
-import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
 import ru.kosterror.testsforge.coreservice.exception.ConflictException;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
+import ru.kosterror.testsforge.coreservice.factory.question.QuestionFactory;
 import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
 import ru.kosterror.testsforge.coreservice.repository.QuestionRepository;
 import ru.kosterror.testsforge.coreservice.service.question.QuestionService;
@@ -36,15 +36,18 @@ public class QuestionServiceImpl implements QuestionService {
     private final QuestionRepository questionRepository;
     private final FileStorageClient fileStorageClient;
     private final SubjectService subjectService;
+    private final QuestionFactory questionFactory;
 
     @Override
-    public QuestionDto createQuestion(UUID userId, UUID subjectId, CreateQuestionDto question) {
+    public QuestionDto createQuestion(UUID subjectId, CreateQuestionDto questionDto) {
         var subject = subjectService.getSubjectEntity(subjectId);
 
-        validateAttachments(userId, question.getAttachments());
-        log.info("Attachments for question {} validated", question);
+        var entity = questionFactory.buildQuestion(questionDto);
+        log.info("Question entity built from dto {}", questionDto);
 
-        var entity = questionMapper.toEntity(question);
+        validateAttachments(entity.getAttachments());
+        log.info("Attachments for question {} validated", questionDto);
+
         entity.setSubject(subject);
         entity.setQuestionFromBank(true);
 
@@ -56,13 +59,13 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionDto getQuestion(UUID id) {
-        var entity = getQuestionById(id);
+        var entity = getQuestionEntity(id);
         return questionMapper.toDto(entity);
     }
 
     @Override
     public void deleteQuestion(UUID id) {
-        var entity = getQuestionById(id);
+        var entity = getQuestionEntity(id);
 
         if (!entity.isQuestionFromBank()) {
             throw new ConflictException("Question with id %s is not from question bank".formatted(id));
@@ -93,12 +96,13 @@ public class QuestionServiceImpl implements QuestionService {
         return new PaginationResponse<>(page, size, questions);
     }
 
-    private QuestionEntity getQuestionById(UUID id) {
+    @Override
+    public QuestionEntity getQuestionEntity(UUID id) {
         return questionRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Question with id %s not found", id)));
     }
 
-    private void validateAttachments(UUID userId, List<UUID> attachmentIds) {
+    private void validateAttachments(List<UUID> attachmentIds) {
         if (CollectionUtils.isEmpty(attachmentIds)) {
             return;
         }
@@ -106,9 +110,7 @@ public class QuestionServiceImpl implements QuestionService {
         for (var attachmentId : attachmentIds) {
             var fileMetaInfo = fileStorageClient.getFileMetaInfo(attachmentId);
 
-            if (fileMetaInfo.ownerId() != userId) {
-                throw new BadRequestException("File '%s' not owned by user '%s'".formatted(attachmentId, userId));
-            }
+            log.info("Attachment with id {} found: {}", attachmentId, fileMetaInfo);
         }
     }
 

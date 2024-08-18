@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.factory;
+package ru.kosterror.testsforge.coreservice.factory.test.generated;
 
 import org.springframework.stereotype.Component;
 import ru.kosterror.testsforge.coreservice.entity.test.generated.question.*;
@@ -11,7 +11,7 @@ import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.textinpu
 import java.util.List;
 
 @Component
-public class QuestionFactory {
+public class GeneratedQuestionFactory {
 
     public List<Question> buildQuestions(List<QuestionEntity> questions) {
         return questions.stream()

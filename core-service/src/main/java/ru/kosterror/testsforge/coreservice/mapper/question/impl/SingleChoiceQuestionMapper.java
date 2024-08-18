@@ -1,8 +1,6 @@
 package ru.kosterror.testsforge.coreservice.mapper.question.impl;
 
 import org.springframework.stereotype.Component;
-import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
-import ru.kosterror.testsforge.coreservice.dto.question.create.CreateSingleChoiceQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.single.SingleChoiceQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.single.SingleOptionDto;
@@ -20,17 +18,6 @@ public class SingleChoiceQuestionMapper extends BaseQuestionMapper {
         super(subjectMapper);
     }
 
-    private static SingleOptionEntity mapToSingleOptionEntity(CreateSingleChoiceQuestionDto dto,
-                                                              int optionOrder,
-                                                              SingleChoiceQuestionEntity question) {
-        var optionEntity = new SingleOptionEntity();
-        optionEntity.setName(dto.getOptions().get(optionOrder));
-        optionEntity.setOrder(optionOrder);
-        optionEntity.setIsRight(dto.getCorrectOptionIndex() == optionOrder);
-        optionEntity.setQuestion(question);
-        return optionEntity;
-    }
-
     private static SingleOptionDto mapToSingleOptionDto(SingleOptionEntity optionEntity) {
         var optionDto = new SingleOptionDto();
         optionDto.setId(optionEntity.getId());
@@ -38,28 +25,6 @@ public class SingleChoiceQuestionMapper extends BaseQuestionMapper {
         optionDto.setRight(optionEntity.getIsRight());
 
         return optionDto;
-    }
-
-    @Override
-    public QuestionEntity toEntity(CreateQuestionDto baseDto) {
-        var entity = new SingleChoiceQuestionEntity();
-        mapBaseQuestionEntityFields(entity, baseDto);
-
-        var dto = (CreateSingleChoiceQuestionDto) baseDto;
-
-        entity.setPoints(dto.getPoints());
-
-        var optionNames = dto.getOptions();
-        var options = new ArrayList<SingleOptionEntity>(optionNames.size());
-
-        for (int order = 0; order < optionNames.size(); order++) {
-            var option = mapToSingleOptionEntity(dto, order, entity);
-            options.add(option);
-        }
-
-        entity.setOptions(options);
-
-        return entity;
     }
 
     @Override

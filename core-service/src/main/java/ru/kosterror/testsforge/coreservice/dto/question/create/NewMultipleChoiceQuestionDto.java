@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
+import ru.kosterror.testsforge.coreservice.dto.question.NewQuestionType;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CreateMultipleChoiceQuestionDto extends CreateQuestionDto {
+public class NewMultipleChoiceQuestionDto extends NewQuestionDto {
 
     @Schema(description = "Список вариантов ответа", requiredMode = REQUIRED)
     @NotNull(message = "Список вариантов не может быть null")
@@ -35,7 +35,7 @@ public class CreateMultipleChoiceQuestionDto extends CreateQuestionDto {
             "значение - соответствующий балл. Количество пар не может быть больше, чем количество вариантов ответа + 1")
     private Map<Integer, Integer> points;
 
-    public CreateMultipleChoiceQuestionDto() {
-        super(QuestionType.MULTIPLE_CHOICE);
+    public NewMultipleChoiceQuestionDto() {
+        super(NewQuestionType.MULTIPLE_CHOICE);
     }
 }

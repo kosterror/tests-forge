@@ -8,6 +8,7 @@ import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateBlockDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateDynamicBlockDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.BlockEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.DynamicBlockEntity;
+import ru.kosterror.testsforge.coreservice.factory.question.QuestionFactory;
 import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
 
 @Component
@@ -15,6 +16,7 @@ import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
 public class DynamicBlockMapper extends BaseBlockMapper {
 
     private final QuestionMapper questionMapper;
+    private final QuestionFactory questionFactory;
 
     @Override
     public BlockEntity toEntity(UpdateBlockDto baseDto) {
@@ -31,12 +33,10 @@ public class DynamicBlockMapper extends BaseBlockMapper {
     }
 
     private void mapQuestions(DynamicBlockEntity entity, UpdateDynamicBlockDto dto) {
-        var questions = questionMapper.toEntities(dto.getQuestions());
+        var questions = dto.getQuestions().stream().map(questionFactory::buildQuestion).toList();
 
-        if (questions != null) {
-            for (var question : questions) {
-                question.setDynamicBlock(entity);
-            }
+        for (var question : questions) {
+            question.setDynamicBlock(entity);
         }
 
         entity.setQuestions(questions);

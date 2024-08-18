@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
+import ru.kosterror.testsforge.coreservice.dto.question.NewQuestionType;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CreateTextInputQuestionDto extends CreateQuestionDto {
+public class NewTextInputQuestionDto extends NewQuestionDto {
 
     @Schema(description = "Является ли ответ чувствительным к регистру", requiredMode = REQUIRED)
     @NotNull(message = "Чувствительность к регистру обязательна")
@@ -32,7 +32,7 @@ public class CreateTextInputQuestionDto extends CreateQuestionDto {
     @NotNull(message = "Количество баллов обязательно")
     private Integer points;
 
-    public CreateTextInputQuestionDto() {
-        super(QuestionType.TEXT_INPUT);
+    public NewTextInputQuestionDto() {
+        super(NewQuestionType.TEXT_INPUT);
     }
 }

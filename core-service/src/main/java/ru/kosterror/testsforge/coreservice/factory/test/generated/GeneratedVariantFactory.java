@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.factory;
+package ru.kosterror.testsforge.coreservice.factory.test.generated;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -10,10 +10,10 @@ import java.util.Random;
 
 @Component
 @RequiredArgsConstructor
-public class VariantFactory {
+public class GeneratedVariantFactory {
 
     private final Random random;
-    private final QuestionFactory questionFactory;
+    private final GeneratedQuestionFactory generatedQuestionFactory;
 
     public Variant buildVariant(List<VariantEntity> variants) {
         var variantIndex = random.nextInt(variants.size());
@@ -22,7 +22,7 @@ public class VariantFactory {
         return new Variant(variant.getId(),
                 variant.getName(),
                 variant.getDescription(),
-                questionFactory.buildQuestions(variant.getQuestions())
+                generatedQuestionFactory.buildQuestions(variant.getQuestions())
         );
     }
 
