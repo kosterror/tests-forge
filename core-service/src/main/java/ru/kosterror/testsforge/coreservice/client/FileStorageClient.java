@@ -1,11 +1,9 @@
 package ru.kosterror.testsforge.coreservice.client;
 
-import ru.kosterror.testsforge.commonmodel.filestorageservice.FileMetaInfoDto;
-
+import java.util.List;
 import java.util.UUID;
 
 public interface FileStorageClient {
 
-    FileMetaInfoDto getFileMetaInfo(UUID id);
-
+    List<UUID> getNotExistingFileIds(List<UUID> fileIds);
 }

@@ -107,10 +107,10 @@ public class QuestionServiceImpl implements QuestionService {
             return;
         }
 
-        for (var attachmentId : attachmentIds) {
-            var fileMetaInfo = fileStorageClient.getFileMetaInfo(attachmentId);
+        var notExistingFileIds = fileStorageClient.getNotExistingFileIds(attachmentIds);
 
-            log.info("Attachment with id {} found: {}", attachmentId, fileMetaInfo);
+        if (!notExistingFileIds.isEmpty()) {
+            throw new NotFoundException("Attachments with ids %s not found".formatted(notExistingFileIds));
         }
     }
 

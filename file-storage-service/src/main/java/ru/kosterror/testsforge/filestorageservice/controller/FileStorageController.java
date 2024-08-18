@@ -20,6 +20,7 @@ import ru.kosterror.testsforge.filestorageservice.service.FileStorageService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.UUID;
 
 import static ru.kosterror.testsforge.securitystarter.util.RoleExpressions.TEACHER_OR_STUDENT;
@@ -71,6 +72,18 @@ public class FileStorageController {
     @GetMapping("/{id}/meta-info")
     public FileMetaInfoDto getFileMetaInfo(@PathVariable UUID id) {
         return fileStorageService.getFileMetaInfo(id);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_SERVICE')")
+    @Operation(
+            summary = "Проверить существование файлов. В ответе список ID несуществующих файлов",
+            security = {
+                    @SecurityRequirement(name = OpenApiConfiguration.API_KEY)
+            }
+    )
+    @PostMapping("/check-existing")
+    public List<UUID> checkExistingFiles(@RequestBody List<UUID> fileIds) {
+        return fileStorageService.checkExistingFiles(fileIds);
     }
 
 }

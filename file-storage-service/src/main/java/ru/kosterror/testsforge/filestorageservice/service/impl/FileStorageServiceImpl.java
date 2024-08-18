@@ -20,6 +20,8 @@ import ru.kosterror.testsforge.filestorageservice.service.FileStorageService;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -72,6 +74,19 @@ public class FileStorageServiceImpl implements FileStorageService {
         var fileMetaInfo = getFileMetaInfoEntity(fileId);
 
         return fileMetaInfoMapper.toDto(fileMetaInfo);
+    }
+
+    @Override
+    public List<UUID> checkExistingFiles(List<UUID> fileIds) {
+        var existingIds = fileMetaInfoRepository.findAllById(fileIds)
+                .stream()
+                .map(FileMetaInfoEntity::getId)
+                .toList();
+
+        var notFoundFileIds = new ArrayList<>(fileIds);
+        notFoundFileIds.removeAll(existingIds);
+
+        return notFoundFileIds;
     }
 
     private FileMetaInfoEntity getFileMetaInfoEntity(UUID fileId) {
