@@ -6,11 +6,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.BaseTestPatternDto;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.TestPatternDto;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.create.UpdateTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.full.BaseTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.full.TestPatternDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.TestPatternEntity;
 import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
+import ru.kosterror.testsforge.coreservice.factory.test.pattern.TestPatternFactory;
 import ru.kosterror.testsforge.coreservice.mapper.TestPatternMapper;
 import ru.kosterror.testsforge.coreservice.repository.TestPatternRepository;
 import ru.kosterror.testsforge.coreservice.service.test.TestPatternService;
@@ -25,11 +26,12 @@ public class TestPatternServiceImpl implements TestPatternService {
 
     private final TestPatternRepository testPatternRepository;
     private final TestPatternMapper testPatternMapper;
+    private final TestPatternFactory testPatternFactory;
 
     @Override
     @Transactional
     public TestPatternDto createTestPattern(UUID userId, UpdateTestPatternDto updateTestPatternDto) {
-        var testPattern = testPatternMapper.toEntity(updateTestPatternDto);
+        var testPattern = testPatternFactory.buildTestPatternEntity(updateTestPatternDto);
         testPattern = testPatternRepository.save(testPattern);
 
         return testPatternMapper.toDto(testPattern);

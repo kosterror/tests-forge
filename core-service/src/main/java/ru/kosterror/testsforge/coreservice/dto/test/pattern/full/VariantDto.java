@@ -1,4 +1,4 @@
-package ru.kosterror.testsforge.coreservice.dto.test.pattern;
+package ru.kosterror.testsforge.coreservice.dto.test.pattern.full;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

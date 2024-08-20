@@ -22,7 +22,7 @@ public class CreateQuestionBasedOnExistingDto extends CreateQuestionDto {
     @Schema(description = "Идентификатор вопроса", requiredMode = REQUIRED)
     private UUID questionId;
 
-    protected CreateQuestionBasedOnExistingDto() {
+    public CreateQuestionBasedOnExistingDto() {
         super(NewQuestionType.BASED_ON_EXISTING);
     }
 

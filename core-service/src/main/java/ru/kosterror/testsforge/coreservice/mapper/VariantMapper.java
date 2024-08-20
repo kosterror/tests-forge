@@ -1,8 +1,9 @@
 package ru.kosterror.testsforge.coreservice.mapper;
 
-import org.mapstruct.*;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateBlockVariantDto;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.VariantDto;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.full.VariantDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.VariantEntity;
 import ru.kosterror.testsforge.coreservice.factory.question.QuestionFactory;
 import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
@@ -14,36 +15,8 @@ import java.util.List;
         unmappedTargetPolicy = ReportingPolicy.WARN,
         uses = {QuestionMapper.class, QuestionFactory.class}
 )
-public abstract class VariantMapper {
+public interface VariantMapper {
 
-    public abstract List<VariantEntity> toEntities(List<UpdateBlockVariantDto> dtos);
-
-    public abstract List<VariantDto> toDtos(List<VariantEntity> entities);
-
-    @AfterMapping
-    void addVariantToQuestion(@MappingTarget List<VariantEntity> variantEntities) {
-        if (variantEntities != null) {
-            for (var variant : variantEntities) {
-                if (variant.getQuestions() != null) {
-                    for (var question : variant.getQuestions()) {
-                        question.setVariant(variant);
-                    }
-                }
-            }
-        }
-    }
-
-    @AfterMapping
-    void orderQuestions(@MappingTarget List<VariantEntity> variantEntities) {
-        if (variantEntities != null) {
-            for (var variant : variantEntities) {
-                if (variant.getQuestions() != null) {
-                    for (int i = 0; i < variant.getQuestions().size(); i++) {
-                        variant.getQuestions().get(i).setOrder(i);
-                    }
-                }
-            }
-        }
-    }
+    List<VariantDto> toDtos(List<VariantEntity> entities);
 
 }

@@ -11,9 +11,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.BaseTestPatternDto;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.TestPatternDto;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.create.UpdateTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.full.BaseTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.full.TestPatternDto;
 import ru.kosterror.testsforge.coreservice.service.test.TestPatternService;
 import ru.kosterror.testsforge.securitystarter.model.JwtUser;
 

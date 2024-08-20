@@ -1,9 +1,10 @@
-package ru.kosterror.testsforge.coreservice.dto.test.pattern;
+package ru.kosterror.testsforge.coreservice.dto.test.pattern.create;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.create.partition.UpdatePartitionDto;
 
 import java.util.List;
 import java.util.UUID;

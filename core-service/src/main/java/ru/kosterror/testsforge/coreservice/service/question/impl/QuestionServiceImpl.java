@@ -42,7 +42,7 @@ public class QuestionServiceImpl implements QuestionService {
     public QuestionDto createQuestion(UUID subjectId, CreateQuestionDto questionDto) {
         var subject = subjectService.getSubjectEntity(subjectId);
 
-        var entity = questionFactory.buildQuestion(questionDto);
+        var entity = questionFactory.buildQuestionFromDto(questionDto);
         log.info("Question entity built from dto {}", questionDto);
 
         validateAttachments(entity.getAttachments());

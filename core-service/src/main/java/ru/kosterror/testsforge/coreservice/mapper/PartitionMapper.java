@@ -1,8 +1,9 @@
 package ru.kosterror.testsforge.coreservice.mapper;
 
-import org.mapstruct.*;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.PartitionDto;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdatePartitionDto;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.full.PartitionDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.PartitionEntity;
 import ru.kosterror.testsforge.coreservice.mapper.block.BlockMapper;
 
@@ -11,28 +12,8 @@ import ru.kosterror.testsforge.coreservice.mapper.block.BlockMapper;
         unmappedTargetPolicy = ReportingPolicy.WARN,
         uses = BlockMapper.class
 )
-public abstract class PartitionMapper {
+public interface PartitionMapper {
 
-    public abstract PartitionEntity toEntity(UpdatePartitionDto partitionDto);
-
-    public abstract PartitionDto toDto(PartitionEntity partitionEntity);
-
-    @AfterMapping
-    void orderBlocks(@MappingTarget PartitionEntity partitionEntity) {
-        if (partitionEntity.getBlocks() != null) {
-            for (int order = 0; order < partitionEntity.getBlocks().size(); order++) {
-                partitionEntity.getBlocks().get(order).setOrder(order);
-            }
-        }
-    }
-
-    @AfterMapping
-    void addPartitionToBlock(@MappingTarget PartitionEntity partitionEntity) {
-        if (partitionEntity.getBlocks() != null) {
-            for (var block : partitionEntity.getBlocks()) {
-                block.setPartition(partitionEntity);
-            }
-        }
-    }
+    PartitionDto toDto(PartitionEntity partitionEntity);
 
 }

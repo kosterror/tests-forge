@@ -1,9 +1,9 @@
 package ru.kosterror.testsforge.coreservice.service.test;
 
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.BaseTestPatternDto;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.TestPatternDto;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.UpdateTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.create.UpdateTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.full.BaseTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.full.TestPatternDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.TestPatternEntity;
 
 import java.util.UUID;
