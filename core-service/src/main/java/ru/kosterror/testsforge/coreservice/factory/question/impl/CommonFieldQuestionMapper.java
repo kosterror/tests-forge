@@ -7,6 +7,8 @@ import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.Question
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionType;
 import ru.kosterror.testsforge.coreservice.exception.InternalException;
 
+import java.util.ArrayList;
+
 @Component
 public class CommonFieldQuestionMapper {
 
@@ -14,6 +16,13 @@ public class CommonFieldQuestionMapper {
         target.setName(source.getName());
         target.setAttachments(source.getAttachments());
         target.setType(mapType(source.getType()));
+    }
+
+    public void mapCommonFields(QuestionEntity source, QuestionEntity target) {
+        target.setName(source.getName());
+        target.setAttachments(new ArrayList<>(source.getAttachments()));
+        target.setType(source.getType());
+        target.setQuestionFromBank(source.isQuestionFromBank());
     }
 
     private QuestionType mapType(NewQuestionType type) {

@@ -37,15 +37,48 @@ public class MatchingQuestionFactory {
     }
 
     public MatchingQuestionEntity buildFromEntity(MatchingQuestionEntity questionEntity) {
-        var dto = new NewMatchingQuestionDto();
-        var termAndDefinitions = buildTermDefinitionsMap(questionEntity);
+        var newQuestionEntity = new MatchingQuestionEntity();
 
-        dto.setName(questionEntity.getName());
-        dto.setAttachments(new ArrayList<>(questionEntity.getAttachments()));
-        dto.setPoints(new HashMap<>(questionEntity.getPoints()));
-        dto.setTermsAndDefinitions(termAndDefinitions);
+        var terms = new ArrayList<TermEntity>(questionEntity.getTerms().size());
+        var definitions = new ArrayList<DefinitionEntity>(questionEntity.getDefinitions().size());
 
-        return buildFromDto(dto);
+        for (var term : questionEntity.getTerms()) {
+            var newDefinition = buildDefinitionFromEntity(term, newQuestionEntity);
+            var newTerm = buildDefinitionFromEntity(term, newQuestionEntity, newDefinition);
+
+            terms.add(newTerm);
+            definitions.add(newDefinition);
+        }
+
+
+        newQuestionEntity.setPoints(new HashMap<>(questionEntity.getPoints()));
+        newQuestionEntity.setTerms(terms);
+        newQuestionEntity.setDefinitions(definitions);
+
+        commonFieldQuestionMapper.mapCommonFields(questionEntity, newQuestionEntity);
+
+        return newQuestionEntity;
+    }
+
+    private TermEntity buildDefinitionFromEntity(TermEntity term,
+                                                 MatchingQuestionEntity newQuestionEntity,
+                                                 DefinitionEntity newDefinition
+    ) {
+        var newTerm = new TermEntity();
+        newTerm.setText(term.getText());
+        newTerm.setQuestion(newQuestionEntity);
+        newTerm.setDefinition(newDefinition);
+        return newTerm;
+    }
+
+    private DefinitionEntity buildDefinitionFromEntity(TermEntity term,
+                                                       MatchingQuestionEntity newQuestionEntity
+    ) {
+        var definition = term.getDefinition();
+        var newDefinition = new DefinitionEntity();
+        newDefinition.setText(definition.getText());
+        newDefinition.setQuestion(newQuestionEntity);
+        return newDefinition;
     }
 
     private void buildTermAndDefinitionEntities(Map.Entry<String, String> termAndDefinition,
@@ -62,19 +95,6 @@ public class MatchingQuestionFactory {
         term.setDefinition(definition);
         term.setQuestion(question);
         terms.add(term);
-    }
-
-    private HashMap<String, String> buildTermDefinitionsMap(MatchingQuestionEntity questionEntity) {
-        var terms = questionEntity.getTerms();
-        var termAndDefinitions = new HashMap<String, String>();
-
-        for (var term : terms) {
-            termAndDefinitions.put(
-                    term.getText(),
-                    term.getDefinition().getText()
-            );
-        }
-        return termAndDefinitions;
     }
 
 }

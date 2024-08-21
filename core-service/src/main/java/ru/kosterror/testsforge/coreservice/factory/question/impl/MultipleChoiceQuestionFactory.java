@@ -23,7 +23,7 @@ public class MultipleChoiceQuestionFactory {
         var options = new ArrayList<MultipleOptionEntity>(optionNames.size());
 
         for (int order = 0; order < optionNames.size(); order++) {
-            var option = buildMultipleOptionEntityFromDto(questionDto, order, questionEntity);
+            var option = buildOptionFromDto(questionDto, order, questionEntity);
             options.add(option);
         }
 
@@ -33,28 +33,43 @@ public class MultipleChoiceQuestionFactory {
         return questionEntity;
     }
 
-    public MultipleChoiceQuestionEntity buildFromEntity(MultipleChoiceQuestionEntity questionEntity) {
-        var dto = new NewMultipleChoiceQuestionDto();
-        dto.setName(questionEntity.getName());
-        dto.setAttachments(new ArrayList<>(questionEntity.getAttachments()));
-        dto.setPoints(new HashMap<>(questionEntity.getPoints()));
-        dto.setOptions(questionEntity.getOptions().stream().map(MultipleOptionEntity::getName).toList());
-        dto.setCorrectOptionIndices(questionEntity.getOptions().stream()
-                .filter(MultipleOptionEntity::getIsRight)
-                .map(MultipleOptionEntity::getOrder)
-                .toList());
-
-        return buildFromDto(dto);
-    }
-
-    private MultipleOptionEntity buildMultipleOptionEntityFromDto(NewMultipleChoiceQuestionDto dto,
-                                                                  int order,
-                                                                  MultipleChoiceQuestionEntity question) {
+    private MultipleOptionEntity buildOptionFromDto(NewMultipleChoiceQuestionDto dto,
+                                                    int order,
+                                                    MultipleChoiceQuestionEntity question) {
         var optionEntity = new MultipleOptionEntity();
         optionEntity.setName(dto.getOptions().get(order));
         optionEntity.setOrder(order);
         optionEntity.setIsRight(dto.getCorrectOptionIndices().contains(order));
         optionEntity.setQuestion(question);
         return optionEntity;
+    }
+
+    public MultipleChoiceQuestionEntity buildFromEntity(MultipleChoiceQuestionEntity questionEntity) {
+        var newQuestionEntity = new MultipleChoiceQuestionEntity();
+        var newOptions = new ArrayList<MultipleOptionEntity>(questionEntity.getOptions().size());
+        newQuestionEntity.setPoints(new HashMap<>(questionEntity.getPoints()));
+
+        commonFieldQuestionMapper.mapCommonFields(questionEntity, newQuestionEntity);
+
+        for (var option : questionEntity.getOptions()) {
+            var newOption = buildOptionFromEntity(option, newQuestionEntity);
+            newOptions.add(newOption);
+        }
+
+        newQuestionEntity.setOptions(newOptions);
+
+        return newQuestionEntity;
+    }
+
+    private MultipleOptionEntity buildOptionFromEntity(MultipleOptionEntity option,
+                                                       MultipleChoiceQuestionEntity newQuestionEntity
+    ) {
+        var newOption = new MultipleOptionEntity();
+        newOption.setName(option.getName());
+        newOption.setOrder(option.getOrder());
+        newOption.setIsRight(option.getIsRight());
+        newOption.setQuestion(newQuestionEntity);
+
+        return newOption;
     }
 }

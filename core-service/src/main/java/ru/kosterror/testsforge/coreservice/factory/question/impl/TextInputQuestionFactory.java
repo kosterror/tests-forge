@@ -25,13 +25,13 @@ public class TextInputQuestionFactory {
     }
 
     public TextInputQuestionEntity buildFromEntity(TextInputQuestionEntity questionEntity) {
-        var dto = new NewTextInputQuestionDto();
-        dto.setName(questionEntity.getName());
-        dto.setAttachments(new ArrayList<>(questionEntity.getAttachments()));
-        dto.setPoints(questionEntity.getPoints());
-        dto.setCaseSensitive(questionEntity.getIsCaseSensitive());
-        dto.setAnswers(new ArrayList<>(questionEntity.getAnswers()));
+        var newQuestionEntity = new TextInputQuestionEntity();
+        commonFieldQuestionMapper.mapCommonFields(questionEntity, newQuestionEntity);
 
-        return buildFromDto(dto);
+        newQuestionEntity.setPoints(questionEntity.getPoints());
+        newQuestionEntity.setIsCaseSensitive(questionEntity.getIsCaseSensitive());
+        newQuestionEntity.setAnswers(new ArrayList<>(questionEntity.getAnswers()));
+
+        return newQuestionEntity;
     }
 }

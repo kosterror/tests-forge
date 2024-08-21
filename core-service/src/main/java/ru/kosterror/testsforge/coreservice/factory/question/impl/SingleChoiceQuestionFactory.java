@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import ru.kosterror.testsforge.coreservice.dto.question.create.NewSingleChoiceQuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.single.SingleChoiceQuestionEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.single.SingleOptionEntity;
-import ru.kosterror.testsforge.coreservice.exception.InternalException;
 
 import java.util.ArrayList;
 
@@ -35,21 +34,26 @@ public class SingleChoiceQuestionFactory {
     }
 
     public SingleChoiceQuestionEntity buildFromEntity(SingleChoiceQuestionEntity questionEntity) {
-        var dto = new NewSingleChoiceQuestionDto();
-        dto.setName(questionEntity.getName());
-        dto.setAttachments(new ArrayList<>(questionEntity.getAttachments()));
-        dto.setPoints(questionEntity.getPoints());
-        dto.setOptions(questionEntity.getOptions().stream().map(SingleOptionEntity::getName).toList());
-        dto.setCorrectOptionIndex(questionEntity.getOptions().stream()
-                .filter(SingleOptionEntity::getIsRight)
-                .map(SingleOptionEntity::getOrder)
-                .findFirst()
-                .orElseThrow(() ->
-                        new InternalException("No correct option found for question " + questionEntity.getId())
-                )
-        );
+        var newQuestionEntity = new SingleChoiceQuestionEntity();
+        commonFieldQuestionMapper.mapCommonFields(questionEntity, newQuestionEntity);
 
-        return buildFromDto(dto);
+        newQuestionEntity.setPoints(questionEntity.getPoints());
+
+        var newOptions = new ArrayList<SingleOptionEntity>(questionEntity.getOptions().size());
+
+        for (var option : questionEntity.getOptions()) {
+            var newOption = new SingleOptionEntity();
+            newOption.setName(option.getName());
+            newOption.setOrder(option.getOrder());
+            newOption.setIsRight(option.getIsRight());
+            newOption.setQuestion(newQuestionEntity);
+
+            newOptions.add(newOption);
+        }
+
+        newQuestionEntity.setOptions(newOptions);
+
+        return newQuestionEntity;
     }
 
     private SingleOptionEntity buildOptionEntityFromDto(NewSingleChoiceQuestionDto dto,
