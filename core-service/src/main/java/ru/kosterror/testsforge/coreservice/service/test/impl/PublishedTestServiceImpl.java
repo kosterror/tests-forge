@@ -8,17 +8,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
 import ru.kosterror.testsforge.coreservice.dto.test.published.*;
+import ru.kosterror.testsforge.coreservice.entity.test.generated.GeneratedTestEntity;
 import ru.kosterror.testsforge.coreservice.entity.test.published.PublishedTestEntity;
 import ru.kosterror.testsforge.coreservice.exception.BadRequestException;
 import ru.kosterror.testsforge.coreservice.mapper.PublishedTestMapper;
+import ru.kosterror.testsforge.coreservice.repository.GeneratedTestRepository;
 import ru.kosterror.testsforge.coreservice.repository.PublishedTestRepository;
 import ru.kosterror.testsforge.coreservice.service.mail.MailService;
+import ru.kosterror.testsforge.coreservice.service.processor.test.GeneratedTestProcessor;
 import ru.kosterror.testsforge.coreservice.service.test.PublishedTestService;
 import ru.kosterror.testsforge.coreservice.service.test.TestPatternService;
 import ru.kosterror.testsforge.coreservice.service.user.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static ru.kosterror.testsforge.coreservice.specificaiton.PublishedTestSpecification.*;
@@ -33,6 +37,8 @@ public class PublishedTestServiceImpl implements PublishedTestService {
     private final MailService mailService;
     private final PublishedTestMapper publishedTestMapper;
     private final UserService userService;
+    private final GeneratedTestProcessor generatedTestProcessor;
+    private final GeneratedTestRepository generatedTestRepository;
 
     @Override
     @Transactional
@@ -48,7 +54,7 @@ public class PublishedTestServiceImpl implements PublishedTestService {
                 .showPointsToStudents(publishTestDto.getShowPointsToStudents())
                 .isNeedPostModeration(publishTestDto.getIsNeedPostModeration())
                 .testPattern(formPattern)
-
+                .markConfiguration(publishTestDto.getMarkConfiguration())
                 .build();
 
         publishedTest = publishedTestRepository.save(publishedTest);
@@ -109,6 +115,13 @@ public class PublishedTestServiceImpl implements PublishedTestService {
 
         var updatedAttributes = applyChanges(publishedTest, updatePublishedTestDto);
 
+        if (!publishedTest.getMarkConfiguration().equals(updatePublishedTestDto.markConfiguration())) {
+            recalculateMarks(
+                    publishedTest.getGeneratedTests(),
+                    updatePublishedTestDto.markConfiguration()
+            );
+        }
+
         publishedTest = publishedTestRepository.save(publishedTest);
         log.info("Published test {} updated", publishedTest.getId());
 
@@ -166,8 +179,18 @@ public class PublishedTestServiceImpl implements PublishedTestService {
         publishedTest.setGroupIds(new ArrayList<>(updatePublishedTestDto.groupIds()));
         publishedTest.setUserIds(new ArrayList<>(updatePublishedTestDto.userIds()));
         publishedTest.setShowPointsToStudents(updatePublishedTestDto.showPointsToStudents());
+        publishedTest.setMarkConfiguration(updatePublishedTestDto.markConfiguration());
 
         return updatedAttributes;
+    }
+
+    public void recalculateMarks(List<GeneratedTestEntity> generatedTests,
+                                 Map<Integer, String> marks
+    ) {
+        generatedTests.forEach(generatedTest -> {
+            generatedTestProcessor.calculateMark(generatedTest, marks);
+            generatedTestRepository.save(generatedTest);
+        });
     }
 
 }

@@ -26,6 +26,7 @@ public abstract class GeneratedTestMapper {
         if (!dto.getPublishedTest().isShowPointsToStudents()
                 && dto.getPublishedTest().getDeadline().isAfter(LocalDateTime.now())) {
             dto.setPoints(null);
+            dto.setMark(null);
         }
     }
 }

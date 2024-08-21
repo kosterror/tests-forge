@@ -29,4 +29,7 @@ public class MyGeneratedTestDto {
     @Schema(description = "Полученные баллы", requiredMode = NOT_REQUIRED)
     Integer points;
 
+    @Schema(description = "Оценка", requiredMode = NOT_REQUIRED)
+    String mark;
+
 }

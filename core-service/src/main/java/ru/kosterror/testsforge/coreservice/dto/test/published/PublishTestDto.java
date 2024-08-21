@@ -9,6 +9,7 @@ import ru.kosterror.testsforge.coreservice.util.validation.AtLeastOneId;
 import ru.kosterror.testsforge.coreservice.util.validation.NotBeforeNow;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -48,5 +49,12 @@ public class PublishTestDto {
     @NotNull(message = "Требуется ли пост-модерация не может быть null")
     @Schema(description = "Требуется ли пост-модерация", requiredMode = REQUIRED)
     private Boolean isNeedPostModeration;
+
+    @NotNull(message = "Конфигурация оценок не может быть null")
+    @Schema(description = "Конфигурация оценок в виде мапы. " +
+            "Ключ - минимальное количество баллов для оценки, " +
+            "значение - соответствующая оценка",
+            requiredMode = REQUIRED)
+    private Map<Integer, String> markConfiguration;
 
 }

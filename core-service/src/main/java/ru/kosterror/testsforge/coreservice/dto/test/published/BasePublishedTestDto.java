@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIRED;
@@ -33,4 +34,7 @@ public class BasePublishedTestDto {
 
     @Schema(description = "Показывать ли баллы студентам", requiredMode = REQUIRED)
     private boolean showPointsToStudents;
+
+    @Schema(description = "Список сгенерированных тестов", requiredMode = NOT_REQUIRED)
+    private Map<Integer, String> markConfiguration;
 }

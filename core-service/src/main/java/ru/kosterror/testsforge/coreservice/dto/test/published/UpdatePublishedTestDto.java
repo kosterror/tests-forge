@@ -8,6 +8,7 @@ import ru.kosterror.testsforge.coreservice.util.validation.AtLeastOneId;
 import ru.kosterror.testsforge.coreservice.util.validation.NotBeforeNow;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -37,6 +38,14 @@ public record UpdatePublishedTestDto(
 
         @NotNull(message = "Показывать ли баллы студентам не может быть null")
         @Schema(description = "Показывать ли баллы студентам", requiredMode = REQUIRED)
-        Boolean showPointsToStudents
+        Boolean showPointsToStudents,
+
+        @NotNull(message = "Конфигурация оценок не может быть null")
+        @Schema(description = "Конфигурация оценок в виде мапы. " +
+                "Ключ - минимальное количество баллов для оценки, " +
+                "значение - соответствующая оценка",
+                requiredMode = REQUIRED)
+        Map<Integer, String> markConfiguration
+
 ) {
 }

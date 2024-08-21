@@ -35,6 +35,8 @@ public class GeneratedTestEntity extends BaseEntity {
 
     private Integer points;
 
+    private String mark;
+
     private LocalDateTime submitDateTime;
 
 }

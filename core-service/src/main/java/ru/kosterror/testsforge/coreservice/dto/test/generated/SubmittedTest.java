@@ -20,6 +20,9 @@ public record SubmittedTest(
         @Schema(description = "Баллы за тест", requiredMode = NOT_REQUIRED)
         Integer points,
 
+        @Schema(description = "Оценка", requiredMode = NOT_REQUIRED)
+        String mark,
+
         @Schema(description = "Дата и время сдачи теста", requiredMode = REQUIRED)
         LocalDateTime submitDateTime
 ) {

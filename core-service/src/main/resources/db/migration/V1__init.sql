@@ -25,6 +25,7 @@ create table test_published
     deadline                timestamp(6) not null,
     show_points_to_students boolean      not null,
     is_need_post_moderation boolean      not null,
+    mark_configuration jsonb,
     created_at              timestamp(6) not null,
     updated_at              timestamp(6) not null
 );
@@ -36,10 +37,12 @@ create table test_generated
     user_id           uuid         not null,
     partitions        jsonb,
     points            integer,
+    mark       varchar(32),
     status            varchar(255) not null,
     submit_date_time  timestamp(6),
     created_at        timestamp(6) not null,
-    updated_at        timestamp(6) not null
+    updated_at timestamp(6) not null,
+    constraint unique (user_id, published_test_id)
 );
 
 create table partition

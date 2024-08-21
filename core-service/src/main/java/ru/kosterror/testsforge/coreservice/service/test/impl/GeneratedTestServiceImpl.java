@@ -50,7 +50,7 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
 
         var generatedTest = generatedTestRepository
                 .findByPublishedTestIdAndUserId(publishedTestId, userId)
-                .orElse(buildAndSaveGeneratedTest(publishedTest, userId));
+                .orElseGet(() -> buildAndSaveGeneratedTest(publishedTest, userId));
 
         checkerUtilService.checkGeneratedTestStatus(generatedTest);
 
@@ -93,8 +93,9 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
                 publishedTest.getTestPattern(),
                 answers
         );
+        generatedTestProcessor.calculateMark(generatedTest, publishedTest.getMarkConfiguration());
 
-        var status = publishedTest.getIsNeedPostModeration()
+        var status = Boolean.TRUE.equals(publishedTest.getIsNeedPostModeration())
                 ? TestStatus.SUBMITTED
                 : TestStatus.COMPLETED;
 

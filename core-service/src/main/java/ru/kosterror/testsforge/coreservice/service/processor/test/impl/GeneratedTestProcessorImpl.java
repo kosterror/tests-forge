@@ -14,6 +14,7 @@ import ru.kosterror.testsforge.coreservice.service.processor.test.GeneratedTestP
 import ru.kosterror.testsforge.coreservice.service.util.TestUtilService;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -76,6 +77,28 @@ public class GeneratedTestProcessorImpl implements GeneratedTestProcessor {
         generatedTest.setStatus(checkTestDto.status());
 
         log.info("Generated test {} verified successfully", generatedTest.getId());
+    }
+
+    @Override
+    public void calculateMark(GeneratedTestEntity generatedTest, Map<Integer, String> marks) {
+        log.info("Started recalculating generated test {} mark...", generatedTest.getId());
+
+        var pointsForTest = generatedTest.getPoints();
+
+        var pointsForMarks = marks.keySet()
+                .stream()
+                .sorted()
+                .toList();
+
+        for (int i = pointsForMarks.size() - 1; i >= 0; i--) {
+            if (pointsForTest >= pointsForMarks.get(i)) {
+                generatedTest.setMark(marks.get(pointsForMarks.get(i)));
+                log.info("Generated test {} mark recalculated successfully", generatedTest.getId());
+                return;
+            }
+        }
+
+        log.info("Generated test {} mark was not recalculated", generatedTest.getId());
     }
 
     private void applyNewPoints(GeneratedTestEntity generatedTest,
