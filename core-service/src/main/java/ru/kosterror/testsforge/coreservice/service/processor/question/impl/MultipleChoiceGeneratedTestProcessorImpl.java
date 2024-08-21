@@ -106,6 +106,9 @@ public class MultipleChoiceGeneratedTestProcessorImpl implements QuestionProcess
             }
         }
 
+        var incorrectAnswersCount = enteredOptionIds.size() - rightAnswersCount;
+        rightAnswersCount = rightAnswersCount - incorrectAnswersCount;
+
         var points = calculatePoints(rightAnswersCount, questionEntity.getPoints());
         question.setPoints(points);
 
