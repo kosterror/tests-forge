@@ -42,7 +42,7 @@ create table test_generated
     submit_date_time  timestamp(6),
     created_at        timestamp(6) not null,
     updated_at timestamp(6) not null,
-    constraint unique (user_id, published_test_id)
+    unique (user_id, published_test_id)
 );
 
 create table partition
