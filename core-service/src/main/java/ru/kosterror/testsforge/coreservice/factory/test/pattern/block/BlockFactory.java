@@ -7,6 +7,8 @@ import ru.kosterror.testsforge.coreservice.dto.test.pattern.create.block.CreateB
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.create.block.NewDynamicBlockDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.create.block.NewStaticBlockDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.BlockEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.DynamicBlockEntity;
+import ru.kosterror.testsforge.coreservice.entity.test.pattern.block.StaticBlockEntity;
 
 @Component
 @RequiredArgsConstructor
@@ -16,11 +18,18 @@ public class BlockFactory {
     private final StaticBlockFactory staticBlockFactory;
     private final BasedOnExistingBlockFactory basedOnExistingBlockFactory;
 
-    public BlockEntity build(CreateBlockDto blockDto) {
+    public BlockEntity buildFromDto(CreateBlockDto blockDto) {
         return switch (blockDto.getType()) {
             case DYNAMIC -> dynamicBlockFactory.buildFromDto((NewDynamicBlockDto) blockDto);
             case STATIC -> staticBlockFactory.buildFromDto((NewStaticBlockDto) blockDto);
             case BASED_ON_EXISTING -> basedOnExistingBlockFactory.build((CreateBlockBasedOnExistingDto) blockDto);
+        };
+    }
+
+    public BlockEntity buildFromEntity(BlockEntity blockEntity) {
+        return switch (blockEntity.getType()) {
+            case DYNAMIC -> dynamicBlockFactory.buildFromEntity((DynamicBlockEntity) blockEntity);
+            case STATIC -> staticBlockFactory.buildFromEntity((StaticBlockEntity) blockEntity);
         };
     }
 

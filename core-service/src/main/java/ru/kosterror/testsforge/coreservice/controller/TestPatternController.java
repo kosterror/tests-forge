@@ -11,7 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.create.UpdateTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.create.NewTestPatternDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.full.BaseTestPatternDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.full.TestPatternDto;
 import ru.kosterror.testsforge.coreservice.service.test.TestPatternService;
@@ -34,8 +34,8 @@ public class TestPatternController {
     @Operation(summary = "Создать шаблон теста", security = @SecurityRequirement(name = JWT))
     @PostMapping
     public TestPatternDto createTestPattern(@AuthenticationPrincipal JwtUser principal,
-                                            @RequestBody @Valid UpdateTestPatternDto updateTestPatternDto) {
-        return testPatternService.createTestPattern(principal.userId(), updateTestPatternDto);
+                                            @RequestBody @Valid NewTestPatternDto newTestPatternDto) {
+        return testPatternService.createTestPattern(principal.userId(), newTestPatternDto);
     }
 
     @PreAuthorize(TEACHER)

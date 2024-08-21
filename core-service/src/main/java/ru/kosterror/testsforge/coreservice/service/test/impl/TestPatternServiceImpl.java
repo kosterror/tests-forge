@@ -6,7 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
-import ru.kosterror.testsforge.coreservice.dto.test.pattern.create.UpdateTestPatternDto;
+import ru.kosterror.testsforge.coreservice.dto.test.pattern.create.NewTestPatternDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.full.BaseTestPatternDto;
 import ru.kosterror.testsforge.coreservice.dto.test.pattern.full.TestPatternDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.TestPatternEntity;
@@ -30,8 +30,8 @@ public class TestPatternServiceImpl implements TestPatternService {
 
     @Override
     @Transactional
-    public TestPatternDto createTestPattern(UUID userId, UpdateTestPatternDto updateTestPatternDto) {
-        var testPattern = testPatternFactory.buildTestPatternEntity(updateTestPatternDto);
+    public TestPatternDto createTestPattern(UUID userId, NewTestPatternDto newTestPatternDto) {
+        var testPattern = testPatternFactory.buildTestPatternEntity(newTestPatternDto);
         testPattern = testPatternRepository.save(testPattern);
 
         return testPatternMapper.toDto(testPattern);
