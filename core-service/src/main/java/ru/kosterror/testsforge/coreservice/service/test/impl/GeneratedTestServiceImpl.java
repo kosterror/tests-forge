@@ -59,14 +59,12 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
 
     @Override
     public GeneratedTestDto saveAnswers(UUID userId,
-                                        UUID publishedTestId,
                                         UUID generatedTestId,
                                         AnswersDto answers) {
-        var publishedTest = publishedTestService.getPublishedTestEntity(publishedTestId);
+        var generatedTest = getGeneratedTestEntity(generatedTestId);
+        var publishedTest = generatedTest.getPublishedTest();
+
         checkerUtilService.checkUserAccessForPublishedTest(publishedTest, userId);
-
-        var generatedTest = getGeneratedTestEntity(userId, publishedTestId, generatedTestId);
-
         checkerUtilService.checkDeadline(publishedTest);
         checkerUtilService.checkTimer(generatedTest);
         checkerUtilService.checkGeneratedTestStatus(generatedTest);
@@ -80,11 +78,11 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
     }
 
     @Override
-    public MyGeneratedTestDto submitTest(UUID userId, UUID publishedTestId, UUID generatedTestId, AnswersDto answers) {
-        var publishedTest = publishedTestService.getPublishedTestEntity(publishedTestId);
-        checkerUtilService.checkUserAccessForPublishedTest(publishedTest, userId);
-        var generatedTest = getGeneratedTestEntity(userId, publishedTestId, generatedTestId);
+    public MyGeneratedTestDto submitTest(UUID userId, UUID generatedTestId, AnswersDto answers) {
+        var generatedTest = getGeneratedTestEntity(generatedTestId);
+        var publishedTest = generatedTest.getPublishedTest();
 
+        checkerUtilService.checkUserAccessForPublishedTest(publishedTest, userId);
         checkerUtilService.checkDeadline(publishedTest);
         checkerUtilService.checkTimer(generatedTest);
         checkerUtilService.checkGeneratedTestStatus(generatedTest);
@@ -195,16 +193,10 @@ public class GeneratedTestServiceImpl implements GeneratedTestService {
                 .orElseThrow(() -> new NotFoundException("Generated test %s not found".formatted(generatedTestId)));
     }
 
-    private GeneratedTestEntity getGeneratedTestEntity(UUID userId, UUID publishedTestId, UUID generatedTestId) {
+    private GeneratedTestEntity getGeneratedTestEntity(UUID generatedTestId) {
         return generatedTestRepository
-                .findByPublishedTestIdAndUserId(publishedTestId, userId)
-                .orElseThrow(() -> new NotFoundException(
-                                "Generated test %s for published test %s not found".formatted(
-                                        generatedTestId,
-                                        publishedTestId
-                                )
-                        )
-                );
+                .findById(generatedTestId)
+                .orElseThrow(() -> new NotFoundException("Generated test %s  not found".formatted(generatedTestId)));
     }
 
     private GeneratedTestEntity buildAndSaveGeneratedTest(PublishedTestEntity publishedTest, UUID userId) {

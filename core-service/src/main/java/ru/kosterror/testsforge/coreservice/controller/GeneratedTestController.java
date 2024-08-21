@@ -44,9 +44,8 @@ public class GeneratedTestController {
     @PostMapping("/{generatedTestId}/save")
     public GeneratedTestDto saveAnswers(@AuthenticationPrincipal JwtUser principal,
                                         @PathVariable UUID generatedTestId,
-                                        @RequestParam UUID publishedTestId,
                                         @RequestBody @Valid AnswersDto answers) {
-        return generatedTestService.saveAnswers(principal.userId(), publishedTestId, generatedTestId, answers);
+        return generatedTestService.saveAnswers(principal.userId(), generatedTestId, answers);
     }
 
     @PreAuthorize(TEACHER_OR_STUDENT)
@@ -54,9 +53,8 @@ public class GeneratedTestController {
     @PostMapping("/{generatedTestId}/submit")
     public MyGeneratedTestDto submitTest(@AuthenticationPrincipal JwtUser principal,
                                          @PathVariable UUID generatedTestId,
-                                         @RequestParam UUID publishedTestId,
                                          @RequestBody @Valid AnswersDto answers) {
-        return generatedTestService.submitTest(principal.userId(), publishedTestId, generatedTestId, answers);
+        return generatedTestService.submitTest(principal.userId(), generatedTestId, answers);
     }
 
     @PreAuthorize(TEACHER_OR_STUDENT)

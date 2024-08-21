@@ -12,9 +12,9 @@ public interface GeneratedTestService {
 
     GeneratedTestDto getMyGeneratedTest(UUID userId, UUID publishedTestId);
 
-    GeneratedTestDto saveAnswers(UUID userId, UUID publishedTestId, UUID generatedTestId, AnswersDto answers);
+    GeneratedTestDto saveAnswers(UUID userId, UUID generatedTestId, AnswersDto answers);
 
-    MyGeneratedTestDto submitTest(UUID userId, UUID publishedTestId, UUID generatedTestId, AnswersDto answers);
+    MyGeneratedTestDto submitTest(UUID userId, UUID generatedTestId, AnswersDto answers);
 
     PaginationResponse<MyGeneratedTestDto> getMyGeneratedTests(UUID userId, UUID subjectId, int page, int size);
 
