@@ -6,9 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import ru.kosterror.testsforge.commonmodel.PaginationResponse;
-import ru.kosterror.testsforge.coreservice.client.FileStorageClient;
 import ru.kosterror.testsforge.coreservice.dto.question.create.CreateQuestionDto;
 import ru.kosterror.testsforge.coreservice.dto.question.full.QuestionDto;
 import ru.kosterror.testsforge.coreservice.entity.test.pattern.question.QuestionEntity;
@@ -19,6 +17,7 @@ import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
 import ru.kosterror.testsforge.coreservice.factory.question.QuestionFactory;
 import ru.kosterror.testsforge.coreservice.mapper.question.QuestionMapper;
 import ru.kosterror.testsforge.coreservice.repository.QuestionRepository;
+import ru.kosterror.testsforge.coreservice.service.attachment.AttachmentService;
 import ru.kosterror.testsforge.coreservice.service.question.QuestionService;
 import ru.kosterror.testsforge.coreservice.service.subject.SubjectService;
 
@@ -34,9 +33,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionMapper questionMapper;
     private final QuestionRepository questionRepository;
-    private final FileStorageClient fileStorageClient;
     private final SubjectService subjectService;
     private final QuestionFactory questionFactory;
+    private final AttachmentService attachmentService;
 
     @Override
     public QuestionDto createQuestion(UUID subjectId, CreateQuestionDto questionDto) {
@@ -45,7 +44,7 @@ public class QuestionServiceImpl implements QuestionService {
         var entity = questionFactory.buildQuestionFromDto(questionDto);
         log.info("Question entity built from dto {}", questionDto);
 
-        validateAttachments(entity.getAttachments());
+        attachmentService.validateAttachments(entity.getAttachments());
         log.info("Attachments for question {} validated", questionDto);
 
         entity.setSubject(subject);
@@ -100,18 +99,6 @@ public class QuestionServiceImpl implements QuestionService {
     public QuestionEntity getQuestionEntity(UUID id) {
         return questionRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Question with id %s not found", id)));
-    }
-
-    private void validateAttachments(List<UUID> attachmentIds) {
-        if (CollectionUtils.isEmpty(attachmentIds)) {
-            return;
-        }
-
-        var notExistingFileIds = fileStorageClient.getNotExistingFileIds(attachmentIds);
-
-        if (!notExistingFileIds.isEmpty()) {
-            throw new NotFoundException("Attachments with ids %s not found".formatted(notExistingFileIds));
-        }
     }
 
 }

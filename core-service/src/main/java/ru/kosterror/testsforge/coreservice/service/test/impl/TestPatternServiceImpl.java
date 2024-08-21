@@ -14,6 +14,7 @@ import ru.kosterror.testsforge.coreservice.exception.NotFoundException;
 import ru.kosterror.testsforge.coreservice.factory.test.pattern.TestPatternFactory;
 import ru.kosterror.testsforge.coreservice.mapper.TestPatternMapper;
 import ru.kosterror.testsforge.coreservice.repository.TestPatternRepository;
+import ru.kosterror.testsforge.coreservice.service.attachment.AttachmentService;
 import ru.kosterror.testsforge.coreservice.service.test.TestPatternService;
 
 import java.util.UUID;
@@ -27,11 +28,14 @@ public class TestPatternServiceImpl implements TestPatternService {
     private final TestPatternRepository testPatternRepository;
     private final TestPatternMapper testPatternMapper;
     private final TestPatternFactory testPatternFactory;
+    private final AttachmentService attachmentService;
 
     @Override
     @Transactional
     public TestPatternDto createTestPattern(UUID userId, NewTestPatternDto newTestPatternDto) {
         var testPattern = testPatternFactory.buildTestPatternEntity(newTestPatternDto);
+        attachmentService.validateAttachments(testPattern);
+
         testPattern = testPatternRepository.save(testPattern);
 
         return testPatternMapper.toDto(testPattern);
