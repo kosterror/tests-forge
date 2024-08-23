@@ -34,18 +34,15 @@ services:
       - file-storage-service-db:/var/lib/postgresql/data
   mail-service-db:
     container_name: mail-service-db
-    image: mongo:8.0-rc
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./config/mongo-init.sh:/docker-entrypoint-initdb.d/init.sh:ro
-      - mail-service-db:/data/db
+    image: postgres:15
     environment:
-      MONGO_INITDB_ROOT_USERNAME: mail-service-admin
-      MONGO_INITDB_ROOT_PASSWORD: mail-service-admin
-      MONGO_INITDB_USER: mail-service
-      MONGO_INITDB_PWD: mail-service
-      MONGO_INITDB_DATABASE: mail-service
+      POSTGRES_DB: mail-service
+      POSTGRES_USER: mail-service
+      POSTGRES_PASSWORD: mail-service
+    ports:
+      - "5435:5432"
+    volumes:
+      - mail-service-db:/data/db
   minio:
     container_name: minio
     image: bitnami/minio:2024.6.11

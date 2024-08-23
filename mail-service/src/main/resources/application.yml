@@ -12,21 +12,25 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
-  data:
-    mongodb:
-      username: mail-service
-      password: mail-service
-      database: mail-service
-      host: localhost
-      port: 27017
+  datasource:
+    url: jdbc:postgresql://localhost:5435/mail-service
+    password: mail-service
+    username: mail-service
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
   kafka:
     consumer:
       bootstrap-servers: localhost:9092
       group-id: ${spring.application.name}
-      auto-offset-reset: earliest
+      auto-offset-reset: latest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
         spring.json.trusted.packages: "ru.kosterror.testsforge.commonmodel.mail"
 
 application:

@@ -31,14 +31,14 @@ public class MailService {
             var mailDetails = mailDetailsMapper.toEntity(sendMailDto);
             mailDetails.setDate(LocalDateTime.now());
             mailDetails.setStatus(MailStatus.SENT);
-            mailDetailsRepository.insert(mailDetails);
+            mailDetailsRepository.save(mailDetails);
             log.info("Saved successfully mail details {}", mailDetails);
         } catch (Exception exception) {
             log.error("Failed to send mail {}", sendMailDto, exception);
             var mailDetails = mailDetailsMapper.toEntity(sendMailDto);
             mailDetails.setDate(LocalDateTime.now());
             mailDetails.setStatus(MailStatus.ERROR);
-            mailDetailsRepository.insert(mailDetails);
+            mailDetailsRepository.save(mailDetails);
             log.info("Saved not successfully mail details {}", mailDetails);
         }
     }
